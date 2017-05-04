@@ -19,7 +19,7 @@ import vazkii.botania.common.block.tile.mana.TileSpreader;
  */
 @Pseudo
 @Mixin(targets = "vazkii/botania/common/block/mana/BlockSpreader", remap = false)
-public class MixinBlockSpreader {
+public abstract class MixinBlockSpreader {
 
     @Inject(method = "func_149689_a", at = @At("RETURN"), locals = LocalCapture.CAPTURE_FAILHARD)
     public void onBlockPlacedByReturn(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack, TileSpreader spreader, CallbackInfo cl) {

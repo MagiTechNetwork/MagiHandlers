@@ -42,14 +42,18 @@ public abstract class MixinEntityManaBurst extends EntityThrowable {
     @Inject(method = "func_70184_a", at = @At("HEAD"), cancellable = true)
     private void replaceImpact(MovingObjectPosition movingobjectposition, CallbackInfo ci) {
         if(getShooter() instanceof TileSpreader) {
-            Player p = Bukkit.getOfflinePlayer(((TileSpreader)getShooter()).getIdentifier()).getPlayer();
+            if(((TileSpreader)getShooter()).getIdentifier() != null) {
+                Player p = Bukkit.getOfflinePlayer(((TileSpreader)getShooter()).getIdentifier()).getPlayer();
 
-            BlockBreakEvent e = new BlockBreakEvent(p.getWorld().getBlockAt(movingobjectposition.blockX, movingobjectposition.blockY, movingobjectposition.blockZ), p);
+                if(p != null) {
+                    BlockBreakEvent e = new BlockBreakEvent(p.getWorld().getBlockAt(movingobjectposition.blockX, movingobjectposition.blockY, movingobjectposition.blockZ), p);
 
-            Bukkit.getPluginManager().callEvent(e);
-            if (e.isCancelled()) {
-                setDead();
-                ci.cancel();
+                    Bukkit.getPluginManager().callEvent(e);
+                    if (e.isCancelled()) {
+                        setDead();
+                        ci.cancel();
+                    }
+                }
             }
         }else if(shooterIdentity != null) {
             Player p = Bukkit.getOfflinePlayer(shooterIdentity).getPlayer();
