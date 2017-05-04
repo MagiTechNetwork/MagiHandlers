@@ -1,0 +1,102 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+    }
+}
+
+apply plugin: 'forge'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+version = "1.0"
+group= "net.heyzeer0.mgh" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "MagiHandlers"
+
+
+ext {
+    mixinSrg = new File(project.buildDir, 'tmp/mixins/mixin.magihandlers.srg')
+    mixinRefMap = new File(project.buildDir, "tmp/mixins/mixin.magihandlers.refmap.json")
+}
+
+reobf.addExtraSrgFile project.mixinSrg
+
+minecraft {
+    version = "1.7.10-10.13.4.1614-1.7.10"
+    runDir = "eclipse"
+}
+
+compileJava {
+    options.compilerArgs += [
+            '-Xlint:-processing',
+            "-AoutSrgFile=${project.mixinSrg.canonicalPath}",
+            "-AoutRefMapFile=${project.mixinRefMap.canonicalPath}",
+            "-AreobfSrgFile=${project.file('build/srgs/mcp-srg.srg').canonicalPath}"
+    ]
+}
+
+afterEvaluate {
+    tasks.compileJava.options.compilerArgs += "-AreobfSrgFile=${tasks.reobf.srg}"
+}
+
+task copySrgs(type: Copy, dependsOn: 'genSrgs') {
+    from plugins.getPlugin("forge").delayedFile('{SRG_DIR}')
+
+    include '**/*.srg'
+    into 'build/srgs'
+}
+
+setupDecompWorkspace.dependsOn copySrgs
+setupDevWorkspace.dependsOn copySrgs
+compileJava.dependsOn copySrgs
+
+configurations {
+    shade
+    compile.extendsFrom shade
+}
+
+repositories {
+    maven {
+        name = "SpongePowered"
+        url = "https://repo.spongepowered.org/maven"
+    }
+}
+
+dependencies {
+    shade("org.spongepowered:mixin:0.6.8-SNAPSHOT"){
+        exclude module: 'launchwrapper'
+        exclude module: 'guava'
+    }
+    compile files('libs/spigot.jar', 'libs/botania.jar')
+    compile 'com.google.code.gson:gson:2.8.0'
+}
+
+jar {
+    from project.mixinRefMap
+
+    manifest {
+        attributes 'FMLCorePlugin': 'net.heyzeer0.mgh.MagiCore',
+                   'FMLCorePluginContainsFMLMod': 'true',
+                   'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
+                   'TweakOrder': '0'
+    }
+
+    configurations.shade.each { dep ->
+        from(project.zipTree(dep)){
+            include 'org/spongepowered', 'org/spongepowered/**'
+        }
+    }
+}
+
+processResources {}

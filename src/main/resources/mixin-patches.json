@@ -1,0 +1,7 @@
+[
+  {
+    "name": "botania",
+    "file": "Botania-r1.8-249.jar",
+    "mixin": "mixins/mixin-botania.json"
+  }
+]
