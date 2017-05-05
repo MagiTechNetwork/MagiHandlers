@@ -3,7 +3,6 @@ package net.heyzeer0.mgh.mixins.botania;
 import net.heyzeer0.mgh.hacks.botania.IMixinTileSpreader;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import org.apache.logging.log4j.LogManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.Shadow;
@@ -26,7 +25,12 @@ public abstract class MixinTileSpreader extends TileEntity implements IMixinTile
 
     @Inject(method = "writeCustomNBT", at = @At(value = "INVOKE", args = {"getIdentifier"}), cancellable = true)
     private void injectWriteNBT(NBTTagCompound cmp, CallbackInfo cl) {
-        cmp.setString("ownerUUID", identity.toString());
+        if(identity != null) {
+            cmp.setString("ownerUUID", identity.toString());
+        }else{
+            cmp.setString("ownerUUID", UUID.randomUUID().toString());
+        }
+
     }
 
     @Inject(method = "readCustomNBT", at = @At(value = "INVOKE", args = {"func_74762_e"}), cancellable = true)
