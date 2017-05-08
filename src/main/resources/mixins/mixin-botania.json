@@ -5,7 +5,8 @@
     "MixinEntityManaBurst",
     "MixinTileSpreader",
     "MixinBlockSpreader",
-    "MixinEntityVineBall"
+    "MixinEntityVineBall",
+    "MixinSubTileGourmaryllis"
   ],
   "server": [],
   "client": [],
