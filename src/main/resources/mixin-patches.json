@@ -3,5 +3,10 @@
     "name": "botania",
     "file": "Botania-r1.8-249.jar",
     "mixin": "mixins/mixin-botania.json"
+  },
+  {
+    "name": "openblocks",
+    "file": "OpenBlocks-1.7.10-1.6.jar",
+    "mixin": "mixins/mixin-openblocks.json"
   }
 ]

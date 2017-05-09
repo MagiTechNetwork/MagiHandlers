@@ -19,6 +19,7 @@ apply plugin: 'forge'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+compileJava.options.encoding = 'UTF-8'
 
 version = "1.0"
 group= "net.heyzeer0.mgh" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
@@ -78,7 +79,7 @@ dependencies {
         exclude module: 'launchwrapper'
         exclude module: 'guava'
     }
-    compile files('libs/spigot.jar', 'libs/botania.jar')
+    compile files('libs/spigot.jar', 'libs/botania.jar', 'libs/openblocks.jar')
     compile 'com.google.code.gson:gson:2.8.0'
 }
 
