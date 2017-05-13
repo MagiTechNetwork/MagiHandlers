@@ -5,10 +5,8 @@
 * Eventos para o Slingshot / Vine Ball
 * Dono para o Mana Spreader
 * Correção para o flood de packets da Gourmaryllis
-
 ### OpenBlocks ###
 * Mensagem no spawn das graves do OpenBlocks
-
 ### Witchery ###
 * Removido Rite of Eclipse do Witchery
 * Removido Rite of Call Storm do Witchery
