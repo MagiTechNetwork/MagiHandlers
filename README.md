@@ -14,3 +14,4 @@
 * Corrigido vampiros bebendo sangue em áreas sem PVP
 * Impede vampiros de alterarem o tempo
 * Impede o uso de taglocks em áreas sem PvP
+* Impede o dano da mão da morte em áreas sem PvP
