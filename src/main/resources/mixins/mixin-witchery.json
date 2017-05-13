@@ -5,7 +5,8 @@
     "MixinStepEclipse",
     "MixinStepWeatherCallStorm",
     "MixinTileEntityPoppetShelf",
-    "MixinGenericEvents"
+    "MixinGenericEvents",
+    "MixinExtendedPlayer"
   ],
   "server": [],
   "client": [],
