@@ -29,13 +29,11 @@ public abstract class MixinExtendedPlayer {
     private void injectVampirePower(CallbackInfo ci) {
         player.addChatMessage(new ChatComponentText("§cDesculpe, esta habilidade encontra-se bloqueada."));
         vampireUltimateCharges -= 1;
-        LogManager.getLogger().warn(vampireUltimateCharges);
         sync();
         ci.cancel();
     }
 
     @Shadow
     public void sync() {}
-
 
 }
