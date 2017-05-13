@@ -6,3 +6,8 @@
 * Dono para o Mana Spreader
 * Correção para o flood de packets da Gourmaryllis
 * Mensagem no spawn das graves do OpenBlocks
+* Removido Rite of Eclipse do Witchery
+* Removido Rite of Call Storm do Witchery
+* Removido Chunk Loading do Poppet Shelf
+* Corrigido vampiros bebendo sangue em áreas sem PVP
+* Impede vampiros de alterarem o tempo
