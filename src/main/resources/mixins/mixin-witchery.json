@@ -3,7 +3,8 @@
   "package":"net.heyzeer0.mgh.mixins.witchery",
   "mixins":[
     "MixinStepEclipse",
-    "MixinStepWeatherCallStorm"
+    "MixinStepWeatherCallStorm",
+    "MixinTileEntityPoppetShelf"
   ],
   "server": [],
   "client": [],
