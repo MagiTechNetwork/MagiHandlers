@@ -13,3 +13,4 @@
 * Removido Chunk Loading do Poppet Shelf
 * Corrigido vampiros bebendo sangue em áreas sem PVP
 * Impede vampiros de alterarem o tempo
+* Impede o uso de taglocks em áreas sem PvP

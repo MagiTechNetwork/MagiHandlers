@@ -6,7 +6,8 @@
     "MixinStepWeatherCallStorm",
     "MixinTileEntityPoppetShelf",
     "MixinGenericEvents",
-    "MixinExtendedPlayer"
+    "MixinExtendedPlayer",
+    "MixinItemTaglockKit"
   ],
   "server": [],
   "client": [],
