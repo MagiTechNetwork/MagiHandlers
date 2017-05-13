@@ -4,7 +4,8 @@
   "mixins":[
     "MixinStepEclipse",
     "MixinStepWeatherCallStorm",
-    "MixinTileEntityPoppetShelf"
+    "MixinTileEntityPoppetShelf",
+    "MixinGenericEvents"
   ],
   "server": [],
   "client": [],
