@@ -8,5 +8,10 @@
     "name": "openblocks",
     "file": "OpenBlocks-1.7.10-1.6.jar",
     "mixin": "mixins/mixin-openblocks.json"
+  },
+  {
+    "name": "witchery",
+    "file": "witchery-1.7.10-0.24.1.jar",
+    "mixin": "mixins/mixin-witchery.json"
   }
 ]

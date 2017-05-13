@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package":"net.heyzeer0.mgh.mixins.witchery",
+  "mixins":[
+    "MixinStepEclipse",
+    "MixinStepWeatherCallStorm"
+  ],
+  "server": [],
+  "client": [],
+  "compatibilityLevel": "JAVA_8",
+  "refmap":"mixin.magihandlers.refmap.json"
+}
