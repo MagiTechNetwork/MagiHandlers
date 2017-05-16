@@ -18,3 +18,5 @@
 * Corrigido vampiros ao morrer pelo sol emitir várias mensagens
 ### Mekanism ###
 * Corrigido bug de duplicação do logistical sorter
+### BiblioCraft ###
+* Corrigido bug de duplicação na Fancy Workbench

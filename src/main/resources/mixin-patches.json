@@ -18,5 +18,10 @@
     "name": "mekanism",
     "file": "Mekanism-1.7.10-9.1.0.281.jar",
     "mixin": "mixins/mixin-mekanism.json"
+  },
+  {
+    "name": "bibliocraft",
+    "file": "BiblioCraft[v1.11.5][MC1.7.10].jar",
+    "mixin": "mixins/mixin-bibliocraft.json"
   }
 ]
