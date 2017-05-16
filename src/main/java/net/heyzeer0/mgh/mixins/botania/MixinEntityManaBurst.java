@@ -5,7 +5,7 @@ import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import org.apache.logging.log4j.LogManager;
+import net.minecraftforge.event.world.BlockEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;

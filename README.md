@@ -15,4 +15,6 @@
 * Impede vampiros de alterarem o tempo
 * Impede o uso de taglocks em áreas sem PvP
 * Impede o dano da mão da morte em áreas sem PvP
-* Corrigido vampiros ao morrer pelo sol emitir várias mensagens.
+* Corrigido vampiros ao morrer pelo sol emitir várias mensagens
+### Mekanism ###
+* Corrigido bug de duplicação do logistical sorter

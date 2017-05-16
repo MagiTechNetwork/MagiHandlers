@@ -13,5 +13,10 @@
     "name": "witchery",
     "file": "witchery-1.7.10-0.24.1.jar",
     "mixin": "mixins/mixin-witchery.json"
+  },
+  {
+    "name": "mekanism",
+    "file": "Mekanism-1.7.10-9.1.0.281.jar",
+    "mixin": "mixins/mixin-mekanism.json"
   }
 ]
