@@ -23,5 +23,10 @@
     "name": "bibliocraft",
     "file": "BiblioCraft[v1.11.5][MC1.7.10].jar",
     "mixin": "mixins/mixin-bibliocraft.json"
+  },
+  {
+    "name": "thaumicenergisitics",
+    "file": "thaumicenergistics-1.0.0.5.jar",
+    "mixin": "mixins/mixin-tenergistics.json"
   }
 ]

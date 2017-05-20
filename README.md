@@ -20,3 +20,5 @@
 * Corrigido bug de duplicação do logistical sorter
 ### BiblioCraft ###
 * Corrigido bug de duplicação na Fancy Workbench
+### Thaumic Energistics ###
+* Corrigido bug de duplicação com o Destillation Pattern Encoder
