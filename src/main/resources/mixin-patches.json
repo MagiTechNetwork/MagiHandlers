@@ -28,5 +28,10 @@
     "name": "thaumicenergisitics",
     "file": "thaumicenergistics-1.0.0.5.jar",
     "mixin": "mixins/mixin-tenergistics.json"
+  },
+  {
+    "name": "extrautilities",
+    "file": "extrautilities-1.2.12.jar",
+    "mixin": "mixins/mixin-extrautilities.json"
   }
 ]
