@@ -20,7 +20,7 @@ import java.util.List;
 @Pseudo
 @Mixin(targets = "vazkii/botania/common/block/subtile/generating/SubTileGourmaryllis", remap = false)
 public abstract class MixinSubTileGourmaryllis extends SubTileGenerating {
-
+    
     @Shadow
     int cooldown = 0;
 

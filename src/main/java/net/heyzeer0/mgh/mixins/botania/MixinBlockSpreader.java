@@ -18,7 +18,7 @@ import vazkii.botania.common.block.tile.mana.TileSpreader;
 @Pseudo
 @Mixin(targets = "vazkii/botania/common/block/mana/BlockSpreader", remap = false)
 public abstract class MixinBlockSpreader {
-    
+
     @Overwrite
     public void func_149689_a(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
         int orientation = BlockPistonBase.determineOrientation(par1World, par2, par3, par4, par5EntityLivingBase);
