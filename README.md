@@ -1,24 +1,7 @@
-## Conteúdo ##
-### Botania ###
-* Eventos para o Mana Spreader / Bore Lens
-* Eventos para o Mana Blaster / Bore Lens
-* Eventos para o Slingshot / Vine Ball
-* Dono para o Mana Spreader
-* Correção para o flood de packets da Gourmaryllis
-### OpenBlocks ###
-* Mensagem no spawn das graves do OpenBlocks
-### Witchery ###
-* Removido Rite of Eclipse do Witchery
-* Removido Rite of Call Storm do Witchery
-* Removido Chunk Loading do Poppet Shelf
-* Corrigido vampiros bebendo sangue em áreas sem PVP
-* Impede vampiros de alterarem o tempo
-* Impede o uso de taglocks em áreas sem PvP
-* Impede o dano da mão da morte em áreas sem PvP
-* Corrigido vampiros ao morrer pelo sol emitir várias mensagens
-### Mekanism ###
-* Corrigido bug de duplicação do logistical sorter
-### BiblioCraft ###
-* Corrigido bug de duplicação na Fancy Workbench
-### Thaumic Energistics ###
-* Corrigido bug de duplicação com o Destillation Pattern Encoder
+## O que é o MagiHandlers?
+MagiHandlers é um coremod forge criado pela equipe da ![MagiTech Network](http://magitechserver.com/) no intuito de corrigir vários mods bugados da 1.7.10, versão que os desenvolvedores consideram "velha", "ultrapassada" e "sem suporte", por meio de ASM usando ![Mixins](https://github.com/SpongePowered/Mixin), um framework para Java que facilita o uso de Class Transformers no Forge.
+### Qual a versão do MagiHandlers?
+Atualmente ele funciona apenas na versão 1.7.10, esperamos que ele não seja necessário na 1.10 em diante, visto que os modders ainda oferecem suporte à essas versões.
+### Quais são os bugs corrigidos?
+São tantos que nem podemos listar aqui. Dê uma olhada na aba Issues desse repositório: https://github.com/sameer/MagiHandlers/issues?q=is%3Aissue+is%3Aclosed
+
