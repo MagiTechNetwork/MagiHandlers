@@ -1,36 +1,36 @@
 [
   {
-    "name": "botania",
+    "name": "Botania",
     "file": "Botania-r1.8-249.jar",
     "mixin": "mixins/mixin-botania.json"
   },
   {
-    "name": "openblocks",
+    "name": "OpenBlocks",
     "file": "OpenBlocks-1.7.10-1.6.jar",
     "mixin": "mixins/mixin-openblocks.json"
   },
   {
-    "name": "witchery",
+    "name": "Witchery",
     "file": "witchery-1.7.10-0.24.1.jar",
     "mixin": "mixins/mixin-witchery.json"
   },
   {
-    "name": "mekanism",
+    "name": "Mekanism",
     "file": "Mekanism-1.7.10-9.1.0.281.jar",
     "mixin": "mixins/mixin-mekanism.json"
   },
   {
-    "name": "bibliocraft",
+    "name": "BiblioCraft",
     "file": "BiblioCraft[v1.11.5][MC1.7.10].jar",
     "mixin": "mixins/mixin-bibliocraft.json"
   },
   {
-    "name": "thaumicenergisitics",
+    "name": "ThaumicEnergisitics",
     "file": "thaumicenergistics-1.0.0.5.jar",
     "mixin": "mixins/mixin-tenergistics.json"
   },
   {
-    "name": "extrautilities",
+    "name": "ExtraUtilities",
     "file": "extrautilities-1.2.12.jar",
     "mixin": "mixins/mixin-extrautilities.json"
   }
