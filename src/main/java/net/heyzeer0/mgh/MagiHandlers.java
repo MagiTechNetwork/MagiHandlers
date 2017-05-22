@@ -12,7 +12,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
  * Copyright © HeyZeer0 - 2016
  */
 public class MagiHandlers extends DummyModContainer {
-
+    
     public MagiHandlers()
     {
         super(new ModMetadata());
