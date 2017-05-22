@@ -4,5 +4,5 @@ MagiHandlers é um coremod forge criado pela equipe da ![MagiTech Network](http:
 ### Qual a versão do MagiHandlers?
 Atualmente ele funciona apenas na versão 1.7.10, esperamos que ele não seja necessário na 1.10 em diante, visto que os modders ainda oferecem suporte à essas versões.
 ### Quais são os bugs corrigidos?
-São tantos que nem podemos listar aqui. Dê uma olhada na aba Issues desse repositório: https://github.com/sameer/MagiHandlers/issues?q=is%3Aissue+is%3Aclosed
+São tantos que nem podemos listar aqui. Dê uma olhada na aba Issues desse repositório: https://github.com/HeyZeer0/MagiHandlers/issues?q=is%3Aissue+is%3Aclosed
 
