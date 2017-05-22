@@ -7,4 +7,5 @@ package net.heyzeer0.mgh.hacks;
 public class HacksManager {
 
     //just to organize, ignore that
+
 }
