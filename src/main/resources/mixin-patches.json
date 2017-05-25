@@ -33,5 +33,10 @@
     "name": "ExtraUtilities",
     "file": "extrautilities-1.2.12.jar",
     "mixin": "mixins/mixin-extrautilities.json"
+  },
+  {
+    "name": "COFHCore",
+    "file": "CoFHCore-[1.7.10]3.1.4-329.jar",
+    "mixin": "mixins/mixin-cofhcore.json"
   }
 ]
