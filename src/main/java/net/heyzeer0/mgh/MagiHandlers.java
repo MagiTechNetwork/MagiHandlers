@@ -5,7 +5,9 @@ import cpw.mods.fml.common.DummyModContainer;
 import cpw.mods.fml.common.LoadController;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.ModMetadata;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartedEvent;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
 
 /**
  * Created by HeyZeer0 on 08/03/2017.
@@ -31,8 +33,10 @@ public class MagiHandlers extends DummyModContainer {
     }
 
     @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event){
-
+    public void init(FMLServerStartedEvent event){
+        LogManager.getLogger().warn(" ");
+        LogManager.getLogger().warn("Class transformes aplicados nos mods: " + StringUtils.join(MagiCore.loader.getLoadedPatches(), ", "));
+        LogManager.getLogger().warn(" ");
     }
 
 }

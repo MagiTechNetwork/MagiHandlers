@@ -16,6 +16,8 @@ import java.util.Map;
 @IFMLLoadingPlugin.MCVersion("1.7.10")
 public class MagiCore implements IFMLLoadingPlugin {
 
+    public static PathLoader loader = new PathLoader();
+
     public MagiCore() {
         MixinBootstrap.init();
 
@@ -25,7 +27,7 @@ public class MagiCore implements IFMLLoadingPlugin {
         LogManager.getLogger().warn(" ");
 
         try{
-            new PathLoader().loadPatches();
+            loader.loadPatches();
         }catch (Exception e) {
             LogManager.getLogger().warn(" ");
             LogManager.getLogger().warn("[MagiHandlers] An error ocurred while trying to load class transformers.");
