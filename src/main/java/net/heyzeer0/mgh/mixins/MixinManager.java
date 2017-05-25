@@ -7,5 +7,5 @@ package net.heyzeer0.mgh.mixins;
 public class MixinManager {
 
     //just to organize, ignore that
-    
+
 }
