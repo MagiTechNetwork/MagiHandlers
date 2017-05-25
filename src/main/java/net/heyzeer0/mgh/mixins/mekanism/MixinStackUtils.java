@@ -42,6 +42,7 @@ public abstract class MixinStackUtils {
             return true;
         }
 
+
         //não me pergunte o porquê + o método esta ao contrario /shrug, existe a possibilidade de isto causar outro dupe, mais acho q n
         if(stack1.hasTagCompound() && stack2.hasTagCompound()) {
             LogManager.getLogger().warn("tem tag");
