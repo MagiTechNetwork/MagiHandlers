@@ -1,11 +1,9 @@
 package net.heyzeer0.mgh;
 
 import com.google.common.eventbus.EventBus;
-import cpw.mods.fml.common.DummyModContainer;
-import cpw.mods.fml.common.LoadController;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.ModMetadata;
-import cpw.mods.fml.common.event.FMLServerStartedEvent;
+import cpw.mods.fml.common.*;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.common.MinecraftForge;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 
@@ -20,9 +18,11 @@ public class MagiHandlers extends DummyModContainer {
         super(new ModMetadata());
         ModMetadata metadata = getMetadata();
         metadata.authorList.add("HeyZeer0");
-        metadata.name="MagiHandlers";
-        metadata.modId="MagiHandlers";
-        metadata.version="1.0";
+        metadata.name = "MagiHandlers";
+        metadata.modId = "MagiHandlers";
+        metadata.version = "1.0";
+
+        MinecraftForge.EVENT_BUS.register(new net.heyzeer0.mgh.EventBus());
     }
 
     @Override
@@ -33,7 +33,7 @@ public class MagiHandlers extends DummyModContainer {
     }
 
     @Mod.EventHandler
-    public void init(FMLServerStartedEvent event){
+    public void init(FMLPostInitializationEvent event){
         LogManager.getLogger().warn(" ");
         LogManager.getLogger().warn("Class transformes aplicados nos mods: " + StringUtils.join(MagiCore.loader.getLoadedPatches(), ", "));
         LogManager.getLogger().warn(" ");
