@@ -22,7 +22,7 @@ public class MagiHandlers extends DummyModContainer {
         metadata.modId = "MagiHandlers";
         metadata.version = "1.0";
 
-        MinecraftForge.EVENT_BUS.register(new net.heyzeer0.mgh.EventBus());
+        MinecraftForge.EVENT_BUS.register(new EventCore());
     }
 
     @Override

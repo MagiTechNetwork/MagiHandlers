@@ -13,7 +13,7 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
  * Created by HeyZeer0 on 29/05/2017.
  * Copyright © HeyZeer0 - 2016
  */
-public class EventBus {
+public class EventCore {
 
     @SubscribeEvent
     public void join(EntityJoinWorldEvent e) {
