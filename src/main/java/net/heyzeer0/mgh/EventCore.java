@@ -8,6 +8,8 @@ import net.lomeli.trophyslots.core.network.MessageSlotsClient;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.world.BlockEvent;
+import org.apache.logging.log4j.LogManager;
 
 /**
  * Created by HeyZeer0 on 29/05/2017.

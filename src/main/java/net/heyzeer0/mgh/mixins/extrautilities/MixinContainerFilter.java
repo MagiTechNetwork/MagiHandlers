@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  */
 @Pseudo
 @Mixin(targets = "com/rwtema/extrautils/gui/ContainerFilter", remap = false)
-public class MixinContainerFilter {
+public abstract class MixinContainerFilter {
 
     @Inject(method = "func_75144_a", at = @At("HEAD"), cancellable = true)
     private void injectClick(int par1, int par2, int par3, EntityPlayer par4EntityPlayer, CallbackInfoReturnable ci) {

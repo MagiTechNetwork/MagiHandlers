@@ -28,6 +28,15 @@ public abstract class MixinItemTaglockKit {
             MinecraftForge.EVENT_BUS.post(e);
             if(e.isCanceled()) {
                 ci.cancel();
+            }else{
+                if(event.target instanceof EntityPlayer) {
+                    AttackEntityEvent e2 = new AttackEntityEvent((EntityPlayer)event.target, player);
+                    MinecraftForge.EVENT_BUS.post(e2);
+
+                    if(e2.isCanceled()) {
+                        ci.cancel();
+                    }
+                }
             }
         }
     }

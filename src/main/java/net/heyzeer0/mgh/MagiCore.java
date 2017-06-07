@@ -38,13 +38,12 @@ public class MagiCore implements IFMLLoadingPlugin {
 
     @Override
     public String[] getASMTransformerClass() {
-        return new String[]{
-        };
+        return new String[0];
     }
 
     @Override
     public String getModContainerClass() {
-        return "net.heyzeer0.mgh.MagiHandlers";
+        return MagiHandlers.class.getName();
     }
 
     @Override
@@ -58,7 +57,8 @@ public class MagiCore implements IFMLLoadingPlugin {
     }
 
     @Override
-    public String getAccessTransformerClass() {
+    public String getAccessTransformerClass()
+    {
         return null;
     }
 
