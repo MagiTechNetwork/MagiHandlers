@@ -1,10 +1,20 @@
 package net.heyzeer0.mgh.mixins.botania;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.eventhandler.EventBus;
+import cpw.mods.fml.common.eventhandler.EventPriority;
+import net.heyzeer0.mgh.EventCore;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.v1_7_R4.PlayerList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.world.BlockEvent;
+import org.apache.logging.log4j.LogManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -16,6 +26,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import vazkii.botania.common.block.tile.mana.TileSpreader;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -42,16 +53,26 @@ public abstract class MixinEntityManaBurst extends EntityThrowable {
     private void replaceImpact(MovingObjectPosition movingobjectposition, CallbackInfo ci) {
         if(getShooter() instanceof TileSpreader) {
             if(((TileSpreader)getShooter()).getIdentifier() != null) {
-                Player p = Bukkit.getOfflinePlayer(((TileSpreader)getShooter()).getIdentifier()).getPlayer();
+                boolean found = false;
 
-                if(p != null) {
-                    BlockBreakEvent e = new BlockBreakEvent(p.getWorld().getBlockAt(movingobjectposition.blockX, movingobjectposition.blockY, movingobjectposition.blockZ), p);
-
-                    Bukkit.getPluginManager().callEvent(e);
-                    if (e.isCancelled()) {
-                        setDead();
-                        ci.cancel();
+                List<EntityPlayerMP> allPlayers = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
+                for(EntityPlayerMP plr : allPlayers) {
+                    if(plr.getUniqueID().toString().equals(((TileSpreader)getShooter()).getIdentifier().toString())) {
+                        found = true;
+                        BlockEvent.BreakEvent evt = new BlockEvent.BreakEvent(movingobjectposition.blockX, movingobjectposition.blockY, movingobjectposition.blockY, plr.worldObj, plr.worldObj.getBlock(movingobjectposition.blockX, movingobjectposition.blockY, movingobjectposition.blockY), 0, (EntityPlayer)plr);
+                        MinecraftForge.EVENT_BUS.post(evt);
+                        LogManager.getLogger().warn(evt.isCanceled());
+                        if(evt.isCanceled()) {
+                            setDead();
+                            ci.cancel();
+                        }
+                        break;
                     }
+                }
+
+                if(!found) {
+                    setDead();
+                    ci.cancel();
                 }
             }
         }else if(shooterIdentity != null) {
