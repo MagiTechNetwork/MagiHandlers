@@ -38,5 +38,10 @@
     "name": "COFHCore",
     "file": "CoFHCore-[1.7.10]3.1.4-329.jar",
     "mixin": "mixins/mixin-cofhcore.json"
+  },
+  {
+    "name": "Avaritia",
+    "file": "Avaritia-1.11.jar",
+    "mixin": "mixins/mixin-avaritia.json"
   }
 ]
