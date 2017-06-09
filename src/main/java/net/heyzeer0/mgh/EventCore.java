@@ -1,13 +1,18 @@
 package net.heyzeer0.mgh;
 
+import com.emoniph.witchery.common.ExtendedPlayer;
 import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.lomeli.trophyslots.TrophySlots;
 import net.lomeli.trophyslots.core.SlotUtil;
 import net.lomeli.trophyslots.core.network.MessageSlotsClient;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import org.apache.logging.log4j.LogManager;
 
@@ -22,6 +27,19 @@ public class EventCore {
         if(e.entity instanceof EntityPlayer) {
             if(Loader.isModLoaded("trophyslots")) {
                 TrophySlots.packetHandler.sendTo(new MessageSlotsClient(SlotUtil.getSlotsUnlocked((EntityPlayer)e.entity)), (EntityPlayerMP) e.entity);
+            }
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public void hitVampire(LivingHurtEvent e) {
+        if(e.entity instanceof EntityPlayer) {
+            if(((EntityPlayer) e.entity).getHealth() <= 3) {
+                if(e.source != DamageSource.inFire && e.source != DamageSource.magic) {
+                    if(ExtendedPlayer.get((EntityPlayer)e.entity).isVampire()) {
+                        ((EntityPlayer) e.entity).setHealth(4);
+                    }
+                }
             }
         }
     }

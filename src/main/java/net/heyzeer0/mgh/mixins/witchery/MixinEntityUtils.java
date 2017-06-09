@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class MixinEntityUtils {
 
     @Inject(method = "instantDeath", at = @At("HEAD"), cancellable = true)
-    private void injectDeath(EntityLivingBase entity, EntityLivingBase attacker, CallbackInfo ci) {
+    private static void injectDeath(EntityLivingBase entity, EntityLivingBase attacker, CallbackInfo ci) {
         if(entity.isDead) {
             ci.cancel();
         }
