@@ -14,5 +14,6 @@ public abstract class MixinBreakAvaritiaBlock {
     @Inject(method = "onUpdate", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;setBlockToAir(III)Z"))
     private void injectQuebrando(CallbackInfo ci){
         System.out.println("QUEBRANDOOOOO");
+
     }
 }
