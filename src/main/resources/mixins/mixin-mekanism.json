@@ -3,7 +3,8 @@
   "package":"net.heyzeer0.mgh.mixins.mekanism",
   "mixins":[
     "MixinStackUtils",
-    "MixinBinRecipe"
+    "MixinBinRecipe",
+    "MixinFlamethrower"
   ],
   "server": [],
   "client": [],
