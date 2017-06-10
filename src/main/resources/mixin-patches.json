@@ -43,5 +43,10 @@
     "name": "BloodMagic",
     "file": "BloodMagic-1.7.10-1.3.3-17.jar",
     "mixin": "mixins/mixin-bloodmagic.json"
+  },
+  {
+    "name": "Avaritia",
+    "file": "Avaritia-1.11.jar",
+    "mixin": "mixins/mixin-avaritia.json"
   }
 ]
