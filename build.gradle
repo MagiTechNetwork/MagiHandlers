@@ -79,7 +79,7 @@ dependencies {
         exclude module: 'launchwrapper'
         exclude module: 'guava'
     }
-    compile files('libs/spigot.jar', 'libs/botania.jar', 'libs/openblocks.jar', 'libs/witchery.jar', 'libs/extrautilities.jar', 'libs/tslots.jar')
+    compile files('libs/spigot.jar', 'libs/botania.jar', 'libs/openblocks.jar', 'libs/witchery.jar', 'libs/extrautilities.jar', 'libs/tslots.jar', 'libs/avaritia.jar')
     compile 'com.google.code.gson:gson:2.8.0'
 }
 
