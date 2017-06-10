@@ -38,5 +38,10 @@
     "name": "COFHCore",
     "file": "CoFHCore-[1.7.10]3.1.4-329.jar",
     "mixin": "mixins/mixin-cofhcore.json"
+  },
+  {
+    "name": "BloodMagic",
+    "file": "BloodMagic-1.7.10-1.3.3-17.jar",
+    "mixin": "mixins/mixin-bloodmagic.json"
   }
 ]

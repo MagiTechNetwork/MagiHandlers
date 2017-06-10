@@ -37,6 +37,8 @@ import java.util.UUID;
 @Mixin(targets = "vazkii/botania/common/entity/EntityManaBurst", remap = false)
 public abstract class MixinEntityManaBurst extends EntityThrowable {
 
+    @Shadow public abstract void setDead();
+
     public MixinEntityManaBurst(World world) {
         super(world);
     }
@@ -53,24 +55,17 @@ public abstract class MixinEntityManaBurst extends EntityThrowable {
     private void replaceImpact(MovingObjectPosition movingobjectposition, CallbackInfo ci) {
         if(getShooter() instanceof TileSpreader) {
             if(((TileSpreader)getShooter()).getIdentifier() != null) {
-                boolean found = false;
+                Player p = Bukkit.getOfflinePlayer(((TileSpreader)getShooter()).getIdentifier()).getPlayer();
 
-                List<EntityPlayerMP> allPlayers = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
-                for(EntityPlayerMP plr : allPlayers) {
-                    if(plr.getUniqueID().toString().equals(((TileSpreader)getShooter()).getIdentifier().toString())) {
-                        found = true;
-                        BlockEvent.BreakEvent evt = new BlockEvent.BreakEvent(movingobjectposition.blockX, movingobjectposition.blockY, movingobjectposition.blockY, plr.worldObj, plr.worldObj.getBlock(movingobjectposition.blockX, movingobjectposition.blockY, movingobjectposition.blockY), 0, (EntityPlayer)plr);
-                        MinecraftForge.EVENT_BUS.post(evt);
-                        LogManager.getLogger().warn(evt.isCanceled());
-                        if(evt.isCanceled()) {
-                            setDead();
-                            ci.cancel();
-                        }
-                        break;
-                    }
+                if(p == null || !p.isOnline()) {
+                    setDead();
+                    ci.cancel();
                 }
 
-                if(!found) {
+                BlockBreakEvent e = new BlockBreakEvent(p.getWorld().getBlockAt(movingobjectposition.blockX, movingobjectposition.blockY, movingobjectposition.blockZ), p);
+
+                Bukkit.getPluginManager().callEvent(e);
+                if (e.isCancelled()) {
                     setDead();
                     ci.cancel();
                 }
