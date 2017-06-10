@@ -2,7 +2,6 @@ package net.heyzeer0.mgh.mixins.avaritia;
 
 import fox.spiteful.avaritia.entity.EntityGapingVoid;
 import net.heyzeer0.mgh.hacks.avaritia.IMixinEntityGapingVoid;
-import net.heyzeer0.mgh.hacks.botania.IMixinTileSpreader;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
