@@ -53,5 +53,10 @@
     "name": "Thaumcraft",
     "file": "Thaumcraft-1.7.10-4.2.3.5.jar",
     "mixin": "mixins/mixin-thaumcraft.json"
+  },
+  {
+    "name": "Thermal Expansion",
+    "file": "ThermalExpansion-[1.7.10]4.1.5-248.jar",
+    "mixin": "mixins/mixin-thermalexpansion.json"
   }
 ]
