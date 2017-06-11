@@ -30,11 +30,13 @@ public class EventCore {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void hitVampire(LivingHurtEvent e) {
-        if(e.entity instanceof EntityPlayer) {
-            if(((EntityPlayer) e.entity).getHealth() <= 3) {
-                if(e.source != DamageSource.inFire && e.source != DamageSource.generic) {
-                    if(ExtendedPlayer.get((EntityPlayer)e.entity).isVampire()) {
-                        ((EntityPlayer) e.entity).setHealth(4);
+        if(Loader.isModLoaded("witchery")) {
+            if(e.entity instanceof EntityPlayer) {
+                if(((EntityPlayer) e.entity).getHealth() <= 3) {
+                    if(e.source != DamageSource.inFire && e.source != DamageSource.generic) {
+                        if(ExtendedPlayer.get((EntityPlayer)e.entity).isVampire()) {
+                            ((EntityPlayer) e.entity).setHealth(4);
+                        }
                     }
                 }
             }
