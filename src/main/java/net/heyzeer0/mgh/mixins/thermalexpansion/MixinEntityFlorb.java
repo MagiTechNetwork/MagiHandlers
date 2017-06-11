@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * Created by Frani on 10/06/2017.
  */
 @Pseudo
-@Mixin(targets = "cofh/thermalexpansion/entity/projectile/EntityFlorb")
+@Mixin(targets = "cofh/thermalexpansion/entity/projectile/EntityFlorb", remap = false)
 public abstract class MixinEntityFlorb extends EntityThrowable {
 
     public MixinEntityFlorb(World world) {

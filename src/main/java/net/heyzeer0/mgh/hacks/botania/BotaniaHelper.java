@@ -24,6 +24,7 @@ import java.util.Random;
  * Created by Frani on 11/06/2017.
  */
 public abstract class BotaniaHelper {
+
     public static void breakGrass(World world, ItemStack stack, int stackDmg, int srcx, int srcy, int srcz, EntityPlayer player) {
         IHornHarvestable.EnumHornType type = IHornHarvestable.EnumHornType.getTypeForMeta(stackDmg);
         Random rand = new Random(srcx ^ srcy ^ srcz);
@@ -71,4 +72,5 @@ public abstract class BotaniaHelper {
             }
         }
     }
+
 }
