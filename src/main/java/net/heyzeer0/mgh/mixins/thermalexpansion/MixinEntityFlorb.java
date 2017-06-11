@@ -17,10 +17,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  */
 @Pseudo
 @Mixin(targets = "cofh/thermalexpansion/entity/projectile/EntityFlorb")
-public abstract class MixinFlorb extends EntityThrowable {
-    public MixinFlorb(World world) {
+public abstract class MixinEntityFlorb extends EntityThrowable {
+
+    public MixinEntityFlorb(World world) {
         super(world);
     }
+
     @Inject(method = "func_70184_a", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;setBlock(IIILnet/minecraft/block/Block;II)Z", shift = At.Shift.BEFORE), cancellable = true)
     private void injectImpact(MovingObjectPosition mop, CallbackInfo ci) {
         if(getThrower() instanceof EntityPlayer){
@@ -32,4 +34,5 @@ public abstract class MixinFlorb extends EntityThrowable {
             }
         }
     }
+
 }
