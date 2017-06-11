@@ -48,5 +48,10 @@
     "name": "Avaritia",
     "file": "Avaritia-1.11.jar",
     "mixin": "mixins/mixin-avaritia.json"
+  },
+  {
+    "name": "Thaumcraft",
+    "file": "Thaumcraft-1.7.10-4.2.3.5.jar",
+    "mixin": "mixins/mixin-thaumcraft.json"
   }
 ]

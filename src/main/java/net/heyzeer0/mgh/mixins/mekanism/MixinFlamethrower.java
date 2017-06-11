@@ -11,7 +11,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-
 /**
  * Created by Frani on 10/06/2017.
  */
@@ -19,7 +18,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Pseudo
 @Mixin(targets = "mekanism/common/entity/EntityFlame", remap = false)
 public abstract class MixinFlamethrower {
+
     @Shadow Entity owner;
+
     @Inject(method = "burn", at = @At("HEAD"), cancellable = true)
     private void injectBurn(Entity entity, CallbackInfo ci) {
         AttackEntityEvent e = new AttackEntityEvent((EntityPlayer)owner, entity);
@@ -28,4 +29,5 @@ public abstract class MixinFlamethrower {
             ci.cancel();
         }
     }
+
 }
