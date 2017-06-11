@@ -15,7 +15,6 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public abstract class MixinItemGrassHorn {
     @Redirect(method = "onUsingTick", at = @At(value = "INVOKE", target = "Lvazkii/botania/common/item/ItemGrassHorn;breakGrass(Lnet/minecraft/world/World;Lnet/minecraft/item/ItemStack;IIII)V"))
     private void onBreakGrass(World world, ItemStack stack, int stackDmg, int srcx, int srcy, int srcz, ItemStack stack2, EntityPlayer player, int time){
-        System.out.println("O ONBREAKGRASS ESTA SENDO CHAMADO");
         BotaniaHelper.breakGrass(world, stack, stackDmg, srcx, srcy, srcz, player);
     }
 

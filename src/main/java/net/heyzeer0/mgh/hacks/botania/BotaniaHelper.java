@@ -53,7 +53,6 @@ public abstract class BotaniaHelper {
             int meta = world.getBlockMetadata(currCoords.posX, currCoords.posY, currCoords.posZ);
             items.addAll(block.getDrops(world, currCoords.posX, currCoords.posY, currCoords.posZ, meta, 0));
 
-            System.out.println("O EVENTO ESTA SENDO CHAMADO");
             BlockEvent.BreakEvent event = new BlockEvent.BreakEvent(currCoords.posX, currCoords.posY, currCoords.posZ, world, block, meta, player);
             MinecraftForge.EVENT_BUS.post(event);
             if(event.isCanceled()) {
