@@ -7,7 +7,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BlockEvent;
-import org.apache.logging.log4j.LogManager;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.config.ConfigBlocks;
@@ -29,7 +28,6 @@ public class MixinManager {
         MinecraftForge.EVENT_BUS.post(evt);
 
         if(evt.isCanceled()) {
-            LogManager.getLogger().warn("ta cancelando porq");
             return true;
         }
 
@@ -46,7 +44,6 @@ public class MixinManager {
             world.markBlockForUpdate(ii, jj, kk);
             Thaumcraft.proxy.blockSparkle(world, ii, jj, kk, 4194368, 1);
             return true; }
-        LogManager.getLogger().warn("ta cancelando porq");
         return false;
     }
 
