@@ -7,6 +7,7 @@ import cpw.mods.fml.common.LoadController;
 import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.MinecraftForge;
+import org.apache.logging.log4j.LogManager;
 
 
 /**
@@ -33,6 +34,15 @@ public class MagiHandlers extends DummyModContainer {
 
     @Subscribe
     public void preInit(FMLPreInitializationEvent e) {
+        LogManager.getLogger().warn(" ");
+        LogManager.getLogger().warn("[MagiHandlers] ASM modules injected:");
+        String x = "- ";
+        for(String patches : MagiCore.loader.getLoadedPatches()) {
+            x = x + patches + ", ";
+        }
+        LogManager.getLogger().warn(x);
+        LogManager.getLogger().warn(" ");
+
         MinecraftForge.EVENT_BUS.register(new EventCore());
     }
 
