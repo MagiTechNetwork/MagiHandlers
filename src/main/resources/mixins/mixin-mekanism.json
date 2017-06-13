@@ -4,7 +4,8 @@
   "mixins":[
     "MixinStackUtils",
     "MixinBinRecipe",
-    "MixinFlamethrower"
+    "MixinFlamethrower",
+    "MixinChunkManager"
   ],
   "server": [],
   "client": [],
