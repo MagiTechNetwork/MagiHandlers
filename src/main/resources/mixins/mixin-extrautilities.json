@@ -3,7 +3,9 @@
   "package":"net.heyzeer0.mgh.mixins.extrautilities",
   "mixins":[
     "MixinItemBlockDrum",
-    "MixinContainerFilter"
+    "MixinContainerFilter",
+    "MixinTileEntityEnderThermicLavaPump",
+    "MixinXUHelper"
   ],
   "server": [],
   "client": [],
