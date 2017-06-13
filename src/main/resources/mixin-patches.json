@@ -58,5 +58,10 @@
     "name": "Thermal Expansion",
     "file": "ThermalExpansion-[1.7.10]4.1.5-248.jar",
     "mixin": "mixins/mixin-thermalexpansion.json"
+  },
+  {
+    "name": "MineFactory Reloaded",
+    "file": "MineFactoryReloaded-[1.7.10]2.8.2B1-201.jar",
+    "mixin": "mixins/mixin-mfr.json"
   }
 ]
