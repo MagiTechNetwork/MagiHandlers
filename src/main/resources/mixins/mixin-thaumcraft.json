@@ -3,7 +3,8 @@
   "package":"net.heyzeer0.mgh.mixins.thaumcraft",
   "mixins":[
     "MixinItemFocusPortableHole",
-    "MixinTileHole"
+    "MixinTileHole",
+    "MixinEntityBottleTaint"
   ],
   "server": [],
   "client": [],
