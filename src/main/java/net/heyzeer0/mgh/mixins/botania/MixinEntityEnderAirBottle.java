@@ -20,7 +20,6 @@ import java.util.List;
  * Created by Frani on 13/06/2017.
  */
 
-@SuppressWarnings("ALL")
 @Pseudo
 @Mixin(targets = "vazkii/botania/common/entity/EntityEnderAirBottle", remap = false)
 public abstract class MixinEntityEnderAirBottle extends EntityThrowable {
@@ -50,4 +49,5 @@ public abstract class MixinEntityEnderAirBottle extends EntityThrowable {
             }
         }
     }
+
 }

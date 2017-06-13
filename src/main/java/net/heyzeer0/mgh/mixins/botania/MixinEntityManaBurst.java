@@ -4,6 +4,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.EventBus;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import net.heyzeer0.mgh.EventCore;
+import net.heyzeer0.mgh.mixins.MixinManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -55,32 +56,38 @@ public abstract class MixinEntityManaBurst extends EntityThrowable {
     private void replaceImpact(MovingObjectPosition movingobjectposition, CallbackInfo ci) {
         if(getShooter() instanceof TileSpreader) {
             if(((TileSpreader)getShooter()).getIdentifier() != null) {
-                Player p = Bukkit.getOfflinePlayer(((TileSpreader)getShooter()).getIdentifier()).getPlayer();
 
-                if(p == null || !p.isOnline()) {
+                EntityPlayer plr = worldObj.func_152378_a(((TileSpreader)getShooter()).getIdentifier());
+
+                if(plr == null) {
                     setDead();
                     ci.cancel();
+                    return;
                 }
 
-                BlockBreakEvent e = new BlockBreakEvent(p.getWorld().getBlockAt(movingobjectposition.blockX, movingobjectposition.blockY, movingobjectposition.blockZ), p);
+                BlockEvent.BreakEvent evt = MixinManager.generateBlockEvent(movingobjectposition.blockX, movingobjectposition.blockY, movingobjectposition.blockZ, worldObj, plr);
+                MinecraftForge.EVENT_BUS.post(evt);
 
-                Bukkit.getPluginManager().callEvent(e);
-                if (e.isCancelled()) {
+                if(evt.isCanceled()) {
                     setDead();
                     ci.cancel();
                 }
             }
         }else if(shooterIdentity != null) {
-            Player p = Bukkit.getOfflinePlayer(shooterIdentity).getPlayer();
+            EntityPlayer plr = worldObj.func_152378_a(shooterIdentity);
 
-            if(p != null) {
-                BlockBreakEvent e = new BlockBreakEvent(p.getWorld().getBlockAt(movingobjectposition.blockX, movingobjectposition.blockY, movingobjectposition.blockZ), p);
+            if(plr == null) {
+                setDead();
+                ci.cancel();
+                return;
+            }
 
-                Bukkit.getPluginManager().callEvent(e);
-                if (e.isCancelled()) {
-                    setDead();
-                    ci.cancel();
-                }
+            BlockEvent.BreakEvent evt = MixinManager.generateBlockEvent(movingobjectposition.blockX, movingobjectposition.blockY, movingobjectposition.blockZ, worldObj, plr);
+            MinecraftForge.EVENT_BUS.post(evt);
+
+            if(evt.isCanceled()) {
+                setDead();
+                ci.cancel();
             }
         }
     }
