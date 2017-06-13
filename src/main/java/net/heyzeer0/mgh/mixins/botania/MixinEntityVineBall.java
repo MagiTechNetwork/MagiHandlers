@@ -1,9 +1,12 @@
 package net.heyzeer0.mgh.mixins.botania;
 
+import net.heyzeer0.mgh.mixins.MixinManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.world.BlockEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -38,16 +41,20 @@ public abstract class MixinEntityVineBall extends EntityThrowable {
     @Inject(method = "func_70184_a", at = @At("HEAD"), cancellable = true)
     private void injectImpact(MovingObjectPosition movingobjectposition, CallbackInfo ci) {
         if(shooterIdentity != null) {
-            Player p = Bukkit.getOfflinePlayer(shooterIdentity).getPlayer();
+            EntityPlayer plr = worldObj.func_152378_a(shooterIdentity);
 
-            if(p != null) {
-                BlockBreakEvent e = new BlockBreakEvent(p.getWorld().getBlockAt(movingobjectposition.blockX, movingobjectposition.blockY, movingobjectposition.blockZ), p);
+            if(plr == null) {
+                setDead();
+                ci.cancel();
+                return;
+            }
 
-                Bukkit.getPluginManager().callEvent(e);
-                if (e.isCancelled()) {
-                    setDead();
-                    ci.cancel();
-                }
+            BlockEvent.BreakEvent evt = MixinManager.generateBlockEvent(movingobjectposition.blockX, movingobjectposition.blockY, movingobjectposition.blockZ, worldObj, plr);
+            MinecraftForge.EVENT_BUS.post(evt);
+
+            if(evt.isCanceled()) {
+                setDead();
+                ci.cancel();
             }
         }
     }
