@@ -1,6 +1,7 @@
 package net.heyzeer0.mgh.mixins.thaumcraft;
 
 import net.heyzeer0.mgh.hacks.thaumcraft.IMixinTileHole;
+import net.heyzeer0.mgh.hacks.thaumcraft.ThaumcraftHelper;
 import net.heyzeer0.mgh.mixins.MixinManager;
 import net.minecraft.entity.player.EntityPlayer;
 import org.spongepowered.asm.mixin.Mixin;
@@ -61,15 +62,15 @@ public class MixinTileHole extends TileMemory implements IMixinTileHole {
             switch (this.direction) {
                 case 0: case 1:
                     for (int a = 0; a < 9; a++) if ((a / 3 != 1) || (a % 3 != 1))
-                        MixinManager.createHole(getOwner(), this.worldObj, ii - 1 + a / 3, jj, kk - 1 + a % 3, -1, (byte)1, this.countdownmax);
+                        ThaumcraftHelper.createHole(getOwner(), this.worldObj, ii - 1 + a / 3, jj, kk - 1 + a % 3, -1, (byte)1, this.countdownmax);
                     break;
                 case 2: case 3:
                     for (int a = 0; a < 9; a++) if ((a / 3 != 1) || (a % 3 != 1))
-                        MixinManager.createHole(getOwner(), this.worldObj, ii - 1 + a / 3, jj - 1 + a % 3, kk, -1, (byte)1, this.countdownmax);
+                        ThaumcraftHelper.createHole(getOwner(), this.worldObj, ii - 1 + a / 3, jj - 1 + a % 3, kk, -1, (byte)1, this.countdownmax);
                     break;
                 case 4: case 5:
                     for (int a = 0; a < 9; a++) { if ((a / 3 != 1) || (a % 3 != 1)) {
-                        MixinManager.createHole(getOwner(), this.worldObj, ii, jj - 1 + a / 3, kk - 1 + a % 3, -1, (byte)1, this.countdownmax);
+                        ThaumcraftHelper.createHole(getOwner(), this.worldObj, ii, jj - 1 + a / 3, kk - 1 + a % 3, -1, (byte)1, this.countdownmax);
                     }
                     }
             }
@@ -82,7 +83,7 @@ public class MixinTileHole extends TileMemory implements IMixinTileHole {
                 case 5:  ii--;
             }
 
-            if (!MixinManager.createHole(getOwner(), this.worldObj, ii, jj, kk, this.direction, (byte)(this.count - 1), this.countdownmax))
+            if (!ThaumcraftHelper.createHole(getOwner(), this.worldObj, ii, jj, kk, this.direction, (byte)(this.count - 1), this.countdownmax))
             {
                 this.count = 0;
             }

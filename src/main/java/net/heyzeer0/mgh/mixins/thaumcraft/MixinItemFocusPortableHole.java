@@ -1,5 +1,6 @@
 package net.heyzeer0.mgh.mixins.thaumcraft;
 
+import net.heyzeer0.mgh.hacks.thaumcraft.ThaumcraftHelper;
 import net.heyzeer0.mgh.mixins.MixinManager;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -7,8 +8,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.world.BlockEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Pseudo;
@@ -75,7 +74,7 @@ public abstract class MixinItemFocusPortableHole extends ItemFocusBasic {
                 int di = getUpgradeLevel(wand.getFocusItem(itemstack), FocusUpgradeType.extend);
                 short dur = (short)(120 + 60 * di);
 
-                MixinManager.createHole(player, world, mop.blockX, mop.blockY, mop.blockZ, mop.sideHit, (byte)(distance + 1), dur);
+                ThaumcraftHelper.createHole(player, world, mop.blockX, mop.blockY, mop.blockZ, mop.sideHit, (byte)(distance + 1), dur);
             }
             player.swingItem();
             if (!world.isRemote) { world.playSoundEffect(mop.blockX + 0.5D, mop.blockY + 0.5D, mop.blockZ + 0.5D, "mob.endermen.portal", 1.0F, 1.0F);
