@@ -26,7 +26,6 @@ public abstract class MixinTileEntityAutoSpawner {
     private void injectActivateMachine(CallbackInfoReturnable<Boolean> cir, ItemStack var1, NBTTagCompound var2, Entity var3, EntityLivingBase var4, double var9, double var11, double var13) {
         List<Entity> l = var4.worldObj.getEntitiesWithinAABB(Entity.class, AxisAlignedBB.getBoundingBox(var4.posX - 5, var4.posY - 5, var4.posZ - 5, var4.posX + 5, var4.posY + 5, var4.posZ + 5));
         if(l.size() >= 8) {
-            cir.cancel();
             cir.setReturnValue(false);
         }
     }
