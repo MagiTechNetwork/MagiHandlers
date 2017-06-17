@@ -10,6 +10,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -150,7 +151,11 @@ public abstract class MixinEntityGapingVoid extends Entity implements IMixinEnti
                 double len = Math.sqrt(lensquared);
 
                 if (len <= nomrange) {
-                    nommee.attackEntityFrom(DamageSource.outOfWorld, 3.0f);
+                    AttackEntityEvent event = new AttackEntityEvent(getOwner(), nommee);
+                    MinecraftForge.EVENT_BUS.post(event);
+                    if(!event.isCanceled()) {
+                        nommee.attackEntityFrom(DamageSource.outOfWorld, 3.0f);
+                    }
                 }
             }
         }
