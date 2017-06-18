@@ -4,7 +4,8 @@
   "mixins":[
     "MixinItemFocusPortableHole",
     "MixinTileHole",
-    "MixinEntityBottleTaint"
+    "MixinEntityBottleTaint",
+    "MixinBlockTable"
   ],
   "server": [],
   "client": [],

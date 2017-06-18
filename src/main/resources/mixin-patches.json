@@ -63,5 +63,10 @@
     "name": "MineFactory Reloaded",
     "file": "MineFactoryReloaded-[1.7.10]2.8.2B1-201.jar",
     "mixin": "mixins/mixin-mfr.json"
+  },
+  {
+    "name": "EnderIO",
+    "file": "EnderIO-1.7.10-2.3.0.429_beta.jar",
+    "mixin": "mixins/mixin-enderio.json"
   }
 ]

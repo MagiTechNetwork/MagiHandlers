@@ -12,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 
 /**
  * Created by HeyZeer0 on 29/05/2017.
@@ -42,5 +43,4 @@ public class EventCore {
             }
         }
     }
-
 }
