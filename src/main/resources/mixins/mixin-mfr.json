@@ -3,7 +3,8 @@
   "package":"net.heyzeer0.mgh.mixins.mfr",
   "mixins":[
     "MixinTileEntityChunkLoader",
-    "MixinTileEntityAutoSpawner"
+    "MixinTileEntityAutoSpawner",
+    "MixinTileEntityBlockPlacer"
   ],
   "server": [],
   "client": [],
