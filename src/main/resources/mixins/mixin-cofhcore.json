@@ -3,7 +3,8 @@
   "package":"net.heyzeer0.mgh.mixins.cofhcore",
   "mixins":[
     "MixinItemHelper",
-    "MixinCoFHFakePlayer"
+    "MixinCoFHFakePlayer",
+    "MixinSecurityHelper"
   ],
   "server": [],
   "client": [],

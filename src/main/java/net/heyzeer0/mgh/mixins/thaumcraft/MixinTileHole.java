@@ -17,7 +17,7 @@ import thaumcraft.common.tiles.TileMemory;
  */
 @Pseudo
 @Mixin(targets = "thaumcraft/common/tiles/TileHole", remap = false)
-public class MixinTileHole extends TileMemory implements IMixinTileHole {
+public abstract class MixinTileHole extends TileMemory implements IMixinTileHole {
 
     private EntityPlayer plr;
 
