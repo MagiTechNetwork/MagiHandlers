@@ -17,6 +17,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(targets = "com/emoniph/witchery/common/ExtendedPlayer", remap = false)
 public abstract class MixinExtendedPlayer {
 
+    @Shadow public abstract boolean isVampire();
+
     @Shadow
     private int vampireUltimateCharges;
 
@@ -29,6 +31,13 @@ public abstract class MixinExtendedPlayer {
         vampireUltimateCharges -= 1;
         sync();
         ci.cancel();
+    }
+
+    @Inject(method = "fillBloodReserve", at = @At(value = "HEAD"), cancellable = true)
+    private void injectBloodReserve(int quantity, CallbackInfo ci) {
+        if(!isVampire()) {
+            ci.cancel();
+        }
     }
 
     @Shadow
