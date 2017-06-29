@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Pseudo;
 
 @Pseudo
-@Mixin(targets = "thaumcraft/common/entities/monster/boss/EntityCultistLeader", remap = false)
+@Mixin(targets = "thaumcraft/common/entities/monster/boss/EntityCultistPortal", remap = false)
 public abstract class MixinEntityCultistPortal extends EntityMob {
 
     public MixinEntityCultistPortal(World world) {
