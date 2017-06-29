@@ -5,7 +5,8 @@
     "MixinItemFocusPortableHole",
     "MixinTileHole",
     "MixinEntityBottleTaint",
-    "MixinBlockTable"
+    "MixinBlockTable",
+    "MixinEntityThaumcraftBoss"
   ],
   "server": [],
   "client": [],
