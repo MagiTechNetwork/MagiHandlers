@@ -50,8 +50,8 @@ public class EventCore {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onDrawerBreak(BlockEvent.BreakEvent event) {
-        TileEntity tile = event.world.getTileEntity(event.x, event.y, event.z);
         if(Loader.isModLoaded("StorageDrawers")) {
+            TileEntity tile = event.world.getTileEntity(event.x, event.y, event.z);
             if (tile != null && tile instanceof TileEntityDrawers) {
                 TileEntityDrawers te = (TileEntityDrawers) tile;
                 int total = 0;
@@ -61,7 +61,7 @@ public class EventCore {
                 }
                 if (total >= 500) {
                     event.setCanceled(true);
-                    event.getPlayer().addChatMessage(new ChatComponentText("§cEsse Drawer está muito cheio! Remova alguns itens §cce §ctente §cquebrar novamente!"));
+                    event.getPlayer().addChatMessage(new ChatComponentText("§cEsse Drawer está muito cheio! Remova alguns itens §ce §ctente §cquebrar novamente!"));
                     event.getPlayer().addChatMessage(new ChatComponentText("§aDica: use uma Packing Tape para mudar o Drawer de lugar §asem §ater §aque quebra-lo!"));
                 }
             }
