@@ -49,8 +49,9 @@ public abstract class MixinEntityThaumcraftBoss extends EntityMob {
                 this.aggro.put(Integer.valueOf(e), Integer.valueOf(ad));
             }
 
+            damage = source.isProjectile() ? 0.1F : damage;
+
             if(damage > 13.0F) {
-                damage = source.isProjectile() ? 1.0F : 13.0F;
                 if(this.getAnger() == 0) {
                     try {
                         this.addPotionEffect(new PotionEffect(Potion.regeneration.id, 200, (int)(damage / 15.0F)));

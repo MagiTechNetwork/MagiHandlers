@@ -11,7 +11,9 @@
     "MixinEntityCultistPortal",
     "MixinEntityTaintacleGiant",
     "MixinEntityEldritchWarden",
-    "MixinEntityEldritchGolem"
+    "MixinEntityEldritchGolem",
+    "MixinTileNode",
+    "MixinTileEldritchTrap"
   ],
   "server": [],
   "client": [],
