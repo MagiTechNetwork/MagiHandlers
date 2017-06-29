@@ -6,7 +6,8 @@
     "MixinTileHole",
     "MixinEntityBottleTaint",
     "MixinBlockTable",
-    "MixinEntityThaumcraftBoss"
+    "MixinEntityThaumcraftBoss",
+    "MixinEntityCultistLeader"
   ],
   "server": [],
   "client": [],
