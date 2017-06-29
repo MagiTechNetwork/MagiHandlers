@@ -9,7 +9,8 @@
     "MixinEntityThaumcraftBoss",
     "MixinEntityCultistLeader",
     "MixinEntityCultistPortal",
-    "MixinEntityTaintacleGiant"
+    "MixinEntityTaintacleGiant",
+    "MixinEntityEldritchWarden"
   ],
   "server": [],
   "client": [],
