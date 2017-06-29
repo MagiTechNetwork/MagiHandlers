@@ -50,6 +50,7 @@ public abstract class MixinEntityThaumcraftBoss extends EntityMob {
             }
 
             if(damage > 13.0F) {
+                damage = source.isProjectile() ? 1.0F : 13.0F;
                 if(this.getAnger() == 0) {
                     try {
                         this.addPotionEffect(new PotionEffect(Potion.regeneration.id, 200, (int)(damage / 15.0F)));
@@ -65,8 +66,6 @@ public abstract class MixinEntityThaumcraftBoss extends EntityMob {
                         source = DamageSource.causePlayerDamage((EntityPlayer)source.getEntity());
                     }
                 }
-
-                damage = 13.0F;
             }
         }
         return super.attackEntityFrom(source, damage);
