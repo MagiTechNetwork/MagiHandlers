@@ -68,5 +68,10 @@
     "name": "EnderIO",
     "file": "EnderIO-1.7.10-2.3.0.429_beta.jar",
     "mixin": "mixins/mixin-enderio.json"
+  },
+  {
+    "name": "ExCompressum",
+    "file": "excompressum-mc1.7.10-1.1.149.jar",
+    "mixin": "mixins/mixin-excompressum.json"
   }
 ]
