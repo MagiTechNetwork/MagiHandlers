@@ -10,7 +10,8 @@
     "MixinEntityCultistLeader",
     "MixinEntityCultistPortal",
     "MixinEntityTaintacleGiant",
-    "MixinEntityEldritchWarden"
+    "MixinEntityEldritchWarden",
+    "MixinEntityEldritchGolem"
   ],
   "server": [],
   "client": [],
