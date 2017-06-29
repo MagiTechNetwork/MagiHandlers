@@ -21,7 +21,7 @@ import java.util.List;
  */
 
 @Pseudo
-@Mixin(targets = "vazkii/botania/common/item/rod/ItemExchangeRod")
+@Mixin(targets = "vazkii/botania/common/item/rod/ItemExchangeRod", remap = false)
 public abstract class MixinItemExchangeRod {
 
     @Shadow public static ItemStack removeFromInventory(EntityPlayer player, ItemStack stack, Block block, int meta, boolean doit) { return null; }
