@@ -25,7 +25,7 @@
     "mixin": "mixins/mixin-bibliocraft.json"
   },
   {
-    "name": "ThaumicEnergisitics",
+    "name": "ThaumicEnergisitcs",
     "file": "thaumicenergistics-1.0.0.5.jar",
     "mixin": "mixins/mixin-tenergistics.json"
   },
@@ -73,5 +73,10 @@
     "name": "ExCompressum",
     "file": "excompressum-mc1.7.10-1.1.149.jar",
     "mixin": "mixins/mixin-excompressum.json"
+  },
+  {
+    "name": "Tinkers Construct",
+    "file": "TConstruct-1.7.10-1.8.8.jar",
+    "mixin": "mixins/mixin-tconstruct.json"
   }
 ]
