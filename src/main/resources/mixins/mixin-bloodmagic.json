@@ -4,7 +4,8 @@
   "mixins":[
     "MixinSacrificialDagger",
     "MixinBoundPickaxe",
-    "MixinBoundAxe"
+    "MixinBoundAxe",
+    "MixinBoundShovel"
   ],
   "server": [],
   "client": [],
