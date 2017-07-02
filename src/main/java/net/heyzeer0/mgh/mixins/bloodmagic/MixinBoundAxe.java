@@ -21,8 +21,8 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
  */
 
 @Pseudo
-@Mixin(targets = "WayofTime/alchemicalWizardry/common/items/BoundPickaxe", remap = false)
-public abstract class MixinBoundPickaxe {
+@Mixin(targets = "WayofTime/alchemicalWizardry/common/items/BoundAxe", remap = false)
+public abstract class MixinBoundAxe {
 
     @Inject(method = "func_77659_a",  at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;func_147468_f(III)Z"), locals = LocalCapture.CAPTURE_FAILSOFT, cancellable = true)
     private void injectOnItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, CallbackInfoReturnable<ItemStack> cir, Vec3 blockVec, int posX, int posY, int posZ, boolean silkTouch, int fortuneLvl, HashMultiset dropMultiset, int i, int j, int k, Block block, int meta, float str) {

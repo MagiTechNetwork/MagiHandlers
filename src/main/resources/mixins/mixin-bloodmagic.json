@@ -3,7 +3,8 @@
   "package":"net.heyzeer0.mgh.mixins.bloodmagic",
   "mixins":[
     "MixinSacrificialDagger",
-    "MixinBoundPickaxe"
+    "MixinBoundPickaxe",
+    "MixinBoundAxe"
   ],
   "server": [],
   "client": [],
