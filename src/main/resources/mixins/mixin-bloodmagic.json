@@ -2,7 +2,8 @@
   "required": true,
   "package":"net.heyzeer0.mgh.mixins.bloodmagic",
   "mixins":[
-    "MixinSacrificialDagger"
+    "MixinSacrificialDagger",
+    "MixinBoundPickaxe"
   ],
   "server": [],
   "client": [],
