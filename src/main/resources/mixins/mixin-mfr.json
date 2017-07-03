@@ -8,7 +8,7 @@
     "MixinItemNeedlegunAmmoFire",
     "MixinItemNeedlegunAmmoBlock",
     "MixinItemNeedlegunAmmoStandard",
-    "ItemNeedlegunAmmoAnvil",
+    "MixinItemNeedlegunAmmoAnvil",
     "MixinEntityRocket"
 
   ],

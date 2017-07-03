@@ -4,14 +4,12 @@ import net.heyzeer0.mgh.mixins.MixinManager;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BlockEvent;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Pseudo;
-import org.spongepowered.asm.mixin.Shadow;
+import powercrystals.minefactoryreloaded.item.gun.ammo.ItemNeedlegunAmmoBlock;
 
 /**
  * Created by Frani on 02/07/2017.
@@ -19,15 +17,12 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Pseudo
 @Mixin(targets = "powercrystals/minefactoryreloaded/item/gun/ammo/ItemNeedlegunAmmoAnvil", remap = false)
-public abstract class MixinItemNeedlegunAmmoAnvil {
+public abstract class MixinItemNeedlegunAmmoAnvil extends ItemNeedlegunAmmoBlock {
 
-    @Shadow
-    protected Block _block;
+    public MixinItemNeedlegunAmmoAnvil(Block block, int meta) {
+        super(block, meta);
+    }
 
-    @Shadow
-    protected int _blockMeta;
-
-    @Overwrite
     protected void placeBlockAt(World world, int x, int y, int z, double distance, EntityPlayer owner) {
         if (!world.isRemote) {
             BlockEvent.PlaceEvent evt = MixinManager.generatePlaceEvent(x, y, z, world, owner);
