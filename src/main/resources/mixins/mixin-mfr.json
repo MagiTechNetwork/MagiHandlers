@@ -10,7 +10,6 @@
     "MixinItemNeedlegunAmmoStandard",
     "ItemNeedlegunAmmoAnvil",
     "MixinEntityRocket"
-
   ],
   "server": [],
   "client": [],
