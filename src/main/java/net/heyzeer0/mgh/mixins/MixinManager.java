@@ -1,7 +1,9 @@
 package net.heyzeer0.mgh.mixins;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.world.BlockEvent;
 
 
@@ -15,6 +17,10 @@ public class MixinManager {
 
     public static BlockEvent.BreakEvent generateBlockEvent(int x, int y, int z, World worldobj, EntityPlayer plr) {
         return new BlockEvent.BreakEvent(x, y, z, worldobj, worldobj.getBlock(x, y, z), worldobj.getBlockMetadata(x, y, z), plr);
+    }
+
+    public static BlockEvent.PlaceEvent generatePlaceEvent(int x, int y, int z, World world, EntityPlayer player) {
+        return new BlockEvent.PlaceEvent(BlockSnapshot.getBlockSnapshot(world, x, y, z), world.getBlock(x, y, z), player);
     }
 
 

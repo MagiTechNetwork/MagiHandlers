@@ -4,7 +4,13 @@
   "mixins":[
     "MixinTileEntityChunkLoader",
     "MixinTileEntityAutoSpawner",
-    "MixinTileEntityBlockPlacer"
+    "MixinTileEntityBlockPlacer",
+    "MixinItemNeedlegunAmmoFire",
+    "MixinItemNeedlegunAmmoBlock",
+    "MixinItemNeedlegunAmmoStandard",
+    "ItemNeedlegunAmmoAnvil",
+    "MixinEntityRocket"
+
   ],
   "server": [],
   "client": [],
