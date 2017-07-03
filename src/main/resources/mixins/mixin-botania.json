@@ -9,7 +9,8 @@
     "MixinSubTileGourmaryllis",
     "MixinItemGrassHorn",
     "MixinEntityEnderAirBottle",
-    "MixinItemExchangeRod"
+    "MixinItemExchangeRod",
+    "MixinItemTerraformRod"
   ],
   "server": [],
   "client": [],
