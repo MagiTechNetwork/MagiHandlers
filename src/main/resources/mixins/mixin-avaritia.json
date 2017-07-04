@@ -3,7 +3,8 @@
   "package":"net.heyzeer0.mgh.mixins.avaritia",
   "mixins":[
     "MixinEntityEndestPearl",
-    "MixinEntityGapingVoid"
+    "MixinEntityGapingVoid",
+    "MixinToolHelper"
   ],
   "server": [],
   "client": [],
