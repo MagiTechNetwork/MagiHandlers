@@ -1,8 +1,12 @@
 package net.heyzeer0.mgh.mixins;
 
+import com.emoniph.witchery.entity.EntityParasyticLouse;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.BlockSnapshot;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.world.BlockEvent;
 
 
@@ -20,6 +24,10 @@ public class MixinManager {
 
     public static BlockEvent.PlaceEvent generatePlaceEvent(int x, int y, int z, World world, EntityPlayer player) {
         return new BlockEvent.PlaceEvent(BlockSnapshot.getBlockSnapshot(world, x, y, z), world.getBlock(x, y, z), player);
+    }
+
+    public static boolean canAttack(EntityPlayer attacker, Entity damaged) {
+        return !MinecraftForge.EVENT_BUS.post(new AttackEntityEvent(attacker, damaged));
     }
 
 
