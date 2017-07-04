@@ -1,5 +1,6 @@
 package net.heyzeer0.mgh.mixins.witchery;
 
+import net.heyzeer0.mgh.mixins.MixinManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,9 +24,7 @@ public abstract class MixinItemDeathsHand {
     @Inject(method = "onLeftClickEntity", at = @At("HEAD"), cancellable = true)
     private void injectDamage(ItemStack stack, EntityPlayer player, Entity otherEntity, CallbackInfoReturnable ci) {
         if(!player.worldObj.isRemote && otherEntity instanceof EntityLivingBase) {
-            AttackEntityEvent e = new AttackEntityEvent(player, otherEntity);
-            MinecraftForge.EVENT_BUS.post(e);
-            if(e.isCanceled()) {
+            if(!MixinManager.canAttack(player, otherEntity)) {
                 ci.cancel();
             }
         }

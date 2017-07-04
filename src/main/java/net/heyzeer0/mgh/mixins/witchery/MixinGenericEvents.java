@@ -1,6 +1,7 @@
 package net.heyzeer0.mgh.mixins.witchery;
 
 import com.emoniph.witchery.common.ExtendedPlayer;
+import net.heyzeer0.mgh.mixins.MixinManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
@@ -22,9 +23,7 @@ public abstract class MixinGenericEvents {
     @Inject(method = "onEntityInteract", at = @At("HEAD"), cancellable = true)
     private void injectDamage(EntityInteractEvent event, CallbackInfo ci) {
         if(ExtendedPlayer.get(event.entityPlayer).getSelectedVampirePower() == ExtendedPlayer.VampirePower.DRINK && event.target instanceof EntityLivingBase) {
-            AttackEntityEvent e = new AttackEntityEvent(event.entityPlayer, event.target);
-            MinecraftForge.EVENT_BUS.post(e);
-            if(e.isCanceled()) {
+            if(!MixinManager.canAttack(event.entityPlayer, event.target)) {
                 ci.cancel();
             }
         }

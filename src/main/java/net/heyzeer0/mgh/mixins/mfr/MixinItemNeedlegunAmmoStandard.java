@@ -1,5 +1,6 @@
 package net.heyzeer0.mgh.mixins.mfr;
 
+import net.heyzeer0.mgh.mixins.MixinManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -24,11 +25,7 @@ public abstract class MixinItemNeedlegunAmmoStandard {
 
     @Overwrite
     public boolean onHitEntity(ItemStack stack, EntityPlayer owner, Entity hit, double distance) {
-
-        AttackEntityEvent evt = new AttackEntityEvent(owner, hit);
-        MinecraftForge.EVENT_BUS.post(evt);
-
-        if(evt.isCanceled()) return false;
+        if(!MixinManager.canAttack(owner, hit)) return false;
         hit.attackEntityFrom(DamageSource.causePlayerDamage(owner).setProjectile(), damage);
         return true;
     }

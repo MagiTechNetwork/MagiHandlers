@@ -1,5 +1,7 @@
 package net.heyzeer0.mgh.mixins.botania;
 
+import net.heyzeer0.mgh.mixins.MixinManager;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -28,9 +30,7 @@ public abstract class MixinEntityThornChakram extends EntityThrowable {
     @Inject(method = "func_70184_a", at = @At("HEAD"), cancellable = true)
     private void injectImpact(MovingObjectPosition pos, CallbackInfo ci) {
         if (pos.entityHit != null && pos.entityHit instanceof EntityLivingBase && pos.entityHit != getThrower() && getThrower() instanceof EntityPlayer) {
-            AttackEntityEvent evt = new AttackEntityEvent((EntityPlayer) getThrower(), pos.entityHit);
-            MinecraftForge.EVENT_BUS.post(evt);
-            if (evt.isCanceled()) {
+            if (!MixinManager.canAttack((EntityPlayer)getThrower(), pos.entityHit)) {
                 ci.cancel();
             }
         }

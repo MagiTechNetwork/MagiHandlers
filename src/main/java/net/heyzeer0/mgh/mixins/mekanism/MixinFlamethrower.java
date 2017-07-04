@@ -1,5 +1,6 @@
 package net.heyzeer0.mgh.mixins.mekanism;
 
+import net.heyzeer0.mgh.mixins.MixinManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
@@ -23,10 +24,10 @@ public abstract class MixinFlamethrower {
 
     @Inject(method = "burn", at = @At("HEAD"), cancellable = true)
     private void injectBurn(Entity entity, CallbackInfo ci) {
-        AttackEntityEvent e = new AttackEntityEvent((EntityPlayer)owner, entity);
-        MinecraftForge.EVENT_BUS.post(e);
-        if(e.isCanceled()) {
-            ci.cancel();
+        if(owner instanceof EntityPlayer) {
+            if(!MixinManager.canAttack((EntityPlayer)owner, entity)) {
+                ci.cancel();
+            }
         }
     }
 

@@ -16,6 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
  * Created by HeyZeer0 on 04/07/2017.
  * Copyright © HeyZeer0 - 2016
  */
+
 @Pseudo
 @Mixin(targets = "com/emoniph/witchery/item/ItemPoppet", remap = false)
 public abstract class MixinItemPoppet {

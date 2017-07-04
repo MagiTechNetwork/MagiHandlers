@@ -1,6 +1,7 @@
 package net.heyzeer0.mgh.mixins.witchery;
 
 import com.emoniph.witchery.Witchery;
+import net.heyzeer0.mgh.mixins.MixinManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -24,16 +25,11 @@ public abstract class MixinItemTaglockKit {
     @Inject(method = "onEntityInteract", at = @At(value = "HEAD"), cancellable = true)
     private void injectInteract(World world, EntityPlayer player, ItemStack stack, EntityInteractEvent event, CallbackInfo ci) {
         if(stack.getItem() == Witchery.Items.TAGLOCK_KIT && event.target != null) {
-            AttackEntityEvent e = new AttackEntityEvent(player, event.target);
-            MinecraftForge.EVENT_BUS.post(e);
-            if(e.isCanceled()) {
+            if(!MixinManager.canAttack(player, event.target)) {
                 ci.cancel();
             }else{
                 if(event.target instanceof EntityPlayer) {
-                    AttackEntityEvent e2 = new AttackEntityEvent((EntityPlayer)event.target, player);
-                    MinecraftForge.EVENT_BUS.post(e2);
-
-                    if(e2.isCanceled()) {
+                    if(!MixinManager.canAttack((EntityPlayer)event.target, player)) {
                         ci.cancel();
                     }
                 }

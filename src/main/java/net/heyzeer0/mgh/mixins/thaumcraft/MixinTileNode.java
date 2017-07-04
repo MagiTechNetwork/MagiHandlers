@@ -86,9 +86,7 @@ public abstract class MixinTileNode extends TileThaumcraft implements INode, IWa
                             if (var20 < 2.0D) {
 
                                 if (who != null) {
-                                    AttackEntityEvent event = new AttackEntityEvent(FakePlayerFactory.getMinecraft((WorldServer) worldObj), who);
-                                    MinecraftForge.EVENT_BUS.post(event);
-                                    if (event.isCanceled()) {
+                                    if (!MixinManager.canAttack(FakePlayerFactory.getMinecraft((WorldServer) worldObj), who)) {
                                         hitCanceled = true;
                                     }
                                 }

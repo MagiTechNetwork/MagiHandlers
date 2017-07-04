@@ -1,6 +1,7 @@
 package net.heyzeer0.mgh.mixins.avaritia;
 
 import net.heyzeer0.mgh.hacks.avaritia.IMixinEntityGapingVoid;
+import net.heyzeer0.mgh.mixins.MixinManager;
 import net.minecraft.block.Block;
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
@@ -151,9 +152,7 @@ public abstract class MixinEntityGapingVoid extends Entity implements IMixinEnti
                 double len = Math.sqrt(lensquared);
 
                 if (len <= nomrange) {
-                    AttackEntityEvent event = new AttackEntityEvent(getOwner(), nommee);
-                    MinecraftForge.EVENT_BUS.post(event);
-                    if(!event.isCanceled()) {
+                    if(MixinManager.canAttack(getOwner(), nommee)) {
                         nommee.attackEntityFrom(DamageSource.outOfWorld, 3.0f);
                     }
                 }

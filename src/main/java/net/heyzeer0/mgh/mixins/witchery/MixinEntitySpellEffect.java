@@ -35,9 +35,7 @@ public abstract class MixinEntitySpellEffect extends Entity {
     @Inject(method = "onImpact", at = @At(value = "INVOKE", target = "Lcom/emoniph/witchery/infusion/infusions/symbols/SymbolEffectProjectile;onCollision(Lnet/minecraft/world/World;Lnet/minecraft/entity/EntityLivingBase;Lnet/minecraft/util/MovingObjectPosition;Lcom/emoniph/witchery/entity/EntitySpellEffect;)V", shift = At.Shift.BEFORE), cancellable = true)
     private void injectImpact(MovingObjectPosition mop, CallbackInfo ci) {
         if(mop.entityHit != null && mop.entityHit instanceof EntityLivingBase && shootingEntity instanceof EntityPlayer) {
-            AttackEntityEvent evt1 = new AttackEntityEvent((EntityPlayer)shootingEntity, mop.entityHit);
-            MinecraftForge.EVENT_BUS.post(evt1);
-            if(evt1.isCanceled()) {
+            if(!MixinManager.canAttack((EntityPlayer)shootingEntity, mop.entityHit)) {
                 ci.cancel();
                 setDead();
             }
