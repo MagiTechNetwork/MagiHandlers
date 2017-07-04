@@ -6,7 +6,8 @@
     "MixinAccelerate",
     "MixinDaylight",
     "MixinBanishRain",
-    "MixinMoonrise"
+    "MixinMoonrise",
+    "MixinStorm"
   ],
   "server": [],
   "client": [],
