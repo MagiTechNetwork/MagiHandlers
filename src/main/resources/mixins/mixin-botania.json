@@ -11,7 +11,8 @@
     "MixinEntityEnderAirBottle",
     "MixinItemExchangeRod",
     "MixinItemTerraformRod",
-    "MixinEntityThornChakram"
+    "MixinEntityThornChakram",
+    "MixinToolCommons"
   ],
   "server": [],
   "client": [],

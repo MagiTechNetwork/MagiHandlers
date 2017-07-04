@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(targets = "vazkii/botania/common/item/rod/ItemTerraformRod", remap = false)
 public abstract class MixinItemTerraformRod {
 
-    @Redirect(method = "terraform", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;func_147449_b(IIILnet/minecraft/block/Block;)Z", args = "log=true"))
+    @Redirect(method = "terraform", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;func_147449_b(IIILnet/minecraft/block/Block;)Z"))
     private boolean injectSetBlock(World world, int x, int y, int z, Block block, ItemStack stack, World par2world, EntityPlayer par3EntityPlayer) {
         return BlockHelper.setBlockWithOwner(x, y, z, block, world, par3EntityPlayer);
     }
