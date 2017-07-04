@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class MixinAccelerate {
 
     @Inject(method = "applyEffectBlock", at = @At("HEAD"), cancellable = true)
-    private void applyEffectBlock(ItemStack stack, World world, int blockx, int blocky, int blockz, int blockFace, double impactX, double impactY, double impactZ, EntityLivingBase caster, CallbackInfoReturnable cir) {
+    private void injectApplyEffectBlock(ItemStack stack, World world, int blockx, int blocky, int blockz, int blockFace, double impactX, double impactY, double impactZ, EntityLivingBase caster, CallbackInfoReturnable cir) {
         cir.setReturnValue(false);
     }
 

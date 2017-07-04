@@ -3,7 +3,8 @@
   "package":"net.heyzeer0.mgh.mixins.am2",
   "mixins":[
     "MixinDisarm",
-    "MixinAccelerate"
+    "MixinAccelerate",
+    "MixinDaylight"
   ],
   "server": [],
   "client": [],
