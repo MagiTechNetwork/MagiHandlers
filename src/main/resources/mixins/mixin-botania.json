@@ -10,7 +10,8 @@
     "MixinItemGrassHorn",
     "MixinEntityEnderAirBottle",
     "MixinItemExchangeRod",
-    "MixinItemTerraformRod"
+    "MixinItemTerraformRod",
+    "MixinEntityThornChakram"
   ],
   "server": [],
   "client": [],
