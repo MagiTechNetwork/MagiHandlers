@@ -4,7 +4,8 @@
   "mixins":[
     "MixinDisarm",
     "MixinAccelerate",
-    "MixinDaylight"
+    "MixinDaylight",
+    "MixinBanishRain"
   ],
   "server": [],
   "client": [],
