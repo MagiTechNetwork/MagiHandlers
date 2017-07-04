@@ -13,7 +13,8 @@
     "MixinItemTerraformRod",
     "MixinEntityThornChakram",
     "MixinToolCommons",
-    "MixinItemGravityRod"
+    "MixinItemGravityRod",
+    "MixinTileCorporeaIndex"
   ],
   "server": [],
   "client": [],
