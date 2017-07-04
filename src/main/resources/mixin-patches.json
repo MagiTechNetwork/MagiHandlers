@@ -78,5 +78,10 @@
     "name": "Tinkers Construct",
     "file": "TConstruct-1.7.10-1.8.8.jar",
     "mixin": "mixins/mixin-tconstruct.json"
+  },
+  {
+    "name": "Ars Magica 2",
+    "file": "1.7.10_AM2-1.4.0.009(1).jar",
+    "mixin": "mixins/mixin-am2.json"
   }
 ]

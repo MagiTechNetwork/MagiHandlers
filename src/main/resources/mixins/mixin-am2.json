@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package":"net.heyzeer0.mgh.mixins.am2",
+  "mixins":[
+    "MixinDisarm"
+  ],
+  "server": [],
+  "client": [],
+  "compatibilityLevel": "JAVA_8",
+  "refmap":"mixin.magihandlers.refmap.json"
+}
