@@ -12,7 +12,8 @@
     "MixinItemExchangeRod",
     "MixinItemTerraformRod",
     "MixinEntityThornChakram",
-    "MixinToolCommons"
+    "MixinToolCommons",
+    "MixinItemGravityRod"
   ],
   "server": [],
   "client": [],

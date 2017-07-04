@@ -54,6 +54,7 @@ public class EventCore {
             TileEntity tile = event.world.getTileEntity(event.x, event.y, event.z);
             if (tile != null && tile instanceof TileEntityDrawers) {
                 TileEntityDrawers te = (TileEntityDrawers) tile;
+                if(te.isSealed()) return;
                 int total = 0;
                 for (int i = 0; i < te.getDrawerCount(); i++) {
                     IDrawer drawer = te.getDrawer(i);
