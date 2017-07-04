@@ -22,12 +22,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(targets = "vazkii/botania/common/item/equipment/tool/ToolCommons", remap = false)
 public abstract class MixinToolCommons {
 
-    @Inject(method = "removeBlockWithDrops", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/Block;onBlockHarvested(Lnet/minecraft/world/World;IIIILnet/minecraft/entity/player/EntityPlayer;)V"), cancellable = true)
+    @Inject(method = "removeBlockWithDrops(Lnet/minecraft/entity/player/EntityPlayer;Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;IIIIIILnet/minecraft/block/Block;[Lnet/minecraft/block/material/Material;ZIFZZ)V", at = @At(value = "HEAD"), cancellable = true)
     private static void injectBlockRemoval(EntityPlayer player, ItemStack stack, World world, int x, int y, int z, int bx, int by, int bz, Block block, Material[] materialsListing, boolean silk, int fortune, float blockHardness, boolean dispose, boolean particles, CallbackInfo ci) {
-        BlockEvent.BreakEvent evt = MixinManager.generateBlockEvent(x, y, z, world, player);
-        MinecraftForge.EVENT_BUS.post(evt);
-        if(evt.isCanceled()) {
-            ci.cancel();
+        if(player != null) {
+            BlockEvent.BreakEvent evt = MixinManager.generateBlockEvent(x, y, z, world, player);
+            MinecraftForge.EVENT_BUS.post(evt);
+            if(evt.isCanceled()) {
+                ci.cancel();
+            }
         }
     }
 
