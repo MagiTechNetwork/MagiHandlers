@@ -1,5 +1,6 @@
 package net.heyzeer0.mgh.mixins.am2;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -19,6 +20,11 @@ public abstract class MixinBanishRain {
 
     @Inject(method = "applyEffectBlock", at = @At("HEAD"), cancellable = true)
     private void injectApplyEffectBlock(ItemStack stack, World world, int blockx, int blocky, int blockz, int blockFace, double impactX, double impactY, double impactZ, EntityLivingBase caster, CallbackInfoReturnable cir) {
+        cir.setReturnValue(false);
+    }
+
+    @Inject(method = "applyEffectEntity", at = @At("HEAD"), cancellable = true)
+    private void injectApplyEffectEntity(ItemStack stack, World world, EntityLivingBase caster, Entity target, CallbackInfoReturnable cir) {
         cir.setReturnValue(false);
     }
 
