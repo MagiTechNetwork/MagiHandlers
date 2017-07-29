@@ -1,5 +1,6 @@
 package net.heyzeer0.mgh.mixins.cofhcore;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -45,5 +46,22 @@ public abstract class MixinItemHelper {
 
     @Shadow
     public static String getOreName(ItemStack paramItemStack) {return "";}
+
+    @Shadow public static boolean areItemsEqual(Item item, Item item1) {return false;};
+
+    @Overwrite
+    public static boolean itemsEqualWithoutMetadata(ItemStack stackA, ItemStack stackB) {
+
+        if (stackA == null || stackB == null) {
+            return false;
+        }
+        if(stackA.hasTagCompound() && !stackB.hasTagCompound() || stackB.hasTagCompound() && !stackA.hasTagCompound()) {
+            return false;
+        }
+        if (stackA.hasTagCompound() && stackB.hasTagCompound()) {
+            if(!stackA.getTagCompound().equals(stackB.getTagCompound())) return false;
+        }
+        return areItemsEqual(stackA.getItem(), stackB.getItem());
+    }
 
 }
