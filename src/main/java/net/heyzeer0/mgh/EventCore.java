@@ -1,5 +1,6 @@
 package net.heyzeer0.mgh;
 
+import com.brandon3055.draconicevolution.common.utills.DamageSourceChaos;
 import com.emoniph.witchery.common.ExtendedPlayer;
 import com.jaquadro.minecraft.storagedrawers.api.storage.IDrawer;
 import com.jaquadro.minecraft.storagedrawers.block.tile.TileEntityDrawers;
@@ -39,6 +40,9 @@ public class EventCore {
             if(e.entity instanceof EntityPlayer) {
                 if(((EntityPlayer) e.entity).getHealth() <= 3) {
                     if(e.source != DamageSource.inFire && e.source != DamageSource.generic) {
+                        if(Loader.isModLoaded("DraconicEvolution")) {
+                            if(e.source instanceof DamageSourceChaos) return;
+                        }
                         if(ExtendedPlayer.get((EntityPlayer)e.entity).isVampire()) {
                             ((EntityPlayer) e.entity).setHealth(4);
                         }
