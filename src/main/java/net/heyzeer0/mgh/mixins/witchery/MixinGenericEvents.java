@@ -18,8 +18,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by HeyZeer0 on 13/05/2017.
@@ -46,9 +49,12 @@ public abstract class MixinGenericEvents {
         if (playerEx != null && chatMasqueradeAllowed && playerEx.getCreatureType() == TransformCreature.PLAYER && playerEx.getOtherPlayerSkin() != null && !playerEx.getOtherPlayerSkin().isEmpty()) {
             event.setCanceled(true);
 
-            Set<Player> players = new HashSet<Player>();
+            Set<Player> players = new HashSet<>();
+            for(Player p : Bukkit.getServer().getOnlinePlayers()) {
+                players.add(p);
+            }
+
             Player sender = Bukkit.getOfflinePlayer(playerEx.getOtherPlayerSkin()).getPlayer();
-            players.addAll(Bukkit.getServer().getOnlinePlayers());
 
             AsyncPlayerChatEvent e = new AsyncPlayerChatEvent(false, sender, event.message, players);
             Bukkit.getPluginManager().callEvent(e);
