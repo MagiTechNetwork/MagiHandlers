@@ -22,7 +22,7 @@ import vazkii.botania.common.item.rod.ItemGravityRod;
 public abstract class MixinItemGravityRod {
 
     @Redirect(method = "func_77659_a", at = @At(value = "INVOKE", target = "Lvazkii/botania/common/item/rod/ItemGravityRod;setEntityMotionFromVector(Lnet/minecraft/entity/Entity;Lvazkii/botania/common/core/helper/Vector3;F)V"))
-    private void redirectSetEntityMotionFromVector(ItemGravityRod item, Entity entity, Vector3 originalPosVector, float modifier, ItemStack stack, World world, EntityPlayer player) {
+    private void redirectSetEntityMotionFromVector(Entity entity, Vector3 originalPosVector, float modifier, ItemStack stack, World world, EntityPlayer player) {
         if(entity instanceof EntityLiving && !MixinManager.canAttack(player, entity)) {
             return;
         }
