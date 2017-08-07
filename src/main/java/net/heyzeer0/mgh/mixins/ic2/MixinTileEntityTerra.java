@@ -10,6 +10,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.event.world.BlockEvent;
 import org.spongepowered.asm.mixin.Mixin;
@@ -31,13 +32,12 @@ public abstract class MixinTileEntityTerra extends TileEntityElectricMachine imp
         super(maxenergy, tier1, oldDischargeIndex);
     }
 
+    private FakePlayer fakePlayer = FakePlayerFactory.get((WorldServer) this.worldObj, new GameProfile(UUID.fromString(getUUID()), getOwner()));
+
     @Redirect(method = "updateEntityServer", at = @At(value = "INVOKE", target = "Lic2/api/item/ITerraformingBP;terraform(Lnet/minecraft/world/World;III)Z"))
     public boolean redirectTerraform(ITerraformingBP instance, World world, int x, int z, int y) {
         EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().func_152612_a(getOwner());
-        if(player == null) {
-            player = FakePlayerFactory.get((WorldServer)world, new GameProfile(UUID.fromString(getUUID()), getOwner()));
-        }
-        BlockEvent.BreakEvent e = MixinManager.generateBlockEvent(x, y, z, world, player);
+        BlockEvent.BreakEvent e = MixinManager.generateBlockEvent(x, y, z, world, player == null ? fakePlayer : player);
         MinecraftForge.EVENT_BUS.post(e);
         if(!e.isCanceled()) {
             return instance.terraform(world, x, z, y);
