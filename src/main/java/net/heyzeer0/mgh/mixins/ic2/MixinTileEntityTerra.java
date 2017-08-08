@@ -32,11 +32,22 @@ public abstract class MixinTileEntityTerra extends TileEntityElectricMachine imp
         super(maxenergy, tier1, oldDischargeIndex);
     }
 
-    private FakePlayer fakePlayer = FakePlayerFactory.get((WorldServer) this.worldObj, new GameProfile(UUID.fromString(getUUID()), getOwner()));
+    private FakePlayer fakePlayer;
+
+    private FakePlayer getFakePlayer() {
+        if (fakePlayer == null) {
+            if (this.getOwner() != null && this.getUUID() != null) {
+                fakePlayer = FakePlayerFactory.get((WorldServer) this.worldObj, new GameProfile(UUID.fromString(getUUID()), getOwner()));
+            } else {
+                fakePlayer = FakePlayerFactory.getMinecraft((WorldServer)this.worldObj);
+            }
+        }
+        return fakePlayer;
+    }
 
     @Redirect(method = "updateEntityServer", at = @At(value = "INVOKE", target = "Lic2/api/item/ITerraformingBP;terraform(Lnet/minecraft/world/World;III)Z"))
     public boolean redirectTerraform(ITerraformingBP instance, World world, int x, int z, int y) {
-        EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().func_152612_a(getOwner());
+        EntityPlayer player = getOwner() == null ? null : MinecraftServer.getServer().getConfigurationManager().func_152612_a(getOwner());
         BlockEvent.BreakEvent e = MixinManager.generateBlockEvent(x, y, z, world, player == null ? fakePlayer : player);
         MinecraftForge.EVENT_BUS.post(e);
         if(!e.isCanceled()) {
