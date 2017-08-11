@@ -13,7 +13,9 @@
     "MixinEntityEldritchWarden",
     "MixinEntityEldritchGolem",
     "MixinTileNode",
-    "MixinTileEldritchTrap"
+    "MixinTileEldritchTrap",
+    "MixinTileEntityArcaneBore",
+    "MixinBlockWoodenDevice"
   ],
   "server": [],
   "client": [],
