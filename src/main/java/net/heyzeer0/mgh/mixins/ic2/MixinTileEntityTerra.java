@@ -48,7 +48,7 @@ public abstract class MixinTileEntityTerra extends TileEntityElectricMachine imp
     @Redirect(method = "updateEntityServer", at = @At(value = "INVOKE", target = "Lic2/api/item/ITerraformingBP;terraform(Lnet/minecraft/world/World;III)Z"))
     public boolean redirectTerraform(ITerraformingBP instance, World world, int x, int z, int y) {
         EntityPlayer player = getOwner() == null ? null : MinecraftServer.getServer().getConfigurationManager().func_152612_a(getOwner());
-        BlockEvent.BreakEvent e = MixinManager.generateBlockEvent(x, y, z, world, player == null ? fakePlayer : player);
+        BlockEvent.BreakEvent e = MixinManager.generateBlockEvent(x, y, z, world, player == null ? getFakePlayer() : player);
         MinecraftForge.EVENT_BUS.post(e);
         if(!e.isCanceled()) {
             return instance.terraform(world, x, z, y);
