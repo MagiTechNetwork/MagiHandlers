@@ -80,10 +80,10 @@ public abstract class MixinTileArcaneBore extends TileThaumcraft implements ITil
         return realFakePlayer;
     }
 
-    @Inject(method = "dig", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;getBlockMetadata(III)I"), cancellable = true)
+    @Inject(method = "dig", at = @At("HEAD"), cancellable = true)
     public void fireBreak(CallbackInfo ci) {
-        EntityPlayer player = getOwner() == null ? null : MinecraftServer.getServer().getConfigurationManager().func_152612_a(getOwner());
-        BlockEvent.BreakEvent e = MixinManager.generateBlockEvent(this.digX, this.digY, this.digZ, this.worldObj, player == null ? getFakePlayer() : player);
+        EntityPlayer player = this.getOwner() == null ? null : MinecraftServer.getServer().getConfigurationManager().func_152612_a(this.getOwner());
+        BlockEvent.BreakEvent e = MixinManager.generateBlockEvent(this.digX, this.digY, this.digZ, this.worldObj, player == null ? this.getFakePlayer() : player);
         MinecraftForge.EVENT_BUS.post(e);
         if(e.isCanceled()) {
             ci.cancel();
