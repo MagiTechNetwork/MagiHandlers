@@ -35,10 +35,4 @@ public abstract class MixinBlockMultiID implements ITileEntityOwnable {
         return te;
     }
 
-    @Inject(method = "func_149727_a", at = @At("HEAD"))
-    public void injectOpen(World world, int x, int y, int z, EntityPlayer entityPlayer, int side, float a, float b, float c, CallbackInfoReturnable cir) {
-        System.out.println("Player: " + entityPlayer.getCommandSenderName());
-        System.out.println("Owner: " + (getOwnTe(world, x, y, z) instanceof ITileEntityOwnable ? ((ITileEntityOwnable)getOwnTe(world, x, y, z)).getOwner() : "No owner"));
-    }
-
 }

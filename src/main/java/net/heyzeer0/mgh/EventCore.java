@@ -7,16 +7,21 @@ import com.jaquadro.minecraft.storagedrawers.block.tile.TileEntityDrawers;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.heyzeer0.mgh.hacks.ITileEntityOwnable;
 import net.lomeli.trophyslots.TrophySlots;
 import net.lomeli.trophyslots.core.SlotUtil;
 import net.lomeli.trophyslots.core.network.MessageSlotsClient;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Items;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 
 /**
@@ -70,6 +75,22 @@ public class EventCore {
                     event.getPlayer().addChatMessage(new ChatComponentText("§aDica: use uma Packing Tape para mudar o Drawer de lugar §asem §ater §aque quebra-lo!"));
                 }
             }
+        }
+    }
+
+    @SubscribeEvent
+    public void onRightClickWithCompass(PlayerInteractEvent e) {
+        if(e.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK
+                && e.entityPlayer.getHeldItem().getItem() == Items.compass
+                && MinecraftServer.getServer().getConfigurationManager().func_152596_g(e.entityPlayer.getGameProfile())
+                && e.entityPlayer.isSneaking()) {
+
+            TileEntity te = e.world.getTileEntity(e.x, e.y, e.z);
+            if(te != null && te instanceof ITileEntityOwnable) {
+                e.entityPlayer.addChatComponentMessage(new ChatComponentText("Username: " + ((ITileEntityOwnable) te).getOwner()));
+                e.entityPlayer.addChatComponentMessage(new ChatComponentText("UUID: " + ((ITileEntityOwnable) te).getUUID()));
+            }
+
         }
     }
     
