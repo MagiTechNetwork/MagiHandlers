@@ -81,6 +81,7 @@ public class EventCore {
     @SubscribeEvent
     public void onRightClickWithCompass(PlayerInteractEvent e) {
         if(e.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK
+                && e.entityPlayer.getHeldItem() != null
                 && e.entityPlayer.getHeldItem().getItem() == Items.compass
                 && MinecraftServer.getServer().getConfigurationManager().func_152596_g(e.entityPlayer.getGameProfile())
                 && e.entityPlayer.isSneaking()) {
