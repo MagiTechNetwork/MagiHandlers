@@ -88,5 +88,10 @@
     "name": "IC2",
     "file": "industrialcraft-2-2.2.827-experimental.jar",
     "mixin": "mixins/mixin-ic2.json"
+  },
+  {
+    "name": "BuildCraft",
+    "file": "buildcraft-7.1.20.jar",
+    "mixin": "mixins/mixin-buildcraft.json"
   }
 ]
