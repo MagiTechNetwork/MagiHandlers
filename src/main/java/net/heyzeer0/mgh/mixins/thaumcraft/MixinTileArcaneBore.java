@@ -75,7 +75,7 @@ public abstract class MixinTileArcaneBore extends TileThaumcraft implements ITil
 
     private FakePlayer getFakePlayer() {
         if (realFakePlayer == null) {
-            if (this.getOwner() != null && this.getUUID() != null) {
+            if (!this.getOwner().isEmpty() && !this.getUUID().isEmpty()) {
                 realFakePlayer = FakePlayerFactory.get((WorldServer) this.worldObj, new GameProfile(UUID.fromString(getUUID()), getOwner()));
             } else {
                 realFakePlayer = FakePlayerFactory.getMinecraft((WorldServer)this.worldObj);
