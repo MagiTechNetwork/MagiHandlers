@@ -11,7 +11,6 @@ import net.heyzeer0.mgh.hacks.ITileEntityOwnable;
 import net.lomeli.trophyslots.TrophySlots;
 import net.lomeli.trophyslots.core.SlotUtil;
 import net.lomeli.trophyslots.core.network.MessageSlotsClient;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
@@ -92,6 +91,13 @@ public class EventCore {
                 e.entityPlayer.addChatComponentMessage(new ChatComponentText("UUID: " + ((ITileEntityOwnable) te).getUUID()));
             }
 
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public void onLastInteract(PlayerInteractEvent event) {
+        if(event.isCanceled()) {
+            event.entityPlayer.closeScreen();
         }
     }
     
