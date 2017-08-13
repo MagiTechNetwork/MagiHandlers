@@ -35,6 +35,11 @@ public abstract class MixinItemHelper {
         if ((paramString == null) || (paramString.equals("Unknown"))) {
             return false;
         }
+
+        if(paramItemStack3 != null && paramItemStack3.hasTagCompound()) {
+            return false;
+        }
+
         return getOreName(paramItemStack1).equalsIgnoreCase(paramString);
     }
 
