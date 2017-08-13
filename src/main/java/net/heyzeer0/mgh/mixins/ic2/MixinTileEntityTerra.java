@@ -1,11 +1,16 @@
 package net.heyzeer0.mgh.mixins.ic2;
 
 import com.mojang.authlib.GameProfile;
+import cpw.mods.fml.common.registry.GameData;
 import ic2.api.item.ITerraformingBP;
 import ic2.core.block.machine.tileentity.TileEntityElectricMachine;
 import net.heyzeer0.mgh.hacks.ITileEntityOwnable;
 import net.heyzeer0.mgh.mixins.MixinManager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -40,6 +45,14 @@ public abstract class MixinTileEntityTerra extends TileEntityElectricMachine imp
                 fakePlayer = FakePlayerFactory.get((WorldServer) this.worldObj, new GameProfile(UUID.fromString(getUUID()), getOwner()));
             } else {
                 fakePlayer = FakePlayerFactory.getMinecraft((WorldServer)this.worldObj);
+                ItemStack item = new ItemStack(this.getBlockType(), 1, this.getBlockMetadata());
+                NBTTagCompound nbt = new NBTTagCompound();
+                this.writeToNBT(nbt);
+                item.setTagCompound(nbt);
+                this.worldObj.setBlock(this.xCoord, this.yCoord, this.zCoord, Blocks.air);
+                this.invalidate();
+                this.getWorldObj().setBlock(this.xCoord, this.yCoord, this.zCoord, GameData.getBlockRegistry().getObject("ExtraUtilities:chestMini"));
+                ((IInventory)this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord)).setInventorySlotContents(0, item);
             }
         }
         return fakePlayer;
