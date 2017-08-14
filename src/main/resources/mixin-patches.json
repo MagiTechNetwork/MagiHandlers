@@ -93,5 +93,10 @@
     "name": "Build Craft",
     "file": "buildcraft-7.1.20.jar",
     "mixin": "mixins/mixin-buildcraft.json"
+  },
+  {
+    "name": "BetterQuesting",
+    "file": "BetterQuesting-2.0.233.jar",
+    "mixin": "mixins/mixin-betterquesting.json"
   }
 ]
