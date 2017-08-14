@@ -81,7 +81,7 @@
   },
   {
     "name": "Ars Magica 2",
-    "file": "1.7.10_AM2-1.4.0.009(1).jar",
+    "file": "1.7.10_AM2-1.4.0.009.jar",
     "mixin": "mixins/mixin-am2.json"
   },
   {
