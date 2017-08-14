@@ -75,7 +75,7 @@ public abstract class MixinTileEntityEnderQuarry extends TileEntity implements I
                 realFakePlayer = FakePlayerFactory.get((WorldServer) this.worldObj, new GameProfile(UUID.fromString(getUUID()), getOwner()));
             } else {
                 realFakePlayer = FakePlayerFactory.getMinecraft((WorldServer)this.worldObj);
-                ItemStack item = new ItemStack(this.getBlockType(), 1, this.getBlockMetadata());
+                ItemStack item = new ItemStack(this.getBlockType(), 1, 0);
                 NBTTagCompound nbt = new NBTTagCompound();
                 this.writeToNBT(nbt);
                 item.setTagCompound(nbt);
