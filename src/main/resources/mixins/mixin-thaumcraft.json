@@ -15,8 +15,7 @@
     "MixinTileNode",
     "MixinTileEldritchTrap",
     "MixinTileArcaneBore",
-    "MixinBlockWoodenDevice",
-    "MixinEventHandlerEntity"
+    "MixinBlockWoodenDevice"
   ],
   "server": [],
   "client": [],
