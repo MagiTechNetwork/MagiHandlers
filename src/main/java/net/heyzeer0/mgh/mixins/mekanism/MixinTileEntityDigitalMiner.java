@@ -33,41 +33,41 @@ import java.util.UUID;
 @Mixin(targets = "mekanism/common/tile/TileEntityDigitalMiner", remap = false)
 public abstract class MixinTileEntityDigitalMiner extends TileEntity implements ITileEntityOwnable {
 
-    private String player;
-    private String uuid;
+    private String MTNPlayer;
+    private String MTNUUID;
     private FakePlayer realFakePlayer;
 
     @Override
     public String getOwner() {
-        return this.player;
+        return this.MTNPlayer;
     }
 
     @Override
     public String getUUID() {
-        return this.uuid;
+        return this.MTNUUID;
     }
 
     @Override
     public void setOwner(String owner) {
-        this.player = owner;
+        this.MTNPlayer = owner;
     }
 
     @Override
     public void setUUID(String uuid) {
-        this.uuid = uuid;
+        this.MTNUUID = uuid;
     }
 
     @Inject(method = "func_145839_a", at = @At("HEAD"))
     public void injectReadFromNBT(NBTTagCompound nbttagcompound, CallbackInfo ci) {
-        this.player = nbttagcompound.getString("owner");
-        this.uuid = nbttagcompound.getString("uuid");
+        this.MTNPlayer = nbttagcompound.getString("MTN-Owner");
+        this.MTNUUID = nbttagcompound.getString("MTN-UUID");
     }
 
     @Inject(method = "func_145841_b", at = @At("HEAD"))
     public void injectWriteToNBT(NBTTagCompound nbttagcompound, CallbackInfo ci) {
-        if(!this.player.isEmpty() && !this.uuid.isEmpty()) {
-            nbttagcompound.setString("owner", this.player);
-            nbttagcompound.setString("uuid", this.uuid);
+        if(!this.MTNPlayer.isEmpty() && !this.MTNUUID.isEmpty()) {
+            nbttagcompound.setString("MTN-Owner", this.MTNPlayer);
+            nbttagcompound.setString("MTN-UUID", this.MTNUUID);
         }
     }
 
