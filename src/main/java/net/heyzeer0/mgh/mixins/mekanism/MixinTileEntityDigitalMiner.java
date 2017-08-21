@@ -1,10 +1,14 @@
 package net.heyzeer0.mgh.mixins.mekanism;
 
 import com.mojang.authlib.GameProfile;
+import cpw.mods.fml.common.registry.GameData;
 import mekanism.common.CommonProxy;
 import mekanism.common.Mekanism;
 import net.heyzeer0.mgh.hacks.ITileEntityOwnable;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
@@ -61,16 +65,27 @@ public abstract class MixinTileEntityDigitalMiner extends TileEntity implements 
 
     @Inject(method = "func_145841_b", at = @At("HEAD"))
     public void injectWriteToNBT(NBTTagCompound nbttagcompound, CallbackInfo ci) {
-        nbttagcompound.setString("owner", this.player);
-        nbttagcompound.setString("uuid", this.uuid);
+        if(!this.player.isEmpty() && !this.uuid.isEmpty()) {
+            nbttagcompound.setString("owner", this.player);
+            nbttagcompound.setString("uuid", this.uuid);
+        }
     }
 
     private FakePlayer getFakePlayer() {
         if (realFakePlayer == null) {
-            if (this.getOwner() != null && this.getUUID() != null) {
+            if (this.getOwner() != null && this.getUUID() != null || !this.getOwner().isEmpty() && !this.getUUID().isEmpty()) {
                 realFakePlayer = FakePlayerFactory.get((WorldServer) this.worldObj, new GameProfile(UUID.fromString(getUUID()), getOwner()));
             } else {
                 realFakePlayer = FakePlayerFactory.getMinecraft((WorldServer)this.worldObj);
+                ItemStack item = new ItemStack(this.getBlockType(), 1, 0);
+                NBTTagCompound nbt = new NBTTagCompound();
+                this.writeToNBT(nbt);
+                item.setTagCompound(nbt);
+                this.worldObj.setBlock(this.xCoord, this.yCoord, this.zCoord, Blocks.air);
+                this.invalidate();
+                this.getWorldObj().setBlock(this.xCoord, this.yCoord, this.zCoord, GameData.getBlockRegistry().getObject("ExtraUtilities:chestMini"));
+                ((IInventory)this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord)).setInventorySlotContents(0, item);
+
             }
         }
         return realFakePlayer;
