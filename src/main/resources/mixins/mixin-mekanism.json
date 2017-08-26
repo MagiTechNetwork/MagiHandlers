@@ -5,7 +5,10 @@
     "MixinStackUtils",
     "MixinBinRecipe",
     "MixinFlamethrower",
-    "MixinChunkManager"
+    "MixinChunkManager",
+    "MixinBlockMachine",
+    "MixinTileEntityDigitalMiner",
+    "MixinEntityRobit"
   ],
   "server": [],
   "client": [],

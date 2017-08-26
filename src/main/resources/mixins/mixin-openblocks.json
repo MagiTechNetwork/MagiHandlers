@@ -2,8 +2,7 @@
   "required": true,
   "package":"net.heyzeer0.mgh.mixins.openblocks",
   "mixins":[
-    "MixinGraveCallable",
-    "MixinLastStandEnchantmentsHandler"
+    "MixinGraveCallable"
   ],
   "server": [],
   "client": [],

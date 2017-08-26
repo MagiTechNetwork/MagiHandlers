@@ -5,7 +5,9 @@
     "MixinItemBlockDrum",
     "MixinContainerFilter",
     "MixinTileEntityEnderThermicLavaPump",
-    "MixinXUHelper"
+    "MixinXUHelper",
+    "MixinBlockEnderQuarry",
+    "MixinTileEntityEnderQuarry"
   ],
   "server": [],
   "client": [],

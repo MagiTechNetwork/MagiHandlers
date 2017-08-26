@@ -81,7 +81,22 @@
   },
   {
     "name": "Ars Magica 2",
-    "file": "1.7.10_AM2-1.4.0.009(1).jar",
+    "file": "1.7.10_AM2-1.4.0.009.jar",
     "mixin": "mixins/mixin-am2.json"
+  },
+  {
+    "name": "IC2",
+    "file": "industrialcraft-2-2.2.827-experimental.jar",
+    "mixin": "mixins/mixin-ic2.json"
+  },
+  {
+    "name": "Build Craft",
+    "file": "buildcraft-7.1.20.jar",
+    "mixin": "mixins/mixin-buildcraft.json"
+  },
+  {
+    "name": "BetterQuesting",
+    "file": "BetterQuesting-2.0.233.jar",
+    "mixin": "mixins/mixin-betterquesting.json"
   }
 ]

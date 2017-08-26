@@ -21,6 +21,7 @@ public abstract class MixinSacrificialDagger {
     private void injectDamage(ItemStack stack, World world, EntityPlayer player, CallbackInfoReturnable ci) {
         if(player != null) {
             if(player.isDead || player.getHealth() <= 0) {
+                player.inventory.consumeInventoryItem(stack.getItem());
                 ci.cancel();
             }
         }
