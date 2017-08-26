@@ -23,10 +23,6 @@ public abstract class MixinSubTileGourmaryllis extends SubTileGenerating {
 
     @Shadow
     int storedMana = 0;
-    
-    @Final
-    @Shadow
-    private static final int RANGE = 1;
 
     @Overwrite
     public void onUpdate() {
@@ -43,7 +39,7 @@ public abstract class MixinSubTileGourmaryllis extends SubTileGenerating {
         int slowdown = getSlowdownFactor();
 
         boolean remote = supertile.getWorldObj().isRemote;
-        List<EntityItem> items = supertile.getWorldObj().getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(supertile.xCoord - RANGE, supertile.yCoord - 1, supertile.zCoord - 1, supertile.xCoord + 1 + 1, supertile.yCoord + 1 + 1, supertile.zCoord + 1 + 1));
+        List<EntityItem> items = supertile.getWorldObj().getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(supertile.xCoord - 1, supertile.yCoord - 1, supertile.zCoord - 1, supertile.xCoord + 1 + 1, supertile.yCoord + 1 + 1, supertile.zCoord + 1 + 1));
         for(EntityItem item : items) {
             ItemStack stack = item.getEntityItem();
             if(stack != null && stack.getItem() instanceof ItemFood && !item.isDead && item.age >= slowdown) {
