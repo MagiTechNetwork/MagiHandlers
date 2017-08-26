@@ -26,6 +26,10 @@ public abstract class MixinSubTileGourmaryllis extends SubTileGenerating {
 
     @Shadow
     int storedMana = 0;
+    
+    @Final
+    @Shadow
+    private static final int RANGE = 1;
 
     @Overwrite
     public void onUpdate() {
