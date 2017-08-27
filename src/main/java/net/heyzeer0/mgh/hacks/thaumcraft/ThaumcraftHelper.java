@@ -1,5 +1,6 @@
 package net.heyzeer0.mgh.hacks.thaumcraft;
 
+import net.heyzeer0.mgh.hacks.BlockHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -19,11 +20,15 @@ public class ThaumcraftHelper {
 
     public static boolean createHole(EntityPlayer plr, World world, int ii, int jj, int kk, int side, byte count, int max) {
         Block bi = world.getBlock(ii, jj, kk);
+        if (world.getTileEntity(ii, jj, kk) != null) {
+            BlockHelper.sendBlockUpdate(ii, jj, kk, world);
+        }
 
         BlockEvent.BreakEvent evt = new BlockEvent.BreakEvent(ii, jj, kk, world, bi, world.getBlockMetadata(ii, jj,kk), plr);
         MinecraftForge.EVENT_BUS.post(evt);
 
         if(evt.isCanceled()) {
+            BlockHelper.sendBlockUpdate(ii, jj, kk, world);
             return true;
         }
 

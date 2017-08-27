@@ -1,9 +1,12 @@
 package net.heyzeer0.mgh.hacks;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import net.heyzeer0.mgh.mixins.MixinManager;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.play.server.S23PacketBlockChange;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.MinecraftForge;
@@ -32,6 +35,24 @@ public abstract class BlockHelper {
             return world.setBlockToAir(x, y, z);
         }
         return false;
+    }
+
+    public static void sendBlockUpdate(int x, int y, int z, World world) {
+        S23PacketBlockChange packet = new S23PacketBlockChange(x, y, z, world);
+        FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().sendPacketToAllPlayers(packet);
+    }
+
+    public static void sendRangedBlockUpdate(int x, int y, int z, World world, int range) {
+        for(int i = -range; i <= range; i++) {
+            for(int j = -range; j <= range; j++) {
+                for(int k = -range; k <= range; k++) {
+                    if(!(world.getBlock(x + i, y + j, z + k).getMaterial() == Material.air)) {
+                        S23PacketBlockChange packet = new S23PacketBlockChange(x + i, y + j, z + k, world);
+                        FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().sendPacketToAllPlayers(packet);
+                    }
+                }
+            }
+        }
     }
 
 }
