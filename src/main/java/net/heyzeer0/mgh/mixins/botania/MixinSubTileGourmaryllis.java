@@ -5,10 +5,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Pseudo;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.*;
 import vazkii.botania.api.subtile.SubTileGenerating;
 
 import java.util.List;
@@ -42,7 +39,7 @@ public abstract class MixinSubTileGourmaryllis extends SubTileGenerating {
         int slowdown = getSlowdownFactor();
 
         boolean remote = supertile.getWorldObj().isRemote;
-        List<EntityItem> items = supertile.getWorldObj().getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(supertile.xCoord - RANGE, supertile.yCoord - RANGE, supertile.zCoord - RANGE, supertile.xCoord + RANGE + 1, supertile.yCoord + RANGE + 1, supertile.zCoord + RANGE + 1));
+        List<EntityItem> items = supertile.getWorldObj().getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(supertile.xCoord - 1, supertile.yCoord - 1, supertile.zCoord - 1, supertile.xCoord + 1 + 1, supertile.yCoord + 1 + 1, supertile.zCoord + 1 + 1));
         for(EntityItem item : items) {
             ItemStack stack = item.getEntityItem();
             if(stack != null && stack.getItem() instanceof ItemFood && !item.isDead && item.age >= slowdown) {
