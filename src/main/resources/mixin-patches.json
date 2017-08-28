@@ -98,5 +98,10 @@
     "name": "BetterQuesting",
     "file": "BetterQuesting-2.0.233.jar",
     "mixin": "mixins/mixin-betterquesting.json"
+  },
+  {
+    "name": "Chisel",
+    "file": "Chisel-2.9.5.11.jar",
+    "mixin": "mixins/mixin-chisel.json"
   }
 ]
