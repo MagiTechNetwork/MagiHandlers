@@ -3,7 +3,8 @@
   "package":"net.heyzeer0.mgh.mixins.buildcraft",
   "mixins":[
     "MixinBlockFloodGate",
-    "MixinTileFloodGate"
+    "MixinTileFloodGate",
+    "MixinTileLaser"
   ],
   "server": [],
   "client": [],
