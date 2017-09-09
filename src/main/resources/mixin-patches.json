@@ -103,5 +103,10 @@
     "name": "Chisel",
     "file": "Chisel-2.9.5.11.jar",
     "mixin": "mixins/mixin-chisel.json"
+  },
+  {
+    "name": "ThaumicTinkerer",
+    "file": "ThaumicTinkerer-2.5-1.7.10-164.jar",
+    "mixin": "mixins/mixin-thaumictinkerer.json"
   }
 ]

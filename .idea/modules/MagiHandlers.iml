@@ -237,6 +237,15 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
+      <library name="Gradle: thaumictinkerer">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../libs/thaumictinkerer.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
       <library name="Gradle: thermalexpansion">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/thermalexpansion.jar!/" />
