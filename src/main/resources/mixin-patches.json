@@ -113,5 +113,10 @@
     "name": "ExAstris",
     "file": "Ex-Astris-MC1.7.10-1.16-36.jar",
     "mixin": "mixins/mixin-exastris.json"
+  },
+  {
+    "name": "IguanaTinkerTweaks",
+    "file": "IguanaTinkerTweaks-1.7.10-2.1.6.jar",
+    "mixin": "mixins/mixin-iguanatt.json"
   }
 ]
