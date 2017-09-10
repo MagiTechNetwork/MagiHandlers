@@ -40,7 +40,7 @@ public class MagiHandlers extends DummyModContainer {
         for(String patches : MagiCore.loader.getLoadedPatches()) {
             x = x + patches + ", ";
         }
-        x = x.substring(0, x.length() - 1) + ".";
+        x = x.substring(0, x.length() - 2) + ".";
         LogManager.getLogger().warn(x);
         LogManager.getLogger().warn(" ");
 

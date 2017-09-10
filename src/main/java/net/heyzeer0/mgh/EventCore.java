@@ -22,12 +22,18 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import org.bukkit.Bukkit;
+
+import java.util.HashMap;
+import java.util.UUID;
 
 /**
  * Created by HeyZeer0 on 29/05/2017.
  * Copyright © HeyZeer0 - 2016
  */
 public class EventCore {
+
+    //trophyslots slots fix
 
     @SubscribeEvent
     public void join(EntityJoinWorldEvent e) {
@@ -37,6 +43,8 @@ public class EventCore {
             }
         }
     }
+
+    //witchery vampire death fix
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void hitVampire(LivingHurtEvent e) {
@@ -55,6 +63,8 @@ public class EventCore {
             }
         }
     }
+
+    //drawer lag fix
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onDrawerBreak(BlockEvent.BreakEvent event) {
@@ -76,6 +86,8 @@ public class EventCore {
             }
         }
     }
+
+    //Debugs
 
     @SubscribeEvent
     public void onRightClickWithCompass(PlayerInteractEvent e) {

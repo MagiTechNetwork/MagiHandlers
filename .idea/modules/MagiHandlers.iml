@@ -120,6 +120,15 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
+      <library name="Gradle: bloodmagic">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../libs/bloodmagic.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
       <library name="Gradle: botania">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/botania.jar!/" />
