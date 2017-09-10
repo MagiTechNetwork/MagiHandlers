@@ -156,6 +156,15 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
+      <library name="Gradle: exastris">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../libs/exastris.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
       <library name="Gradle: extrautilities">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/extrautilities.jar!/" />

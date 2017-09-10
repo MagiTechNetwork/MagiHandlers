@@ -108,5 +108,10 @@
     "name": "ThaumicTinkerer",
     "file": "ThaumicTinkerer-2.5-1.7.10-164.jar",
     "mixin": "mixins/mixin-thaumictinkerer.json"
+  },
+  {
+    "name": "ExAstris",
+    "file": "Ex-Astris-MC1.7.10-1.16-36.jar",
+    "mixin": "mixins/mixin-exastris.json"
   }
 ]
