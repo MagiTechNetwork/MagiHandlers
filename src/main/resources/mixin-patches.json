@@ -118,5 +118,10 @@
     "name": "IguanaTinkerTweaks",
     "file": "IguanaTinkerTweaks-1.7.10-2.1.6.jar",
     "mixin": "mixins/mixin-iguanatt.json"
+  },
+  {
+    "name": "OreExcavation",
+    "file": "OreExcavation-1.1.97.jar",
+    "mixin": "mixins/mixin-oreexcavation.json"
   }
 ]
