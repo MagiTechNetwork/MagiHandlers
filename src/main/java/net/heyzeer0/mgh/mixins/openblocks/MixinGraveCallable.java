@@ -1,6 +1,8 @@
 package net.heyzeer0.mgh.mixins.openblocks;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import openblocks.api.GraveSpawnEvent;
@@ -9,6 +11,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
@@ -24,6 +27,11 @@ public abstract class MixinGraveCallable {
     private void injectGrave(EntityPlayer mp, World world, CallbackInfoReturnable cir, Coord location, String gravestoneText, GraveSpawnEvent evt, int x, int y, int z) {
         mp.addChatMessage(new ChatComponentText("§aSua lápide foi colocada nas seguintes coordenadas:"));
         mp.addChatMessage(new ChatComponentText("§7X:§c " + x + " §7| Y:§c " + y + " §7| Z:§c " + z));
+    }
+
+    @Redirect(method = "trySpawnGrave", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;setBlock(IIILnet/minecraft/block/Block;)Z"))
+    private boolean injectSetBlock(World world, int x, int y, int z, Block block) {
+        return world.setBlock(x, y, z, Blocks.hardened_clay);
     }
 
 }

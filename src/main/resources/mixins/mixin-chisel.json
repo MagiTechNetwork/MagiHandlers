@@ -2,7 +2,9 @@
   "required": true,
   "package":"net.heyzeer0.mgh.mixins.chisel",
   "mixins":[
-    "MixinEntityBallOMoss"
+    "MixinEntityBallOMoss",
+    "MixinEntityCloudInABottle",
+    "MixinEntitySmashingRock"
   ],
   "server": [],
   "client": [],

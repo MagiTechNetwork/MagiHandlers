@@ -27,6 +27,15 @@ public abstract class BlockHelper {
         return false;
     }
 
+    public static boolean setBlockWithOwner(int x, int y, int z, Block block, int meta, int flag, World world, EntityPlayer owner) {
+        BlockEvent.BreakEvent evt = MixinManager.generateBlockEvent(x, y, z, world, owner);
+        MinecraftForge.EVENT_BUS.post(evt);
+        if(!evt.isCanceled()) {
+            return world.setBlock(x, y, z, block, meta, flag);
+        }
+        return false;
+    }
+
     public static boolean setBlockToAirWithOwner(int x, int y, int z, World world, Entity entity) {
         EntityPlayer player = (entity instanceof EntityPlayer ? (EntityPlayer) entity : FakePlayerFactory.getMinecraft((WorldServer) world));
         BlockEvent.BreakEvent e = MixinManager.generateBlockEvent(x, y, z, world, player);
