@@ -6,8 +6,7 @@
     "MixinBoundPickaxe",
     "MixinBoundAxe",
     "MixinBoundShovel",
-    "MixinSigilOfMagnetism",
-    "MixinRitualEffectDemonPortal"
+    "MixinSigilOfMagnetism"
   ],
   "server": [],
   "client": [],

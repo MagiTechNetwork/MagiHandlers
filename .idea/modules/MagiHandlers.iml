@@ -192,6 +192,15 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: magicalcrops">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../libs/magicalcrops.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
       <library name="Gradle: mekanism">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/mekanism.jar!/" />
@@ -443,6 +452,15 @@
       <library name="Gradle: industrialcraft">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/industrialcraft.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="RUNTIME">
+      <library name="Gradle: magicalcrops">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../libs/magicalcrops.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -709,6 +727,15 @@
       <library name="Gradle: industrialcraft">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/industrialcraft.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="TEST">
+      <library name="Gradle: magicalcrops">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../libs/magicalcrops.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
