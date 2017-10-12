@@ -50,6 +50,8 @@ public class PathLoader {
                 loadedPatches.add(patch.getName());
             }
         }
+
+        Mixins.addConfiguration("mixins/mixin-forge.json");
     }
 
     private void loadModJar(File jar) throws Exception{
