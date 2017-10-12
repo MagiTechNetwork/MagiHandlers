@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  */
 
 @Pseudo
-@Mixin(targets = "blusunrize/immersiveengineering/common/entities/EntityRailgunShot")
+@Mixin(targets = "blusunrize/immersiveengineering/common/entities/EntityRailgunShot", remap = false)
 public abstract class MixinEntityRailgunShot extends EntityThrowable {
 
     public MixinEntityRailgunShot(World w) {

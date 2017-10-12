@@ -20,7 +20,6 @@ public abstract class MixinXUHelper {
         if(!world.blockExists(x, y, z)) {
             cir.cancel();
         }
-
     }
 
 }
