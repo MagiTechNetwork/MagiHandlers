@@ -1,6 +1,5 @@
 package net.heyzeer0.mgh.mixins;
 
-import com.emoniph.witchery.entity.EntityParasyticLouse;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MovingObjectPosition;
@@ -37,6 +36,10 @@ public class MixinManager {
             return !MinecraftForge.EVENT_BUS.post(generateBlockEvent(pos.blockX, pos.blockY, pos.blockZ, world, player));
         }
         return false;
+    }
+
+    public static boolean canBuild(int x, int y, int z, World world, EntityPlayer player) {
+        return !MinecraftForge.EVENT_BUS.post(generateBlockEvent(x, y, z, world, player));
     }
 
 

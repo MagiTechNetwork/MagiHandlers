@@ -2,7 +2,6 @@
   "required": true,
   "package":"net.heyzeer0.mgh.mixins.buildcraft",
   "mixins":[
-    "MixinBlockFloodGate",
     "MixinTileFloodGate",
     "MixinTileLaser"
   ],

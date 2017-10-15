@@ -1,9 +1,8 @@
 {
   "required": true,
-  "package":"net.heyzeer0.mgh.mixins.ic2",
+  "package":"net.heyzeer0.mgh.mixins.progressiveauto",
   "mixins":[
-    "MixinTileEntityTerra",
-    "MixinEntityMiningLaser"
+    "MixinTileMiner"
   ],
   "server": [],
   "client": [],

@@ -126,12 +126,17 @@
   },
   {
     "name": "Immersive Engineering",
-    "file": "ImmersiveEngineering-0.7.7.jar ",
+    "file": "ImmersiveEngineering-0.7.7.jar",
     "mixin": "mixins/mixin-ie.json"
   },
   {
     "name": "MagicalCrops",
-    "file": "magicalcrops-4.0.0_PUBLIC_BETA_5.jar ",
+    "file": "magicalcrops-4.0.0_PUBLIC_BETA_5.jar",
     "mixin": "mixins/mixin-magicalcrops.json"
+  },
+  {
+    "name": "Progressive Automation",
+    "file": "ProgressiveAutomation-1.7.10-1.6.35.jar",
+    "mixin": "mixins/mixin-progressiveautomation.json"
   }
 ]

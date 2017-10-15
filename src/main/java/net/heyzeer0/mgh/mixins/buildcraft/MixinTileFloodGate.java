@@ -32,10 +32,7 @@ public abstract class MixinTileFloodGate extends TileEntity implements ITileEnti
 
     @Inject(method = "canPlaceFluidAt", at = @At("HEAD"), cancellable = true)
     public void fireBreak(Block block, int x, int y, int z, CallbackInfoReturnable<Boolean> cir) {
-        EntityPlayer player = this.getOwner() == null ? null : MinecraftServer.getServer().getConfigurationManager().func_152612_a(this.getOwner());
-        BlockEvent.BreakEvent e = MixinManager.generateBlockEvent(x, y, z, this.worldObj, player == null ? getFakePlayer() : player);
-        MinecraftForge.EVENT_BUS.post(e);
-        if(e.isCanceled()) {
+        if (!MixinManager.canBuild(x, y, z, worldObj, getFakePlayer())) {
             cir.setReturnValue(false);
         }
     }
