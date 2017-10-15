@@ -33,8 +33,6 @@ import java.util.UUID;
 @Mixin(targets = "thaumcraft/common/tiles/TileArcaneBore", remap = false)
 public abstract class MixinTileArcaneBore extends TileThaumcraft implements ITileEntityOwnable {
 
-    private String owner;
-    private String uuid;
     private FakePlayer realFakePlayer;
 
     @Shadow int digX;
@@ -42,38 +40,7 @@ public abstract class MixinTileArcaneBore extends TileThaumcraft implements ITil
     @Shadow int digZ;
 
     @Override
-    public String getOwner() {
-        return this.owner;
-    }
-
-    @Override
-    public String getUUID() {
-        return this.uuid;
-    }
-
-    @Override
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
-
-    @Override
-    public void setUUID(String uuid) {
-        this.uuid = uuid;
-    }
-
-    @Inject(method = "func_145839_a", at = @At("HEAD"))
-    public void injectReadFromNBT(NBTTagCompound nbttagcompound, CallbackInfo ci) {
-        this.owner = nbttagcompound.getString("owner");
-        this.uuid = nbttagcompound.getString("uuid");
-    }
-
-    @Inject(method = "func_145841_b", at = @At("HEAD"))
-    public void injectWriteToNBT(NBTTagCompound nbttagcompound, CallbackInfo ci) {
-        nbttagcompound.setString("owner", this.owner);
-        nbttagcompound.setString("uuid", this.uuid);
-    }
-
-    private FakePlayer getFakePlayer() {
+    public FakePlayer getFakePlayer() {
         if (realFakePlayer == null) {
             if (!this.getOwner().isEmpty() && !this.getUUID().isEmpty()) {
                 realFakePlayer = FakePlayerFactory.get((WorldServer) this.worldObj, new GameProfile(UUID.fromString(getUUID()), getOwner()));

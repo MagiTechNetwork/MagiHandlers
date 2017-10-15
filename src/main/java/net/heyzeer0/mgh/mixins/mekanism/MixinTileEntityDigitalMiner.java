@@ -32,46 +32,10 @@ import java.util.UUID;
 @Pseudo
 @Mixin(targets = "mekanism/common/tile/TileEntityDigitalMiner", remap = false)
 public abstract class MixinTileEntityDigitalMiner extends TileEntity implements ITileEntityOwnable {
-
-    private String MTNPlayer;
-    private String MTNUUID;
     private FakePlayer realFakePlayer;
 
     @Override
-    public String getOwner() {
-        return this.MTNPlayer;
-    }
-
-    @Override
-    public String getUUID() {
-        return this.MTNUUID;
-    }
-
-    @Override
-    public void setOwner(String owner) {
-        this.MTNPlayer = owner;
-    }
-
-    @Override
-    public void setUUID(String uuid) {
-        this.MTNUUID = uuid;
-    }
-
-    @Inject(method = "func_145839_a", at = @At("HEAD"))
-    public void injectReadFromNBT(NBTTagCompound nbttagcompound, CallbackInfo ci) {
-        this.MTNPlayer = nbttagcompound.getString("MTN-Owner");
-        this.MTNUUID = nbttagcompound.getString("MTN-UUID");
-    }
-
-    @Inject(method = "func_145841_b", at = @At("HEAD"))
-    public void injectWriteToNBT(NBTTagCompound nbttagcompound, CallbackInfo ci) {
-        if(!this.MTNPlayer.isEmpty() && !this.MTNUUID.isEmpty()) {
-            nbttagcompound.setString("MTN-Owner", this.MTNPlayer);
-            nbttagcompound.setString("MTN-UUID", this.MTNUUID);
-        }
-    }
-
-    private FakePlayer getFakePlayer() {
+    public FakePlayer getFakePlayer() {
         if (realFakePlayer == null) {
             if (this.getOwner() != null && this.getUUID() != null || !this.getOwner().isEmpty() && !this.getUUID().isEmpty()) {
                 realFakePlayer = FakePlayerFactory.get((WorldServer) this.worldObj, new GameProfile(UUID.fromString(getUUID()), getOwner()));

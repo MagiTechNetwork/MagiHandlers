@@ -33,43 +33,10 @@ import java.util.UUID;
 @Mixin(targets = "com/rwtema/extrautils/tileentity/enderquarry/TileEntityEnderQuarry", remap = false)
 public abstract class MixinTileEntityEnderQuarry extends TileEntity implements ITileEntityOwnable {
 
-    private String player;
-    private String uuid;
     private FakePlayer realFakePlayer;
 
     @Override
-    public String getOwner() {
-        return this.player;
-    }
-
-    @Override
-    public String getUUID() {
-        return this.uuid;
-    }
-
-    @Override
-    public void setOwner(String owner) {
-        this.player = owner;
-    }
-
-    @Override
-    public void setUUID(String uuid) {
-        this.uuid = uuid;
-    }
-
-    @Inject(method = "func_145839_a", at = @At("HEAD"))
-    public void injectReadFromNBT(NBTTagCompound nbttagcompound, CallbackInfo ci) {
-        this.player = nbttagcompound.getString("owner");
-        this.uuid = nbttagcompound.getString("uuid");
-    }
-
-    @Inject(method = "func_145841_b", at = @At("HEAD"))
-    public void injectWriteToNBT(NBTTagCompound nbttagcompound, CallbackInfo ci) {
-        nbttagcompound.setString("owner", this.player);
-        nbttagcompound.setString("uuid", this.uuid);
-    }
-
-    private FakePlayer getFakePlayer() {
+    public FakePlayer getFakePlayer() {
         if (realFakePlayer == null) {
             if (!this.getOwner().isEmpty() && !this.getUUID().isEmpty()) {
                 realFakePlayer = FakePlayerFactory.get((WorldServer) this.worldObj, new GameProfile(UUID.fromString(getUUID()), getOwner()));

@@ -39,7 +39,8 @@ public abstract class MixinTileEntityTerra extends TileEntityElectricMachine imp
 
     private FakePlayer fakePlayer;
 
-    private FakePlayer getFakePlayer() {
+    @Override
+    public FakePlayer getFakePlayer() {
         if (fakePlayer == null) {
             if (!this.getOwner().isEmpty() && !this.getUUID().isEmpty()) {
                 fakePlayer = FakePlayerFactory.get((WorldServer) this.worldObj, new GameProfile(UUID.fromString(getUUID()), getOwner()));
