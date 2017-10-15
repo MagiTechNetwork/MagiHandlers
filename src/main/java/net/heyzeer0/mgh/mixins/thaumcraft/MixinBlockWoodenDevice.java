@@ -8,13 +8,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.FakePlayer;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import thaumcraft.common.tiles.*;
 
 /**
  * Created by Frani on 11/08/2017.
@@ -31,28 +30,13 @@ public abstract class MixinBlockWoodenDevice extends BlockContainer {
     public EntityPlayer owner;
 
     @Inject(method = "func_149689_a", at = @At("HEAD"))
-    public void setOwner(World w, int x, int y, int z, EntityLivingBase e, ItemStack s, CallbackInfo ci) {
-        if (e instanceof EntityPlayer) {
-            this.owner = (EntityPlayer)e;
+    public void onBPlacedBy(World world, int x, int y, int z, EntityLivingBase entityliving, ItemStack s, CallbackInfo ci) {
+        if (entityliving instanceof EntityPlayer) {
+            EntityPlayer $owner = (EntityPlayer) entityliving;
+            TileEntity $te = world.getTileEntity(x, y, z);
+            if ($te != null && !((ITileEntityOwnable) $te).hasTrackedPlayer() && !($owner instanceof FakePlayer)) {
+                ((ITileEntityOwnable) $te).setPlayer($owner);
+            }
         }
     }
-
-    @Overwrite
-    public TileEntity createTileEntity(World world, int metadata) {
-        TileEntity te = (TileEntity)(metadata == 0 ? new TileBellows()
-                : (metadata == 1 ? new TileSensor()
-                : (metadata == 2 ? new TileArcanePressurePlate()
-                : (metadata == 3 ? new TileArcanePressurePlate()
-                : (metadata == 4 ? new TileArcaneBoreBase()
-                : (metadata == 5 ? new TileArcaneBore()
-                : (metadata == 8 ? new TileBanner()
-                : super.createTileEntity(world, metadata))))))));
-
-        if (te instanceof ITileEntityOwnable && owner != null) {
-            ((ITileEntityOwnable)te).setOwner(owner.getCommandSenderName());
-            ((ITileEntityOwnable)te).setUUID(owner.getUniqueID().toString());
-        }
-        return te;
-    }
-
 }
