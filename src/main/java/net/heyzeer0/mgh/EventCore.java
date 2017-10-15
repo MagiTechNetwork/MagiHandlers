@@ -74,20 +74,16 @@ public class EventCore {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onDrawerBreak(BlockEvent.BreakEvent event) {
         // Fire bukkit events
-        TileEntity tileEntity = event.world.getTileEntity(event.x, event.y, event.z);
-        ITileEntityOwnable t = (ITileEntityOwnable) tileEntity;
-
-        // Fire bukkit events
-        Player p = Bukkit.getPlayer(UUID.fromString(t.getUUID()));
-        if (p == null) p = Bukkit.getOfflinePlayer(UUID.fromString(t.getUUID())).getPlayer();
-        BlockBreakEvent e = new BlockBreakEvent(p.getWorld().getBlockAt(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord), p);
+        Player p = Bukkit.getPlayer(event.getPlayer().getUniqueID());
+        if (p == null) p = Bukkit.getOfflinePlayer(event.getPlayer().getUniqueID()).getPlayer();
+        BlockBreakEvent e = new BlockBreakEvent(p.getWorld().getBlockAt(event.x, event.y, event.z), p);
         Bukkit.getPluginManager().callEvent(e);
         if (e.isCancelled()) event.setCanceled(true);
 
         // Storage drawers logic
         if(Loader.isModLoaded("StorageDrawers")) {
             TileEntity tile = event.world.getTileEntity(event.x, event.y, event.z);
-            if (tile != null && tile instanceof TileEntityDrawers) {
+            if (tile != null && tile instanceof TileEntityDrawers && !e.isCancelled()) {
                 TileEntityDrawers te = (TileEntityDrawers) tile;
                 if(te.isSealed()) return;
                 int total = 0;
