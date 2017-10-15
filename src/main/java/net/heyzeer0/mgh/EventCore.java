@@ -7,7 +7,9 @@ import com.jaquadro.minecraft.storagedrawers.block.tile.TileEntityDrawers;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.heyzeer0.mgh.events.ThrowableHitEntityEvent;
 import net.heyzeer0.mgh.hacks.ITileEntityOwnable;
+import net.heyzeer0.mgh.mixins.MixinManager;
 import net.lomeli.trophyslots.TrophySlots;
 import net.lomeli.trophyslots.core.SlotUtil;
 import net.lomeli.trophyslots.core.network.MessageSlotsClient;
@@ -22,6 +24,7 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import org.apache.logging.log4j.LogManager;
 import org.bukkit.Bukkit;
 
 import java.util.HashMap;
@@ -112,5 +115,33 @@ public class EventCore {
             event.entityPlayer.closeScreen();
         }
     }
-    
+
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public void onHit(ThrowableHitEntityEvent event) {
+        if (event.thrower != null && event.thrower instanceof EntityPlayer) {
+            if (event.projectile.entityHit != null) {
+                if (!MixinManager.canAttack((EntityPlayer) event.thrower, event.projectile.entityHit)) {
+                    event.setCanceled(true);
+                }
+            } else {
+                if (!MixinManager.canBuild((EntityPlayer) event.thrower, event.projectile, event.entity.worldObj)) {
+                    event.setCanceled(true);
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public void onPlace(BlockEvent.PlaceEvent event) {
+        if (event.isCanceled()) return;
+        if (event.placedBlock.hasTileEntity(event.itemInHand.getItemDamage()) || event.placedBlock.hasTileEntity()) {
+            TileEntity $te = event.world.getTileEntity(event.x, event.y, event.z);
+            if ($te != null && $te instanceof ITileEntityOwnable) {
+                if (((ITileEntityOwnable) $te).getOwner() == null && ((ITileEntityOwnable) $te).getUUID() == null) {
+                    ((ITileEntityOwnable) $te).setOwner(event.player.getCommandSenderName());
+                    ((ITileEntityOwnable) $te).setUUID(event.player.getUniqueID().toString());
+                }
+            }
+        }
+    }
 }

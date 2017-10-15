@@ -2,7 +2,9 @@
   "required": true,
   "package":"net.heyzeer0.mgh.mixins.forge",
   "mixins":[
-    "MixinForgeChunkManager"
+    "MixinEntityThrowable",
+    "MixinTileEntity",
+    "MixinBlock"
   ],
   "server": [],
   "client": [],

@@ -77,15 +77,14 @@ public abstract class MixinTileEntityDigitalMiner extends TileEntity implements 
                 realFakePlayer = FakePlayerFactory.get((WorldServer) this.worldObj, new GameProfile(UUID.fromString(getUUID()), getOwner()));
             } else {
                 realFakePlayer = FakePlayerFactory.getMinecraft((WorldServer)this.worldObj);
-                ItemStack item = new ItemStack(this.getBlockType(), 1, 0);
+                /*ItemStack item = new ItemStack(this.getBlockType(), 1, 0);
                 NBTTagCompound nbt = new NBTTagCompound();
                 this.writeToNBT(nbt);
                 item.setTagCompound(nbt);
                 this.worldObj.setBlock(this.xCoord, this.yCoord, this.zCoord, Blocks.air);
                 this.invalidate();
                 this.getWorldObj().setBlock(this.xCoord, this.yCoord, this.zCoord, GameData.getBlockRegistry().getObject("ExtraUtilities:chestMini"));
-                ((IInventory)this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord)).setInventorySlotContents(0, item);
-
+                ((IInventory)this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord)).setInventorySlotContents(0, item);*/
             }
         }
         return realFakePlayer;
