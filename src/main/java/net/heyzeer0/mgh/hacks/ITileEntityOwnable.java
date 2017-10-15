@@ -1,5 +1,6 @@
 package net.heyzeer0.mgh.hacks;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.util.FakePlayer;
 
 /**
@@ -12,5 +13,7 @@ public interface ITileEntityOwnable {
     void setOwner(String owner);
     void setUUID(String uuid);
     FakePlayer getFakePlayer();
+    void setPlayer(EntityPlayer player);
+    boolean hasTrackedPlayer();
 
 }

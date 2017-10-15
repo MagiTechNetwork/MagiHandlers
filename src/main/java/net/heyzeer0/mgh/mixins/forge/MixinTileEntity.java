@@ -4,6 +4,7 @@ import com.mojang.authlib.GameProfile;
 import cpw.mods.fml.common.registry.GameData;
 import net.heyzeer0.mgh.hacks.ITileEntityOwnable;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -60,6 +61,22 @@ public abstract class MixinTileEntity implements ITileEntityOwnable {
         this.tileUuid = uuid;
     }
 
+    @Override
+    public void setPlayer(EntityPlayer player) {
+        this.setOwner(player.getCommandSenderName());
+        this.setUUID(player.getUniqueID().toString());
+    }
+
+    @Override
+    public boolean hasTrackedPlayer() {
+        return this.tileOwner != null && this.tileUuid != null;
+    }
+
+    @Override
+    public FakePlayer getFakePlayer() {
+        return getFake();
+    }
+
     @Inject(method = "readFromNBT", at = @At("HEAD"))
     private void injectReadFromNBT(NBTTagCompound nbttagcompound, CallbackInfo ci) {
         this.tileOwner = nbttagcompound.getString("MHData.Owner");
@@ -80,6 +97,7 @@ public abstract class MixinTileEntity implements ITileEntityOwnable {
                 realFakePlayer = FakePlayerFactory.get((WorldServer) this.worldObj, new GameProfile(UUID.fromString(getUUID()), getOwner()));
             } else {
                 realFakePlayer = FakePlayerFactory.getMinecraft((WorldServer)this.worldObj);
+                /*
                 ItemStack item = new ItemStack(this.getBlockType(), 1, 0);
                 NBTTagCompound nbt = new NBTTagCompound();
                 this.writeToNBT(nbt);
@@ -88,6 +106,7 @@ public abstract class MixinTileEntity implements ITileEntityOwnable {
                 this.invalidate();
                 this.getWorldObj().setBlock(this.xCoord, this.yCoord, this.zCoord, GameData.getBlockRegistry().getObject("ExtraUtilities:chestMini"));
                 ((IInventory)this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord)).setInventorySlotContents(0, item);
+                */
             }
         }
         return realFakePlayer;

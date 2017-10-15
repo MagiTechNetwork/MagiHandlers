@@ -9,6 +9,7 @@ import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.heyzeer0.mgh.events.ThrowableHitEntityEvent;
 import net.heyzeer0.mgh.hacks.ITileEntityOwnable;
+import net.heyzeer0.mgh.hacks.IWorld;
 import net.heyzeer0.mgh.mixins.MixinManager;
 import net.lomeli.trophyslots.TrophySlots;
 import net.lomeli.trophyslots.core.SlotUtil;
@@ -20,6 +21,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -71,6 +73,7 @@ public class EventCore {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onDrawerBreak(BlockEvent.BreakEvent event) {
+        // Storage drawers logic
         if(Loader.isModLoaded("StorageDrawers")) {
             TileEntity tile = event.world.getTileEntity(event.x, event.y, event.z);
             if (tile != null && tile instanceof TileEntityDrawers) {
@@ -105,7 +108,6 @@ public class EventCore {
                 e.entityPlayer.addChatComponentMessage(new ChatComponentText("Username: " + ((ITileEntityOwnable) te).getOwner()));
                 e.entityPlayer.addChatComponentMessage(new ChatComponentText("UUID: " + ((ITileEntityOwnable) te).getUUID()));
             }
-
         }
     }
 
@@ -134,14 +136,17 @@ public class EventCore {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onPlace(BlockEvent.PlaceEvent event) {
         if (event.isCanceled()) return;
-        if (event.placedBlock.hasTileEntity(event.itemInHand.getItemDamage()) || event.placedBlock.hasTileEntity()) {
-            TileEntity $te = event.world.getTileEntity(event.x, event.y, event.z);
-            if ($te != null && $te instanceof ITileEntityOwnable) {
-                if (((ITileEntityOwnable) $te).getOwner() == null && ((ITileEntityOwnable) $te).getUUID() == null) {
-                    ((ITileEntityOwnable) $te).setOwner(event.player.getCommandSenderName());
-                    ((ITileEntityOwnable) $te).setUUID(event.player.getUniqueID().toString());
+        ITileEntityOwnable tile = (ITileEntityOwnable) event.world.getTileEntity(event.x, event.y, event.z);
+        if (tile != null && !tile.hasTrackedPlayer()) {
+            if (event.player instanceof FakePlayer) {
+                ITileEntityOwnable otherTile = (ITileEntityOwnable) ((IWorld) event.world).getCurrentTickingTile();
+                if (otherTile.hasTrackedPlayer()) {
+                    tile.setOwner(otherTile.getOwner());
+                    tile.setUUID(otherTile.getUUID());
+                    return;
                 }
             }
+            tile.setPlayer(event.player);
         }
     }
 }

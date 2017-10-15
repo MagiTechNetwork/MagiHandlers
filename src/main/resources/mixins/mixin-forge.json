@@ -4,7 +4,8 @@
   "mixins":[
     "MixinEntityThrowable",
     "MixinTileEntity",
-    "MixinBlock"
+    "MixinBlock",
+    "MixinWorld"
   ],
   "server": [],
   "client": [],

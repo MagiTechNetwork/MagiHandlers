@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.FakePlayer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -29,7 +30,7 @@ public abstract class MixinBlock {
             if (entityliving instanceof EntityPlayer) {
                 EntityPlayer $owner = (EntityPlayer) entityliving;
                 TileEntity $te = world.getTileEntity(x, y, z);
-                if ($te instanceof ITileEntityOwnable) {
+                if ($te instanceof ITileEntityOwnable && !((ITileEntityOwnable) $te).hasTrackedPlayer() && !($owner instanceof FakePlayer)) {
                     ((ITileEntityOwnable) $te).setOwner($owner.getCommandSenderName());
                     ((ITileEntityOwnable) $te).setUUID($owner.getUniqueID().toString());
                 }
