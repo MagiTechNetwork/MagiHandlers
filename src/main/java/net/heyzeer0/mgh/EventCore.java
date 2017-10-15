@@ -28,6 +28,8 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import org.apache.logging.log4j.LogManager;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.event.block.BlockBreakEvent;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -73,6 +75,17 @@ public class EventCore {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onDrawerBreak(BlockEvent.BreakEvent event) {
+        // Fire bukkit events
+        TileEntity tileEntity = event.world.getTileEntity(event.x, event.y, event.z);
+        ITileEntityOwnable t = (ITileEntityOwnable) tileEntity;
+
+        // Fire bukkit events
+        Player p = Bukkit.getPlayer(UUID.fromString(t.getUUID()));
+        if (p == null) p = Bukkit.getOfflinePlayer(UUID.fromString(t.getUUID())).getPlayer();
+        BlockBreakEvent e = new BlockBreakEvent(p.getWorld().getBlockAt(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord), p);
+        Bukkit.getPluginManager().callEvent(e);
+        if (e.isCancelled()) event.setCanceled(true);
+
         // Storage drawers logic
         if(Loader.isModLoaded("StorageDrawers")) {
             TileEntity tile = event.world.getTileEntity(event.x, event.y, event.z);
@@ -103,6 +116,7 @@ public class EventCore {
                 && MinecraftServer.getServer().getConfigurationManager().func_152596_g(e.entityPlayer.getGameProfile())
                 && e.entityPlayer.isSneaking()) {
 
+            e.setCanceled(true);
             TileEntity te = e.world.getTileEntity(e.x, e.y, e.z);
             if(te != null && te instanceof ITileEntityOwnable) {
                 e.entityPlayer.addChatComponentMessage(new ChatComponentText("Username: " + ((ITileEntityOwnable) te).getOwner()));
@@ -137,16 +151,19 @@ public class EventCore {
     public void onPlace(BlockEvent.PlaceEvent event) {
         if (event.isCanceled()) return;
         ITileEntityOwnable tile = (ITileEntityOwnable) event.world.getTileEntity(event.x, event.y, event.z);
-        if (tile != null && !tile.hasTrackedPlayer()) {
-            if (event.player instanceof FakePlayer) {
-                ITileEntityOwnable otherTile = (ITileEntityOwnable) ((IWorld) event.world).getCurrentTickingTile();
-                if (otherTile.hasTrackedPlayer()) {
-                    tile.setOwner(otherTile.getOwner());
-                    tile.setUUID(otherTile.getUUID());
-                    return;
+        if (tile != null) {
+            // Add tracking info
+            if (!tile.hasTrackedPlayer()) {
+                if (event.player instanceof FakePlayer) {
+                    ITileEntityOwnable otherTile = (ITileEntityOwnable) ((IWorld) event.world).getCurrentTickingTile();
+                    if (otherTile.hasTrackedPlayer()) {
+                        tile.setOwner(otherTile.getOwner());
+                        tile.setUUID(otherTile.getUUID());
+                    }
+                } else {
+                    tile.setPlayer(event.player);
                 }
             }
-            tile.setPlayer(event.player);
         }
     }
 }
