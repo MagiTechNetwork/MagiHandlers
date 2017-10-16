@@ -5,7 +5,11 @@
     "MixinEntityThrowable",
     "MixinTileEntity",
     "MixinBlock",
-    "MixinWorld"
+    "MixinWorld",
+    "MixinEntityMob",
+    "MixinSpawnerAnimals",
+    "MixinChunk",
+    "MixinChunkProviderServer"
   ],
   "server": [],
   "client": [],
