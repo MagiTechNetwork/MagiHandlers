@@ -138,5 +138,10 @@
     "name": "Progressive Automation",
     "file": "ProgressiveAutomation-1.7.10-1.6.35.jar",
     "mixin": "mixins/mixin-progressiveautomation.json"
+  },
+  {
+    "name": "ComputerCraft",
+    "file": "ComputerCraft1.75.jar",
+    "mixin": "mixins/mixin-computercraft.json"
   }
 ]

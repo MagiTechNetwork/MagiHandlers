@@ -2,7 +2,6 @@
   "required": true,
   "package":"net.heyzeer0.mgh.mixins.enderio",
   "mixins":[
-    "MixinEnchantmentSoulBound",
     "MixinTileTelePad"
   ],
   "server": [],

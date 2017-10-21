@@ -8,8 +8,8 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.heyzeer0.mgh.events.ThrowableHitEntityEvent;
+import net.heyzeer0.mgh.hacks.IBlockEvent;
 import net.heyzeer0.mgh.hacks.ITileEntityOwnable;
-import net.heyzeer0.mgh.hacks.IWorld;
 import net.heyzeer0.mgh.mixins.MixinManager;
 import net.lomeli.trophyslots.TrophySlots;
 import net.lomeli.trophyslots.core.SlotUtil;
@@ -18,6 +18,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.v1_7_R4.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
@@ -25,13 +26,17 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 
 import java.util.UUID;
+import java.util.logging.LogManager;
 
 /**
  * Created by HeyZeer0 on 29/05/2017.
@@ -71,20 +76,28 @@ public class EventCore {
     }
 
     //drawer lag fix
-
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onDrawerBreak(BlockEvent.BreakEvent event) {
         // Fire bukkit events
-        Player p = Bukkit.getPlayer(event.getPlayer().getUniqueID());
-        if (p == null) p = Bukkit.getOfflinePlayer(event.getPlayer().getUniqueID()).getPlayer();
-        BlockBreakEvent e = new BlockBreakEvent(p.getWorld().getBlockAt(event.x, event.y, event.z), p);
-        Bukkit.getPluginManager().callEvent(e);
-        if (e.isCancelled()) event.setCanceled(true);
+        UUID playerUUID = ((IBlockEvent)event).getOwner().getUniqueID();
+        if (event.getPlayer() == null || event.getPlayer() instanceof FakePlayer) {
+            ITileEntityOwnable tile = ((IBlockEvent)event).getTile();
+            if (tile != null) {
+                playerUUID = UUID.fromString(tile.getUUID());
+            }
+        }
+        Player p = Bukkit.getPlayer(playerUUID);
+        if (p == null) p = Bukkit.getOfflinePlayer(playerUUID).getPlayer();
+        if (p != null) {
+            BlockBreakEvent e = new BlockBreakEvent(p.getWorld().getBlockAt(event.x, event.y, event.z), p);
+            Bukkit.getPluginManager().callEvent(e);
+            if (e.isCancelled()) event.setCanceled(true);
+        }
 
         // Storage drawers logic
-        if(Loader.isModLoaded("StorageDrawers")) {
+        if(Loader.isModLoaded("StorageDrawers") && !event.isCanceled()) {
             TileEntity tile = event.world.getTileEntity(event.x, event.y, event.z);
-            if (tile != null && tile instanceof TileEntityDrawers && !e.isCancelled()) {
+            if (tile != null && tile instanceof TileEntityDrawers && !event.isCanceled()) {
                 TileEntityDrawers te = (TileEntityDrawers) tile;
                 if(te.isSealed()) return;
                 int total = 0;
@@ -150,8 +163,8 @@ public class EventCore {
             // Add tracking info
             if (!tile.hasTrackedPlayer()) {
                 if (event.player instanceof FakePlayer) {
-                    ITileEntityOwnable otherTile = (ITileEntityOwnable) ((IWorld) event.world).getCurrentTickingTile();
-                    if (otherTile.hasTrackedPlayer()) {
+                    ITileEntityOwnable otherTile = ((IBlockEvent)event).getTile();
+                    if (otherTile != null && otherTile.hasTrackedPlayer()) {
                         tile.setOwner(otherTile.getOwner());
                         tile.setUUID(otherTile.getUUID());
                     }

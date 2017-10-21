@@ -2,6 +2,7 @@ package net.heyzeer0.mgh.mixins.forge;
 
 import com.mojang.authlib.GameProfile;
 import cpw.mods.fml.common.registry.GameData;
+import net.heyzeer0.mgh.MagiHandlers;
 import net.heyzeer0.mgh.hacks.ITileEntityOwnable;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -119,5 +120,4 @@ public abstract class MixinTileEntity implements ITileEntityOwnable {
             nbttagcompound.setString("MHData.UUID", this.tileUuid);
         }
     }
-
 }

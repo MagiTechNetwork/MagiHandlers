@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package":"net.heyzeer0.mgh.mixins.computercraft",
+  "mixins":[
+    "MixinTileTurtle",
+    "MixinTurtleMoveCommand",
+    "MixinTurtleSuckCommand",
+    "MixinTurtleTool"
+  ],
+  "server": [],
+  "client": [],
+  "compatibilityLevel": "JAVA_8",
+  "refmap":"mixin.magihandlers.refmap.json"
+}

@@ -9,7 +9,11 @@
     "MixinEntityMob",
     "MixinSpawnerAnimals",
     "MixinChunk",
-    "MixinChunkProviderServer"
+    "MixinChunkProviderServer",
+    "MixinBlockEvent",
+    "MixinBlockEvent$MixinBreakEvent",
+    "MixinBlockEvent$MixinPlaceEvent",
+    "MixinWorldServer"
   ],
   "server": [],
   "client": [],
