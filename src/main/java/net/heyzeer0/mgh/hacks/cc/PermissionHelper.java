@@ -19,8 +19,7 @@ public class PermissionHelper {
     public static boolean canTurtleBreak(ITurtleAccess turtle, int dir) {
         ChunkCoordinates pos = WorldUtil.moveCoords(turtle.getPosition(), dir);
         ITileEntityOwnable tile = (ITileEntityOwnable) turtle.getWorld().getTileEntity(turtle.getPosition().posX, turtle.getPosition().posY, turtle.getPosition().posZ);
-        FakePlayer player = tile.getFakePlayer();
-        return MixinManager.canBuild(pos.posX, pos.posY, pos.posZ, turtle.getWorld(), player);
+        return MixinManager.canBuild(pos.posX, pos.posY, pos.posZ, turtle.getWorld(), tile.getFakePlayer());
     }
 
     public static boolean canTurtleAttack(ITurtleAccess turtle, int dir) {

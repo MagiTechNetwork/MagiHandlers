@@ -18,10 +18,10 @@ public abstract class MixinWorld {
 
     @Redirect(method = "updateEntities", at = @At(value = "INVOKE", target = "Lnet/minecraft/tileentity/TileEntity;updateEntity()V"))
     private void redirectTileEntityUpdate(TileEntity te) {
-        if (!((IMixinChunk)te.getWorldObj().getChunkFromBlockCoords(te.xCoord, te.zCoord)).isMarkedToUnload()) {
-            MagiHandlers.instance.phase.push(te);
-            te.updateEntity();
-            MagiHandlers.instance.phase.pop();
+        if (te.getBlockType().getUnlocalizedName().toLowerCase().contains("ic2")) {
+            update(te);
+        } else if (!((IMixinChunk)te.getWorldObj().getChunkFromBlockCoords(te.xCoord, te.zCoord)).isMarkedToUnload()) {
+            update(te);
         }
     }
 
@@ -30,5 +30,11 @@ public abstract class MixinWorld {
         if (!((IMixinChunk)world.getChunkFromChunkCoords(entity.chunkCoordX, entity.chunkCoordZ)).isMarkedToUnload()) {
             world.updateEntity(entity);
         }
+    }
+
+    private void update(TileEntity te) {
+        MagiHandlers.instance.phase.push(te);
+        te.updateEntity();
+        MagiHandlers.instance.phase.pop();
     }
 }

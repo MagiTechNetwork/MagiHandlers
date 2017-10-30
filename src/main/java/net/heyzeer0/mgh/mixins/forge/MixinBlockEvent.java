@@ -7,11 +7,10 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.world.BlockEvent;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -41,25 +40,30 @@ public abstract class MixinBlockEvent implements IBlockEvent {
         }
     }
 
-    @Mixin(BlockEvent.BreakEvent.class)
+    @Mixin(value = BlockEvent.BreakEvent.class, remap = false)
     public static abstract class MixinBreakEvent implements IBlockEvent {
 
-        @Shadow public abstract EntityPlayer getPlayer();
+        @Shadow @Final private EntityPlayer player;
 
-        @Override
-        public EntityPlayer getOwner() {
-            return getPlayer() instanceof FakePlayer ? getTile().getFakePlayer() : getPlayer();
+        @Overwrite
+        public EntityPlayer getPlayer() {
+            if (player instanceof FakePlayer && getTile() != null) {
+                return getTile().getFakePlayer();
+            }
+            return player;
         }
     }
 
     @Mixin(BlockEvent.PlaceEvent.class)
     public static abstract class MixinPlaceEvent implements IBlockEvent {
 
-        @Shadow @Final public EntityPlayer player;
+        @Shadow @Final @Mutable public EntityPlayer player;
 
-        @Override
-        public EntityPlayer getOwner() {
-            return player instanceof FakePlayer ? getTile().getFakePlayer() : player;
+        @Inject(method = "<init>", at = @At("RETURN"))
+        private void onConstruct(BlockSnapshot blockSnapshot, Block placedAgainst, EntityPlayer p, CallbackInfo ci) {
+            if (p instanceof FakePlayer && getTile() != null) {
+                player = getTile().getFakePlayer();
+            }
         }
     }
 

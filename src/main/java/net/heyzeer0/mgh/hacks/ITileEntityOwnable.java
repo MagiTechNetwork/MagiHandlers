@@ -12,8 +12,8 @@ public interface ITileEntityOwnable {
     String getUUID();
     void setOwner(String owner);
     void setUUID(String uuid);
-    FakePlayer getFakePlayer();
-    FakePlayer getFakePlayerReplacingBlock();
+    EntityPlayer getFakePlayer();
+    EntityPlayer getFakePlayerReplacingBlock();
     void setPlayer(EntityPlayer player);
     boolean hasTrackedPlayer();
 

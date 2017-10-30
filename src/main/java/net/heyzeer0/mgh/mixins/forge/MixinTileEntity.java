@@ -10,6 +10,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -40,7 +41,7 @@ public abstract class MixinTileEntity implements ITileEntityOwnable {
 
     private String tileOwner;
     private String tileUuid;
-    private FakePlayer realFakePlayer;
+    private EntityPlayer realFakePlayer;
 
     @Override
     public String getOwner() {
@@ -74,10 +75,14 @@ public abstract class MixinTileEntity implements ITileEntityOwnable {
     }
 
     @Override
-    public FakePlayer getFakePlayer() {
+    public EntityPlayer getFakePlayer() {
         if (realFakePlayer == null) {
-            if (this.getOwner() != null && this.getUUID() != null || !this.getOwner().isEmpty() && !this.getUUID().isEmpty()) {
-                realFakePlayer = FakePlayerFactory.get((WorldServer) this.worldObj, new GameProfile(UUID.fromString(getUUID()), getOwner()));
+            if (this.hasTrackedPlayer()) {
+                if (MagiHandlers.getPlayer(this.tileOwner) != null) {
+                    realFakePlayer = MagiHandlers.getPlayer(this.tileOwner);
+                } else {
+                    realFakePlayer = FakePlayerFactory.get((WorldServer) this.worldObj, new GameProfile(UUID.fromString(getUUID()), getOwner()));
+                }
             } else {
                 realFakePlayer = FakePlayerFactory.getMinecraft((WorldServer) this.worldObj);
             }
@@ -86,25 +91,18 @@ public abstract class MixinTileEntity implements ITileEntityOwnable {
     }
 
     @Override
-    public FakePlayer getFakePlayerReplacingBlock() {
-        if (realFakePlayer == null) {
-            if (this.getOwner() != null && this.getUUID() != null || !this.getOwner().isEmpty() && !this.getUUID().isEmpty()) {
-                realFakePlayer = FakePlayerFactory.get((WorldServer) this.worldObj, new GameProfile(UUID.fromString(getUUID()), getOwner()));
-            } else {
-                realFakePlayer = FakePlayerFactory.getMinecraft((WorldServer)this.worldObj);
-
-                ItemStack item = new ItemStack(this.getBlockType(), 1, 0);
-                NBTTagCompound nbt = new NBTTagCompound();
-                this.writeToNBT(nbt);
-                item.setTagCompound(nbt);
-                this.worldObj.setBlock(this.xCoord, this.yCoord, this.zCoord, Blocks.air);
-                this.invalidate();
-                this.getWorldObj().setBlock(this.xCoord, this.yCoord, this.zCoord, GameData.getBlockRegistry().getObject("ExtraUtilities:chestMini"));
-                ((IInventory)this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord)).setInventorySlotContents(0, item);
-
-            }
+    public EntityPlayer getFakePlayerReplacingBlock() {
+        if (!this.hasTrackedPlayer()) {
+            ItemStack item = new ItemStack(this.getBlockType(), 1, 0);
+            NBTTagCompound nbt = new NBTTagCompound();
+            this.writeToNBT(nbt);
+            item.setTagCompound(nbt);
+            this.worldObj.setBlock(this.xCoord, this.yCoord, this.zCoord, Blocks.air);
+            this.invalidate();
+            this.getWorldObj().setBlock(this.xCoord, this.yCoord, this.zCoord, GameData.getBlockRegistry().getObject("ExtraUtilities:chestMini"));
+            ((IInventory)this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord)).setInventorySlotContents(0, item);
         }
-        return realFakePlayer;
+        return getFakePlayer();
     }
 
     @Inject(method = "readFromNBT", at = @At("HEAD"))

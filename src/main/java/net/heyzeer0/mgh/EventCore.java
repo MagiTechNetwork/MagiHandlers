@@ -79,13 +79,7 @@ public class EventCore {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onDrawerBreak(BlockEvent.BreakEvent event) {
         // Fire bukkit events
-        UUID playerUUID = ((IBlockEvent)event).getOwner().getUniqueID();
-        if (event.getPlayer() == null || event.getPlayer() instanceof FakePlayer) {
-            ITileEntityOwnable tile = ((IBlockEvent)event).getTile();
-            if (tile != null) {
-                playerUUID = UUID.fromString(tile.getUUID());
-            }
-        }
+        UUID playerUUID = event.getPlayer().getUniqueID();
         Player p = Bukkit.getPlayer(playerUUID);
         if (p == null) p = Bukkit.getOfflinePlayer(playerUUID).getPlayer();
         if (p != null) {
