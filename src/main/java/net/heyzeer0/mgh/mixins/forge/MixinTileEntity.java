@@ -76,6 +76,10 @@ public abstract class MixinTileEntity implements ITileEntityOwnable {
 
     @Override
     public EntityPlayer getFakePlayer() {
+        if (this.hasTrackedPlayer() && MagiHandlers.getPlayer(this.tileOwner) != null) {
+            realFakePlayer = MagiHandlers.getPlayer(this.tileOwner);
+            return realFakePlayer;
+        }
         if (realFakePlayer == null) {
             if (this.hasTrackedPlayer()) {
                 if (MagiHandlers.getPlayer(this.tileOwner) != null) {

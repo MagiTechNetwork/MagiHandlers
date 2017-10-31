@@ -5,7 +5,9 @@ import net.heyzeer0.mgh.hacks.IMixinChunk;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;;
 
@@ -16,11 +18,14 @@ import org.spongepowered.asm.mixin.injection.Redirect;;
 @Mixin(World.class)
 public abstract class MixinWorld {
 
+    @Shadow public abstract Chunk getChunkFromBlockCoords(int p_72938_1_, int p_72938_2_);
+
     @Redirect(method = "updateEntities", at = @At(value = "INVOKE", target = "Lnet/minecraft/tileentity/TileEntity;updateEntity()V"))
     private void redirectTileEntityUpdate(TileEntity te) {
-        if (te.getBlockType().getUnlocalizedName().toLowerCase().contains("ic2")) {
+        if (te.getBlockType().getUnlocalizedName().toLowerCase().contains("ic2") ||
+            te.getBlockType().getUnlocalizedName().toLowerCase().contains("appliedenergistics2")) {
             update(te);
-        } else if (!((IMixinChunk)te.getWorldObj().getChunkFromBlockCoords(te.xCoord, te.zCoord)).isMarkedToUnload()) {
+        } else if (!((IMixinChunk)this.getChunkFromBlockCoords(te.xCoord, te.zCoord)).isMarkedToUnload()) {
             update(te);
         }
     }
