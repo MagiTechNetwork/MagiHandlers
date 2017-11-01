@@ -14,7 +14,8 @@
     "MixinEntityThornChakram",
     "MixinToolCommons",
     "MixinItemGravityRod",
-    "MixinTileCorporeaIndex"
+    "MixinTileCorporeaIndex",
+    "MixinEntityBabylonWeapon"
   ],
   "server": [],
   "client": [],

@@ -23,18 +23,23 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.world.ExplosionEvent;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
 
+import java.util.ArrayList;
 import java.util.UUID;
 import java.util.logging.LogManager;
 
@@ -108,19 +113,29 @@ public class EventCore {
         }
     }
 
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public void onExplosionPre(ExplosionEvent.Start event) {
+        org.bukkit.entity.Entity exploder = Bukkit.getWorld(event.world.getSaveHandler().getWorldDirectoryName()).getEntities().stream().filter(e -> e.getUniqueId() == event.explosion.exploder.getUniqueID()).findFirst().orElse(null);
+        if (exploder != null) {
+            EntityExplodeEvent e = new EntityExplodeEvent(exploder, new Location(Bukkit.getWorld(event.world.getSaveHandler().getWorldDirectoryName()), event.explosion.explosionX, event.explosion.explosionY, event.explosion.explosionZ), new ArrayList<>(), event.explosion.explosionSize);
+            Bukkit.getPluginManager().callEvent(e);
+            if (e.isCancelled()) event.setCanceled(true);
+        }
+    }
+
     //Debugs
 
     @SubscribeEvent
     public void onRightClickWithCompass(PlayerInteractEvent e) {
         if(e.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK
                 && e.entityPlayer.getHeldItem() != null
-                && e.entityPlayer.getHeldItem().getItem() == Items.compass
+                && e.entityPlayer.getHeldItem().getItem() == Items.arrow
                 && MinecraftServer.getServer().getConfigurationManager().func_152596_g(e.entityPlayer.getGameProfile())
                 && e.entityPlayer.isSneaking()) {
 
-            e.setCanceled(true);
             TileEntity te = e.world.getTileEntity(e.x, e.y, e.z);
             if(te != null && te instanceof ITileEntityOwnable) {
+                e.setCanceled(true);
                 e.entityPlayer.addChatComponentMessage(new ChatComponentText("Username: " + ((ITileEntityOwnable) te).getOwner()));
                 e.entityPlayer.addChatComponentMessage(new ChatComponentText("UUID: " + ((ITileEntityOwnable) te).getUUID()));
             }
@@ -164,6 +179,27 @@ public class EventCore {
                     }
                 } else {
                     tile.setPlayer(event.player);
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public void onMultiPlace(BlockEvent.MultiPlaceEvent e) {
+        onPlace(e);
+        if (e.isCanceled()) return;
+        for (BlockSnapshot snapshot : e.getReplacedBlockSnapshots()) {
+            ITileEntityOwnable tile = (ITileEntityOwnable) e.world.getTileEntity(snapshot.x, snapshot.y, snapshot.z);
+            if (tile != null && !tile.hasTrackedPlayer()) {
+                // Add tracking info
+                if (e.player instanceof FakePlayer) {
+                    ITileEntityOwnable otherTile = ((IBlockEvent) e).getTile();
+                    if (otherTile != null && otherTile.hasTrackedPlayer()) {
+                        tile.setOwner(otherTile.getOwner());
+                        tile.setUUID(otherTile.getUUID());
+                    }
+                } else {
+                    tile.setPlayer(e.player);
                 }
             }
         }

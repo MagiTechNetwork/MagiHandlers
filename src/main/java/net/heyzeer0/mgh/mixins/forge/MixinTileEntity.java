@@ -85,7 +85,11 @@ public abstract class MixinTileEntity implements ITileEntityOwnable {
                 if (MagiHandlers.getPlayer(this.tileOwner) != null) {
                     realFakePlayer = MagiHandlers.getPlayer(this.tileOwner);
                 } else {
-                    realFakePlayer = FakePlayerFactory.get((WorldServer) this.worldObj, new GameProfile(UUID.fromString(getUUID()), getOwner()));
+                    try {
+                        realFakePlayer = FakePlayerFactory.get((WorldServer) this.worldObj, new GameProfile(UUID.fromString(getUUID()), getOwner()));
+                    } catch (IllegalArgumentException e) {
+                        realFakePlayer = FakePlayerFactory.getMinecraft((WorldServer) this.worldObj);
+                    }
                 }
             } else {
                 realFakePlayer = FakePlayerFactory.getMinecraft((WorldServer) this.worldObj);

@@ -4,6 +4,7 @@ import com.google.common.io.Resources;
 import com.google.gson.Gson;
 import cpw.mods.fml.relauncher.CoreModManager;
 import net.minecraft.launchwrapper.LaunchClassLoader;
+import org.apache.logging.log4j.LogManager;
 import org.spongepowered.asm.mixin.Mixins;
 
 import java.io.File;
@@ -47,6 +48,7 @@ public class PathLoader {
             if (modfile.exists()){
                 loadModJar(modfile);
                 Mixins.addConfiguration(patch.getMixin());
+                LogManager.getLogger().info("[MagiHandlers] Applying " + patch.getMixin() + " to " + patch.getName());
                 loadedPatches.add(patch.getName());
             }
         }
