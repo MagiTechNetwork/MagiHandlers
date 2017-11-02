@@ -47,7 +47,7 @@ public class MagiHandlers extends DummyModContainer {
     public void preInit(FMLPreInitializationEvent e) {
         LogManager.getLogger().warn(" ");
         LogManager.getLogger().warn("[MagiHandlers] ASM modules injected:");
-        String x = "- ";
+        String x = "- Forge, ";
         for(String patches : MagiCore.loader.getLoadedPatches()) {
             x = x + patches + ", ";
         }

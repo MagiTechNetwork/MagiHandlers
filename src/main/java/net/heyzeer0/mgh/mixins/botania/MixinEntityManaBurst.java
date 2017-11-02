@@ -1,13 +1,16 @@
 package net.heyzeer0.mgh.mixins.botania;
 
+import com.emoniph.witchery.entity.EntitySpellEffect;
+import net.heyzeer0.mgh.events.ThrowableHitEntityEvent;
+import net.heyzeer0.mgh.hacks.ITileEntityOwnable;
 import net.heyzeer0.mgh.mixins.MixinManager;
+import net.heyzeer0.mgh.mixins.witchery.MixinEntitySpellEffect;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.world.BlockEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.Shadow;
@@ -40,12 +43,15 @@ public abstract class MixinEntityManaBurst extends EntityThrowable {
         shooterIdentity = player.getUniqueID();
     }
 
+
     @Inject(method = "func_70184_a", at = @At("HEAD"), cancellable = true)
     private void replaceImpact(MovingObjectPosition movingobjectposition, CallbackInfo ci) {
         if(getShooter() instanceof TileSpreader) {
-            if(((TileSpreader)getShooter()).getIdentifier() != null) {
+            ITileEntityOwnable owner = (ITileEntityOwnable)getShooter();
+            if(owner.getUUID() != null) {
+                System.out.println("uuid nao e null: " + owner.getUUID() + " | " + owner.getOwner());
 
-                EntityPlayer plr = worldObj.func_152378_a(((TileSpreader)getShooter()).getIdentifier());
+                EntityPlayer plr = worldObj.func_152378_a(UUID.fromString(owner.getUUID()));
 
                 if(plr == null) {
                     setDead();
@@ -53,7 +59,7 @@ public abstract class MixinEntityManaBurst extends EntityThrowable {
                     return;
                 }
 
-                BlockEvent.BreakEvent evt = MixinManager.generateBlockEvent(movingobjectposition.blockX, movingobjectposition.blockY, movingobjectposition.blockZ, worldObj, plr);
+                ThrowableHitEntityEvent evt = new ThrowableHitEntityEvent(this, movingobjectposition, plr);
                 MinecraftForge.EVENT_BUS.post(evt);
 
                 if(evt.isCanceled()) {
@@ -70,9 +76,8 @@ public abstract class MixinEntityManaBurst extends EntityThrowable {
                 return;
             }
 
-            BlockEvent.BreakEvent evt = MixinManager.generateBlockEvent(movingobjectposition.blockX, movingobjectposition.blockY, movingobjectposition.blockZ, worldObj, plr);
+            ThrowableHitEntityEvent evt = new ThrowableHitEntityEvent(this, movingobjectposition, plr);
             MinecraftForge.EVENT_BUS.post(evt);
-
             if(evt.isCanceled()) {
                 setDead();
                 ci.cancel();
@@ -82,6 +87,5 @@ public abstract class MixinEntityManaBurst extends EntityThrowable {
 
     @Shadow
     public abstract TileEntity getShooter();
-
 
 }

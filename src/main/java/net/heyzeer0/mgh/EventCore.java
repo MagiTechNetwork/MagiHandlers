@@ -73,6 +73,7 @@ public class EventCore {
                         }
                         if(ExtendedPlayer.get((EntityPlayer)e.entity).isVampire()) {
                             ((EntityPlayer) e.entity).setHealth(4);
+
                         }
                     }
                 }
@@ -204,4 +205,5 @@ public class EventCore {
             }
         }
     }
+
 }

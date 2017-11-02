@@ -3,8 +3,6 @@
   "package":"net.heyzeer0.mgh.mixins.botania",
   "mixins":[
     "MixinEntityManaBurst",
-    "MixinTileSpreader",
-    "MixinBlockSpreader",
     "MixinEntityVineBall",
     "MixinSubTileGourmaryllis",
     "MixinItemGrassHorn",

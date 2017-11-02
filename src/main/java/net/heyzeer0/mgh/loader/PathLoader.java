@@ -42,6 +42,8 @@ public class PathLoader {
     private List<String> loadedPatches = new ArrayList<>();
 
     public void loadPatches() throws Exception{
+        Mixins.addConfiguration("mixins/mixin-forge.json");
+
         Patch[] patches = gson.fromJson(Resources.toString(Resources.getResource("mixin-patches.json"), Charset.forName("UTF-8")), Patch[].class);
         for (Patch patch : patches) {
             File modfile = new File(modFolder, patch.getFile());
@@ -52,8 +54,6 @@ public class PathLoader {
                 loadedPatches.add(patch.getName());
             }
         }
-
-        Mixins.addConfiguration("mixins/mixin-forge.json");
     }
 
     private void loadModJar(File jar) throws Exception{
