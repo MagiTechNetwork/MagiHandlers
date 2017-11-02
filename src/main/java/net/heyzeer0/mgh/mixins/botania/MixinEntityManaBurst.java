@@ -18,7 +18,7 @@ import vazkii.botania.common.entity.EntityManaBurst;
  * Copyright © HeyZeer0 - 2016
  */
 @Pseudo
-@Mixin(EntityManaBurst.class)
+@Mixin(value = EntityManaBurst.class, remap = false)
 public abstract class MixinEntityManaBurst extends EntityThrowable {
 
     @Shadow public abstract void setDead();
@@ -27,7 +27,7 @@ public abstract class MixinEntityManaBurst extends EntityThrowable {
         super(world);
     }
 
-    @Inject(method = "onImpact", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "func_70184_a", at = @At("HEAD"), cancellable = true)
     private void replaceImpact(MovingObjectPosition movingobjectposition, CallbackInfo ci) {
         ThrowableHitEntityEvent event = new ThrowableHitEntityEvent(this, movingobjectposition, getThrower());
         MinecraftForge.EVENT_BUS.post(event);
