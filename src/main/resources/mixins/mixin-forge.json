@@ -13,7 +13,8 @@
     "MixinBlockEvent",
     "MixinBlockEvent$MixinBreakEvent",
     "MixinBlockEvent$MixinPlaceEvent",
-    "MixinWorldServer"
+    "MixinWorldServer",
+    "MixinExplosionEvent"
   ],
   "server": [],
   "client": [],

@@ -114,7 +114,7 @@ public class EventCore {
         }
     }
 
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    /*@SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onExplosionPre(ExplosionEvent.Start event) {
         org.bukkit.entity.Entity exploder = Bukkit.getWorld(event.world.getSaveHandler().getWorldDirectoryName()).getEntities().stream().filter(e -> e.getUniqueId() == event.explosion.exploder.getUniqueID()).findFirst().orElse(null);
         if (exploder != null) {
@@ -122,7 +122,7 @@ public class EventCore {
             Bukkit.getPluginManager().callEvent(e);
             if (e.isCancelled()) event.setCanceled(true);
         }
-    }
+    }*/
 
     //Debugs
 
