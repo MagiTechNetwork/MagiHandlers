@@ -1,10 +1,13 @@
 package net.heyzeer0.mgh.mixins.forge;
 
 import net.heyzeer0.mgh.events.ThrowableHitEntityEvent;
+import net.heyzeer0.mgh.hacks.IEntityThrowable;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
@@ -15,7 +18,9 @@ import org.spongepowered.asm.mixin.injection.Redirect;
  */
 
 @Mixin(EntityThrowable.class)
-public abstract class MixinEntityThrowable {
+public abstract class MixinEntityThrowable implements IEntityThrowable {
+
+    @Shadow private EntityLivingBase thrower;
 
     @Invoker("onImpact")
     protected abstract void impact(MovingObjectPosition mop);
@@ -27,6 +32,11 @@ public abstract class MixinEntityThrowable {
         if (!event.isCanceled()) {
             ((MixinEntityThrowable)(Object)instance).impact(mop);
         }
+    }
+
+    @Override
+    public void setThrower(EntityLivingBase s) {
+        this.thrower = s;
     }
 
 }

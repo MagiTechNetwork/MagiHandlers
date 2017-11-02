@@ -13,7 +13,8 @@
     "MixinToolCommons",
     "MixinItemGravityRod",
     "MixinTileCorporeaIndex",
-    "MixinEntityBabylonWeapon"
+    "MixinEntityBabylonWeapon",
+    "MixinTileSpreader"
   ],
   "server": [],
   "client": [],
