@@ -39,7 +39,7 @@ public abstract class MixinEntityManaBurst extends EntityThrowable implements IE
         }
     }
 
-    @Inject(method = "<init>(Lnet/minecraft/entity/player/EntityPlayer;)V", at = @At("HEAD"))
+    @Inject(method = "<init>(Lnet/minecraft/entity/player/EntityPlayer;)V", at = @At("RETURN"))
     private void onConstruct(EntityPlayer player, CallbackInfo ci) {
         setThrower(player);
     }

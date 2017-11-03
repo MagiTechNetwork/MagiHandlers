@@ -10,16 +10,18 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
  * Created by Frani on 15/10/2017.
  */
 
+@Pseudo
 @Mixin(World.class)
 public abstract class MixinWorld {
 
@@ -42,13 +44,14 @@ public abstract class MixinWorld {
         }
     }
 
-    @Inject(method = "spawnEntityInWorld", at = @At("HEAD"))
-    private void onEntitySpawn(Entity entity, CallbackInfoReturnable cir) {
-        if (MagiHandlers.getStack().getFirst(TileEntity.class).isPresent()) {
-            ((IEntity)entity).setOwner(((ITileEntityOwnable)MagiHandlers.getStack().getFirst(TileEntity.class).get()).getFakePlayer());
-        } else {
-            MagiHandlers.getStack().getFirst(EntityPlayer.class).ifPresent(p -> ((IEntity)entity).setOwner(p));
-        }
+    @Inject(method = "spawnEntityInWorld", at = @At(value = "RETURN"))
+    private void onEntitySpawn1(Entity entity, CallbackInfoReturnable cir) {
+        spawn(entity);
+    }
+
+    @Inject(method = "spawnEntityInWorld", at = @At(value = "RETURN", ordinal = 1))
+    private void onEntitySpawn2(Entity entity, CallbackInfoReturnable cir) {
+        spawn(entity);
     }
 
     private void update(TileEntity te) {
@@ -61,5 +64,13 @@ public abstract class MixinWorld {
         MagiHandlers.getStack().push(entity);
         world.updateEntity(entity);
         MagiHandlers.getStack().remove(entity);
+    }
+
+    private void spawn(Entity e) {
+        if (MagiHandlers.getStack().getFirst(TileEntity.class).isPresent()) {
+            ((IEntity)e).setOwner(((ITileEntityOwnable)MagiHandlers.getStack().getFirst(TileEntity.class).get()).getFakePlayer());
+        } else {
+            MagiHandlers.getStack().getFirst(EntityPlayer.class).ifPresent(p -> ((IEntity)e).setOwner(p));
+        }
     }
 }
