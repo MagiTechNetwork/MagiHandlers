@@ -1,6 +1,8 @@
 package net.heyzeer0.mgh.mixins.botania;
 
 import net.heyzeer0.mgh.events.ThrowableHitEntityEvent;
+import net.heyzeer0.mgh.hacks.IEntityThrowable;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
@@ -19,7 +21,7 @@ import vazkii.botania.common.entity.EntityManaBurst;
  */
 @Pseudo
 @Mixin(value = EntityManaBurst.class, remap = false)
-public abstract class MixinEntityManaBurst extends EntityThrowable {
+public abstract class MixinEntityManaBurst extends EntityThrowable implements IEntityThrowable {
 
     @Shadow public abstract void setDead();
 
@@ -35,6 +37,11 @@ public abstract class MixinEntityManaBurst extends EntityThrowable {
             setDead();
             ci.cancel();
         }
+    }
+
+    @Inject(method = "<init>(Lnet/minecraft/entity/player/EntityPlayer;)V", at = @At("HEAD"))
+    private void onConstruct(EntityPlayer player, CallbackInfo ci) {
+        setThrower(player);
     }
 
 }

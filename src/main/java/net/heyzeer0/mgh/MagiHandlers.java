@@ -25,10 +25,9 @@ import java.util.List;
 public class MagiHandlers extends DummyModContainer {
 
     public static MagiHandlers instance;
-    public Deque<TileEntity> phase;
+    private PhaseStack stack;
     
-    public MagiHandlers()
-    {
+    public MagiHandlers() {
         super(new ModMetadata());
         ModMetadata metadata = getMetadata();
         metadata.authorList.add("HeyZeer0");
@@ -57,11 +56,15 @@ public class MagiHandlers extends DummyModContainer {
 
         MinecraftForge.EVENT_BUS.register(new EventCore());
         instance = this;
-        this.phase = new ArrayDeque<>(1);
+        this.stack = new PhaseStack();
     }
 
     public static EntityPlayer getPlayer(String name) {
         return MinecraftServer.getServer().getConfigurationManager().func_152612_a(name);
+    }
+
+    public static PhaseStack getStack() {
+        return instance.stack;
     }
 
 }

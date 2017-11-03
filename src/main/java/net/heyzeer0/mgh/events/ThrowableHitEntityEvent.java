@@ -1,6 +1,7 @@
 package net.heyzeer0.mgh.events;
 
 import cpw.mods.fml.common.eventhandler.Cancelable;
+import net.heyzeer0.mgh.hacks.IEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -26,6 +27,9 @@ public class ThrowableHitEntityEvent extends EntityEvent {
         this.thrower = thrower;
         if (thrower == null && entity instanceof EntityThrowable) {
             this.thrower = ((EntityThrowable)entity).getThrower();
+            if (this.thrower == null) {
+                this.thrower = ((IEntity)entity).getOwner();
+            }
         }
     }
 }

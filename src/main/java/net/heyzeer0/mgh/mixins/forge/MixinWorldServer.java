@@ -25,17 +25,23 @@ public abstract class MixinWorldServer extends World {
         super(a, b, c, d, e);
     }
 
+    private TileEntity currentTile;
+
     @Inject(method = "func_147485_a", at = @At("HEAD"))
     private void onSendBlockEvents(BlockEventData data, CallbackInfoReturnable<Boolean> cir) {
         TileEntity te = this.getTileEntity(data.func_151340_a(), data.func_151342_b(), data.func_151341_c());
         if (te != null) {
-            MagiHandlers.instance.phase.push(te);
+            this.currentTile = te;
+            MagiHandlers.getStack().push(te);
         }
     }
 
     @Inject(method = "func_147488_Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/management/ServerConfigurationManager;sendToAllNear(DDDDILnet/minecraft/network/Packet;)V", shift = At.Shift.AFTER))
     private void onSendToAllNear(CallbackInfo ci) {
-        MagiHandlers.instance.phase.poll();
+        if (currentTile != null) {
+            MagiHandlers.getStack().remove(currentTile);
+            currentTile = null;
+        }
     }
 
 }

@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
  * Created by Frani on 02/11/2017.
@@ -23,7 +24,7 @@ public abstract class MixinExplosionEvent extends ExplosionEvent {
     @Shadow private ExplosionPrimeEvent event;
 
     @Inject(method = "<init>", at = @At("RETURN"))
-    private void onConstruct(World world, Explosion explosion) {
+    private void onConstruct(World world, Explosion explosion, CallbackInfo ci) {
         if (event.isCancelled()) this.setCanceled(true);
     }
 

@@ -35,9 +35,7 @@ public abstract class MixinBlockEvent implements IBlockEvent {
 
     @Inject(method = "<init>", at = @At("RETURN"))
     private void onConstruct(int a, int b, int c, World d, Block e, int f, CallbackInfo ci) {
-        if (MagiHandlers.instance.phase.peekFirst() != null) {
-            this.setTile(MagiHandlers.instance.phase.peekFirst());
-        }
+        MagiHandlers.getStack().getFirst(TileEntity.class).ifPresent(this::setTile);
     }
 
     @Mixin(value = BlockEvent.BreakEvent.class, remap = false)

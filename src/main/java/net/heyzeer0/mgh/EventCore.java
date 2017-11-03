@@ -9,6 +9,7 @@ import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.heyzeer0.mgh.events.ThrowableHitEntityEvent;
 import net.heyzeer0.mgh.hacks.IBlockEvent;
+import net.heyzeer0.mgh.hacks.IEntity;
 import net.heyzeer0.mgh.hacks.ITileEntityOwnable;
 import net.heyzeer0.mgh.mixins.MixinManager;
 import net.lomeli.trophyslots.TrophySlots;
@@ -28,6 +29,7 @@ import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import net.minecraftforge.event.entity.player.EntityInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
@@ -126,8 +128,12 @@ public class EventCore {
 
     //Debugs
 
-    @SubscribeEvent
-    public void onRightClickWithCompass(PlayerInteractEvent e) {
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public void onRightClick(PlayerInteractEvent e) {
+        // Add the player to tracking
+        MagiHandlers.getStack().push(e.entityPlayer);
+
+        // Run debug
         if(e.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK
                 && e.entityPlayer.getHeldItem() != null
                 && e.entityPlayer.getHeldItem().getItem() == Items.arrow
@@ -141,6 +147,9 @@ public class EventCore {
                 e.entityPlayer.addChatComponentMessage(new ChatComponentText("UUID: " + ((ITileEntityOwnable) te).getUUID()));
             }
         }
+
+        // Remove the player from tracking
+        MagiHandlers.getStack().remove(e.entityPlayer);
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
@@ -203,6 +212,19 @@ public class EventCore {
                     tile.setPlayer(e.player);
                 }
             }
+        }
+    }
+
+    @SubscribeEvent
+    public void onEntityInteract(EntityInteractEvent e) {
+        if (e.entityPlayer.getHeldItem() != null
+                && e.entityPlayer.getHeldItem().getItem() == Items.arrow
+                && MinecraftServer.getServer().getConfigurationManager().func_152596_g(e.entityPlayer.getGameProfile())
+                && e.entityPlayer.isSneaking()) {
+
+            e.setCanceled(true);
+            e.entityPlayer.addChatComponentMessage(new ChatComponentText("Username: " + ((IEntity) e.target).getOwner().getCommandSenderName()));
+            e.entityPlayer.addChatComponentMessage(new ChatComponentText("UUID: " + ((IEntity) e.target).getOwner().getUniqueID().toString()));
         }
     }
 
