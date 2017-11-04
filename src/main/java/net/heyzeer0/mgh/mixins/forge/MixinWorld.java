@@ -1,9 +1,15 @@
 package net.heyzeer0.mgh.mixins.forge;
 
 import net.heyzeer0.mgh.MagiHandlers;
-import net.heyzeer0.mgh.hacks.EntityHelper;
+import net.heyzeer0.mgh.hacks.IEntity;
 import net.heyzeer0.mgh.hacks.IMixinChunk;
+import net.heyzeer0.mgh.hacks.ITileEntityOwnable;
+import net.heyzeer0.mgh.mixins.MixinManager;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityFallingBlock;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
@@ -13,6 +19,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
  * Created by Frani on 15/10/2017.
@@ -27,22 +34,43 @@ public abstract class MixinWorld {
     private void redirectTileEntityUpdate(TileEntity te) {
         if (te.getBlockType().getUnlocalizedName().toLowerCase().contains("ic2") ||
             te.getBlockType().getUnlocalizedName().toLowerCase().contains("appliedenergistics2")) {
-            EntityHelper.update(te);
+            MagiHandlers.getStack().push(te);
+            te.updateEntity();
+            MagiHandlers.getStack().remove(te);
         } else if (!((IMixinChunk)this.getChunkFromBlockCoords(te.xCoord, te.zCoord)).isMarkedToUnload()) {
-            EntityHelper.update(te);
+            MagiHandlers.getStack().push(te);
+            te.updateEntity();
+            MagiHandlers.getStack().remove(te);
         }
     }
 
     @Redirect(method = "updateEntities", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;updateEntity(Lnet/minecraft/entity/Entity;)V"))
     private void redirectEntityUpdate(World world, Entity entity) {
         if (!((IMixinChunk)world.getChunkFromChunkCoords(entity.chunkCoordX, entity.chunkCoordZ)).isMarkedToUnload()) {
-            EntityHelper.update(world, entity);
+            MagiHandlers.getStack().push(entity);
+            world.updateEntity(entity);
+            MagiHandlers.getStack().remove(entity);
         }
     }
 
     @Inject(method = "onEntityAdded", at = @At(value = "HEAD"))
-    private void onEntitySpawn1(Entity entity, CallbackInfo cir) {
-        EntityHelper.spawn(entity);
+    private void onEntitySpawn1(Entity e, CallbackInfo cir) {
+        if (MagiHandlers.getStack().getFirst(TileEntity.class).isPresent()) {
+            ((IEntity)e).setOwner(((ITileEntityOwnable)MagiHandlers.getStack().getFirst(TileEntity.class).get()).getFakePlayer());
+        } else if (MagiHandlers.getStack().getFirst(EntityPlayer.class).isPresent()) {
+            MagiHandlers.getStack().getFirst(EntityPlayer.class).ifPresent(((IEntity)e)::setOwner);
+        } else if (MagiHandlers.getStack().getFirst(Entity.class).isPresent()) {
+            MagiHandlers.getStack().getFirst(Entity.class).ifPresent(entity -> {
+                if (((IEntity) entity).hasOwner()) {
+                    ((IEntity) e).setOwner(((IEntity) entity).getOwner());
+                }
+            });
+        } else if (MagiHandlers.getStack().ignorePhase || e instanceof EntityItem || e instanceof EntityPlayer || e instanceof EntityFallingBlock) {
+            // ignore, for now
+        } else {
+            MagiHandlers.log("Spawning entity with no owner, stacktrace: ");
+            //Thread.dumpStack();
+        }
     }
 
     @Inject(method = "tick", at = @At("HEAD"))
@@ -50,6 +78,32 @@ public abstract class MixinWorld {
         for (Runnable r : MagiHandlers.instance.tasks) {
             r.run();
             MagiHandlers.instance.tasks.remove(r);
+        }
+    }
+
+    @Inject(method = "setBlock(IIILnet/minecraft/block/Block;II)Z", at = @At("HEAD"), cancellable = true)
+    private void onSetBlock(int x, int y, int z, Block block, int meta, int flag, CallbackInfoReturnable cir) {
+        if (MagiHandlers.getStack().getFirst(EntityPlayer.class).isPresent()) {
+            if (!MixinManager.canBuild(x, y, z, (World)(Object)this, MagiHandlers.getStack().getFirst(EntityPlayer.class).get())) {
+                cir.setReturnValue(false);
+            }
+        } else if (MagiHandlers.getStack().getFirst(Entity.class).isPresent()) {
+            IEntity entity = (IEntity) MagiHandlers.getStack().getFirst(Entity.class).get();
+            if (entity.hasOwner()) {
+                if (!MixinManager.canBuild(x, y, z, (World)(Object)this, entity.getOwner())) {
+                    cir.setReturnValue(false);
+                }
+            }
+        } else if (MagiHandlers.getStack().getFirst(TileEntity.class).isPresent()) {
+            ITileEntityOwnable tile = (ITileEntityOwnable) MagiHandlers.getStack().getFirst(TileEntity.class).get();
+            if (tile.hasTrackedPlayer()) {
+                if (!MixinManager.canBuild(x, y, z, (World)(Object)this, tile.getFakePlayer())) {
+                    cir.setReturnValue(false);
+                }
+            }
+        } else {
+            //MagiHandlers.log("Could not capture the cause of a setBlock, ignoring. Stacktrace: ");
+            //Thread.dumpStack();
         }
     }
 

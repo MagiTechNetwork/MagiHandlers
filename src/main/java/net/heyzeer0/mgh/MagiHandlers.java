@@ -15,10 +15,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 
 /**
@@ -38,7 +36,7 @@ public class MagiHandlers extends DummyModContainer {
         metadata.name = "MagiHandlers";
         metadata.modId = "MagiHandlers";
         metadata.version = "1.0";
-        this.tasks = new ArrayList<>();
+        this.tasks = new CopyOnWriteArrayList<>();
     }
 
     @Override

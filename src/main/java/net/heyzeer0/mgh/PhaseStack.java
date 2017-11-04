@@ -32,5 +32,5 @@ public class PhaseStack {
         return phaseStack;
     }
 
-    public boolean isSpawningTick = false;
+    public boolean ignorePhase = false;
 }

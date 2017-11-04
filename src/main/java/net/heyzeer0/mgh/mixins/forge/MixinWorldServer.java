@@ -59,9 +59,9 @@ public abstract class MixinWorldServer extends World {
 
     @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/SpawnerAnimals;findChunksForSpawning(Lnet/minecraft/world/WorldServer;ZZZ)I"))
     private int redirectFindChunksForSpawningCall(SpawnerAnimals instance, WorldServer w, boolean a, boolean b, boolean c) {
-        MagiHandlers.getStack().isSpawningTick = true;
+        MagiHandlers.getStack().ignorePhase = true;
         instance.findChunksForSpawning(w, a, b, c);
-        MagiHandlers.getStack().isSpawningTick = false;
+        MagiHandlers.getStack().ignorePhase = false;
         return 0;
     }
 
