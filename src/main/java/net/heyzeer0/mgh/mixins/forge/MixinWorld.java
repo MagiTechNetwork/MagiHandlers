@@ -80,7 +80,7 @@ public abstract class MixinWorld {
         }
     }
 
-    @Inject(method = "setBlock(IIILnet/minecraft/block/Block;II)Z", at = @At("HEAD"), cancellable = true)
+    /*@Inject(method = "setBlock(IIILnet/minecraft/block/Block;II)Z", at = @At("HEAD"), cancellable = true)
     public void onSetBlock(int x, int y, int z, Block block, int meta, int flag, CallbackInfoReturnable cir) {
         if (MagiHandlers.getStack().getFirst(EntityPlayer.class).isPresent()) {
             if (MagiHandlers.getStack().ignorePhase) return;
@@ -108,6 +108,6 @@ public abstract class MixinWorld {
             //MagiHandlers.log("Could not capture the cause of a setBlock, ignoring. Stacktrace: ");
             //Thread.dumpStack();
         }
-    }
+    }*/
 
 }
