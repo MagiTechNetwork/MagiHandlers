@@ -3,7 +3,8 @@
   "package":"net.heyzeer0.mgh.mixins.thermalexpansion",
   "mixins":[
     "MixinEntityFlorb",
-    "MixinTileAssembler"
+    "MixinTileAssembler",
+    "MixinItemIgniter"
   ],
   "server": [],
   "client": [],
