@@ -30,6 +30,10 @@ public abstract class MixinEntity implements IEntity {
 
     @Override
     public void setOwner(EntityPlayer player) {
+        if (player.getUniqueID().toString().isEmpty()) {
+            MagiHandlers.log("Tried to add a invalid player as entity owner, player: " + player.getCommandSenderName());
+            return;
+        }
         this.uuid = player.getUniqueID().toString();
         this.username = player.getCommandSenderName();
     }
@@ -40,7 +44,7 @@ public abstract class MixinEntity implements IEntity {
     }
 
     public boolean hasTrackedPlayer() {
-        return this.username != null && this.uuid != null;
+        return this.username != null && this.uuid != null && !this.username.isEmpty() && !this.uuid.isEmpty();
     }
 
     @Inject(method = "writeToNBT", at = @At("HEAD"))

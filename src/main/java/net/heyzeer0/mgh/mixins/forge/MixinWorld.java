@@ -7,6 +7,7 @@ import net.heyzeer0.mgh.hacks.ITileEntityOwnable;
 import net.heyzeer0.mgh.mixins.MixinManager;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -65,10 +66,10 @@ public abstract class MixinWorld {
                     ((IEntity) e).setOwner(((IEntity) entity).getOwner());
                 }
             });
-        } else if (MagiHandlers.getStack().ignorePhase || e instanceof EntityItem || e instanceof EntityPlayer || e instanceof EntityFallingBlock) {
+        } else if (MagiHandlers.getStack().ignorePhase || e instanceof EntityItem || e instanceof EntityLiving || e instanceof EntityFallingBlock) {
             // ignore, for now
         } else {
-            MagiHandlers.log("Spawning entity with no owner, stacktrace: ");
+            //MagiHandlers.log("Spawning entity with no owner, stacktrace: ");
             //Thread.dumpStack();
         }
     }
