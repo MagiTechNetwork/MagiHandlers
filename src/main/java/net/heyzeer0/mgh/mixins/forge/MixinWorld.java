@@ -5,6 +5,8 @@ import net.heyzeer0.mgh.hacks.IEntity;
 import net.heyzeer0.mgh.hacks.IMixinChunk;
 import net.heyzeer0.mgh.hacks.ITileEntityOwnable;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityFallingBlock;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -15,7 +17,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
  * Created by Frani on 15/10/2017.
@@ -44,14 +46,17 @@ public abstract class MixinWorld {
         }
     }
 
-    @Inject(method = "spawnEntityInWorld", at = @At(value = "RETURN"))
-    private void onEntitySpawn1(Entity entity, CallbackInfoReturnable cir) {
+    @Inject(method = "onEntityAdded", at = @At(value = "HEAD"))
+    private void onEntitySpawn1(Entity entity, CallbackInfo cir) {
         spawn(entity);
     }
 
-    @Inject(method = "spawnEntityInWorld", at = @At(value = "RETURN", ordinal = 1))
-    private void onEntitySpawn2(Entity entity, CallbackInfoReturnable cir) {
-        spawn(entity);
+    @Inject(method = "tick", at = @At("HEAD"))
+    private void onTick(CallbackInfo ci) {
+        for (Runnable r : MagiHandlers.instance.tasks) {
+            r.run();
+            MagiHandlers.instance.tasks.remove(r);
+        }
     }
 
     private void update(TileEntity te) {
@@ -69,8 +74,19 @@ public abstract class MixinWorld {
     private void spawn(Entity e) {
         if (MagiHandlers.getStack().getFirst(TileEntity.class).isPresent()) {
             ((IEntity)e).setOwner(((ITileEntityOwnable)MagiHandlers.getStack().getFirst(TileEntity.class).get()).getFakePlayer());
+        } else if (MagiHandlers.getStack().getFirst(EntityPlayer.class).isPresent()) {
+            MagiHandlers.getStack().getFirst(EntityPlayer.class).ifPresent(((IEntity)e)::setOwner);
+        } else if (MagiHandlers.getStack().getFirst(Entity.class).isPresent()) {
+            MagiHandlers.getStack().getFirst(Entity.class).ifPresent(entity -> {
+                if (((IEntity) entity).hasOwner()) {
+                    ((IEntity) e).setOwner(((IEntity) entity).getOwner());
+                }
+            });
+        } else if (MagiHandlers.getStack().isSpawningTick || e instanceof EntityItem || e instanceof EntityPlayer || e instanceof EntityFallingBlock) {
+            // ignore, for now
         } else {
-            MagiHandlers.getStack().getFirst(EntityPlayer.class).ifPresent(p -> ((IEntity)e).setOwner(p));
+            MagiHandlers.log("Spawning entity with no owner, stacktrace: ");
+            Thread.dumpStack();
         }
     }
 }

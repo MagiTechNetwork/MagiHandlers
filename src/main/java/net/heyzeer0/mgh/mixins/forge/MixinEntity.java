@@ -34,6 +34,11 @@ public abstract class MixinEntity implements IEntity {
         this.username = player.getCommandSenderName();
     }
 
+    @Override
+    public boolean hasOwner() {
+        return hasTrackedPlayer();
+    }
+
     public boolean hasTrackedPlayer() {
         return this.username != null && this.uuid != null;
     }

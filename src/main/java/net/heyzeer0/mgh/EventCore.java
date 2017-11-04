@@ -130,9 +130,6 @@ public class EventCore {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onRightClick(PlayerInteractEvent e) {
-        // Add the player to tracking
-        MagiHandlers.getStack().push(e.entityPlayer);
-
         // Run debug
         if(e.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK
                 && e.entityPlayer.getHeldItem() != null
@@ -147,9 +144,6 @@ public class EventCore {
                 e.entityPlayer.addChatComponentMessage(new ChatComponentText("UUID: " + ((ITileEntityOwnable) te).getUUID()));
             }
         }
-
-        // Remove the player from tracking
-        MagiHandlers.getStack().remove(e.entityPlayer);
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)

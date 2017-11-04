@@ -1,19 +1,20 @@
 package net.heyzeer0.mgh.mixins.forge;
 
 import net.heyzeer0.mgh.MagiHandlers;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockEventData;
 import net.minecraft.profiler.Profiler;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldProvider;
-import net.minecraft.world.WorldServer;
-import net.minecraft.world.WorldSettings;
+import net.minecraft.world.*;
 import net.minecraft.world.storage.ISaveHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Random;
 
 /**
  * Created by Frani on 20/10/2017.
@@ -42,6 +43,26 @@ public abstract class MixinWorldServer extends World {
             MagiHandlers.getStack().remove(currentTile);
             currentTile = null;
         }
+    }
+
+    @Redirect(method = "tickUpdates", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/Block;updateTick(Lnet/minecraft/world/World;IIILjava/util/Random;)V"))
+    private void updateTick(Block block, World w, int x, int y, int z, Random rand) {
+        TileEntity te = w.getTileEntity(x, y, z);
+        if (te != null) {
+            MagiHandlers.getStack().push(te);
+            block.updateTick(w, x, y, z, rand);
+            MagiHandlers.getStack().remove(te);
+        } else {
+            block.updateTick(w, x, y, z, rand);
+        }
+    }
+
+    @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/SpawnerAnimals;findChunksForSpawning(Lnet/minecraft/world/WorldServer;ZZZ)I"))
+    private int redirectFindChunksForSpawningCall(SpawnerAnimals instance, WorldServer w, boolean a, boolean b, boolean c) {
+        MagiHandlers.getStack().isSpawningTick = true;
+        instance.findChunksForSpawning(w, a, b, c);
+        MagiHandlers.getStack().isSpawningTick = false;
+        return 0;
     }
 
 }

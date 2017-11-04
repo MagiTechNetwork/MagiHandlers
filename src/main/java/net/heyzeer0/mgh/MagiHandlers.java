@@ -6,14 +6,17 @@ import cpw.mods.fml.common.DummyModContainer;
 import cpw.mods.fml.common.LoadController;
 import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import net.heyzeer0.mgh.hacks.ITileEntityOwnable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
@@ -26,6 +29,7 @@ public class MagiHandlers extends DummyModContainer {
 
     public static MagiHandlers instance;
     private PhaseStack stack;
+    public List<Runnable> tasks;
     
     public MagiHandlers() {
         super(new ModMetadata());
@@ -34,6 +38,7 @@ public class MagiHandlers extends DummyModContainer {
         metadata.name = "MagiHandlers";
         metadata.modId = "MagiHandlers";
         metadata.version = "1.0";
+        this.tasks = new ArrayList<>();
     }
 
     @Override
@@ -65,6 +70,21 @@ public class MagiHandlers extends DummyModContainer {
 
     public static PhaseStack getStack() {
         return instance.stack;
+    }
+
+    public static void scheduleTileCheck(EntityPlayer player, World world, int x, int y, int z) {
+        instance.tasks.add(new Runnable() {
+            @Override
+            public void run() {
+                ITileEntityOwnable tile = (ITileEntityOwnable) world.getTileEntity(x, y, z);
+                if (tile != null) tile.setPlayer(player);
+            }
+        });
+    }
+
+    public static void log(String content) {
+        LogManager.getLogger().warn(" ");
+        LogManager.getLogger().warn("[MagiHandlers] " + content);
     }
 
 }

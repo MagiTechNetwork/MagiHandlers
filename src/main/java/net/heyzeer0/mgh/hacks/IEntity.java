@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 public interface IEntity {
 
     void setOwner(EntityPlayer player);
+    boolean hasOwner();
     EntityPlayer getOwner();
 
 }

@@ -10,13 +10,9 @@ public class PhaseStack {
 
     private Deque<Object> phaseStack = new ArrayDeque<>(16);
 
-    private Collection<Object> getStack() {
-        return phaseStack;
-    }
-
     @SuppressWarnings("unchecked")
     public <T> List<T> getFrom(Class<T> c) {
-        return (List<T>) phaseStack.stream().filter(o -> o.getClass() == c).collect(Collectors.toList());
+        return (List<T>) phaseStack.stream().filter(c::isInstance).collect(Collectors.toList());
     }
 
     public void push(Object o) {
@@ -25,11 +21,16 @@ public class PhaseStack {
 
     @SuppressWarnings("unchecked")
     public <T> Optional<T> getFirst(Class<T> c) {
-        return (Optional<T>) phaseStack.stream().filter(o -> o.getClass() == c).findFirst();
+        return (Optional<T>) phaseStack.stream().filter(c::isInstance).findFirst();
     }
 
     public boolean remove(Object o) {
         return phaseStack.remove(o);
     }
 
+    public Deque<Object> raw() {
+        return phaseStack;
+    }
+
+    public boolean isSpawningTick = false;
 }
