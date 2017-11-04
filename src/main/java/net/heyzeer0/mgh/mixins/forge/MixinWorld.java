@@ -14,6 +14,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraftforge.common.util.FakePlayer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -32,7 +33,7 @@ public abstract class MixinWorld {
     @Shadow public abstract Chunk getChunkFromBlockCoords(int p_72938_1_, int p_72938_2_);
 
     @Redirect(method = "updateEntities", at = @At(value = "INVOKE", target = "Lnet/minecraft/tileentity/TileEntity;updateEntity()V"))
-    private void redirectTileEntityUpdate(TileEntity te) {
+    public void redirectTileEntityUpdate(TileEntity te) {
         if (te.getBlockType().getUnlocalizedName().toLowerCase().contains("ic2") ||
             te.getBlockType().getUnlocalizedName().toLowerCase().contains("appliedenergistics2")) {
             MagiHandlers.getStack().push(te);
@@ -46,7 +47,7 @@ public abstract class MixinWorld {
     }
 
     @Redirect(method = "updateEntities", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;updateEntity(Lnet/minecraft/entity/Entity;)V"))
-    private void redirectEntityUpdate(World world, Entity entity) {
+    public void redirectEntityUpdate(World world, Entity entity) {
         if (!((IMixinChunk)world.getChunkFromChunkCoords(entity.chunkCoordX, entity.chunkCoordZ)).isMarkedToUnload()) {
             MagiHandlers.getStack().push(entity);
             world.updateEntity(entity);
@@ -55,7 +56,7 @@ public abstract class MixinWorld {
     }
 
     @Inject(method = "onEntityAdded", at = @At(value = "HEAD"))
-    private void onEntitySpawn1(Entity e, CallbackInfo cir) {
+    public void onEntitySpawn1(Entity e, CallbackInfo cir) {
         if (MagiHandlers.getStack().getFirst(TileEntity.class).isPresent()) {
             ((IEntity)e).setOwner(((ITileEntityOwnable)MagiHandlers.getStack().getFirst(TileEntity.class).get()).getFakePlayer());
         } else if (MagiHandlers.getStack().getFirst(EntityPlayer.class).isPresent()) {
@@ -68,14 +69,11 @@ public abstract class MixinWorld {
             });
         } else if (MagiHandlers.getStack().ignorePhase || e instanceof EntityItem || e instanceof EntityLiving || e instanceof EntityFallingBlock) {
             // ignore, for now
-        } else {
-            //MagiHandlers.log("Spawning entity with no owner, stacktrace: ");
-            //Thread.dumpStack();
         }
     }
 
     @Inject(method = "tick", at = @At("HEAD"))
-    private void onTick(CallbackInfo ci) {
+    public void onTick(CallbackInfo ci) {
         for (Runnable r : MagiHandlers.instance.tasks) {
             r.run();
             MagiHandlers.instance.tasks.remove(r);
@@ -83,12 +81,15 @@ public abstract class MixinWorld {
     }
 
     @Inject(method = "setBlock(IIILnet/minecraft/block/Block;II)Z", at = @At("HEAD"), cancellable = true)
-    private void onSetBlock(int x, int y, int z, Block block, int meta, int flag, CallbackInfoReturnable cir) {
+    public void onSetBlock(int x, int y, int z, Block block, int meta, int flag, CallbackInfoReturnable cir) {
         if (MagiHandlers.getStack().getFirst(EntityPlayer.class).isPresent()) {
-            if (!MixinManager.canBuild(x, y, z, (World)(Object)this, MagiHandlers.getStack().getFirst(EntityPlayer.class).get())) {
+            if (MagiHandlers.getStack().ignorePhase) return;
+            EntityPlayer player = MagiHandlers.getStack().getFirst(EntityPlayer.class).get();
+            if (!(player instanceof FakePlayer) && !MixinManager.canBuild(x, y, z, (World)(Object)this, player)) {
                 cir.setReturnValue(false);
             }
         } else if (MagiHandlers.getStack().getFirst(Entity.class).isPresent()) {
+            if (MagiHandlers.getStack().ignorePhase) return;
             IEntity entity = (IEntity) MagiHandlers.getStack().getFirst(Entity.class).get();
             if (entity.hasOwner()) {
                 if (!MixinManager.canBuild(x, y, z, (World)(Object)this, entity.getOwner())) {
@@ -96,6 +97,7 @@ public abstract class MixinWorld {
                 }
             }
         } else if (MagiHandlers.getStack().getFirst(TileEntity.class).isPresent()) {
+            if (MagiHandlers.getStack().ignorePhase) return;
             ITileEntityOwnable tile = (ITileEntityOwnable) MagiHandlers.getStack().getFirst(TileEntity.class).get();
             if (tile.hasTrackedPlayer()) {
                 if (!MixinManager.canBuild(x, y, z, (World)(Object)this, tile.getFakePlayer())) {
