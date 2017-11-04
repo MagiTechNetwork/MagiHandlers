@@ -22,7 +22,7 @@ public abstract class MixinExplosion {
 
     @Inject(method = "<init>", at = @At("RETURN"))
     private void onConstruct(World w, Entity e, double x, double y, double z, float size, CallbackInfo ci) {
-        if (!(exploder instanceof EntityPlayer) && ((IEntity)e).hasOwner()) {
+        if ((exploder == null || !(exploder instanceof EntityPlayer)) && ((IEntity)e).hasOwner()) {
             exploder = ((IEntity)e).getOwner();
         }
     }
