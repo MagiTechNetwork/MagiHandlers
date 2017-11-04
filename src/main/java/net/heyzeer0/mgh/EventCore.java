@@ -185,6 +185,15 @@ public class EventCore {
                     tile.setPlayer(event.player);
                 }
             }
+        } else {
+            if (event.player instanceof FakePlayer) {
+                ITileEntityOwnable otherTile = ((IBlockEvent)event).getTile();
+                if (otherTile != null && otherTile.hasTrackedPlayer()) {
+                    MagiHandlers.scheduleTileCheck(otherTile.getFakePlayer(), event.world, event.x, event.y, event.z);
+                }
+            } else {
+                MagiHandlers.scheduleTileCheck(event.player, event.world, event.x, event.y, event.z);
+            }
         }
     }
 
