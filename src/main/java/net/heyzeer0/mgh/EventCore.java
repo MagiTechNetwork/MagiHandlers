@@ -214,6 +214,15 @@ public class EventCore {
                 } else {
                     tile.setPlayer(e.player);
                 }
+            } else {
+                if (e.player instanceof FakePlayer) {
+                    ITileEntityOwnable otherTile = ((IBlockEvent)e).getTile();
+                    if (otherTile != null && otherTile.hasTrackedPlayer()) {
+                        MagiHandlers.scheduleTileCheck(otherTile.getFakePlayer(), snapshot.world, snapshot.x, snapshot.y, snapshot.z);
+                    }
+                } else {
+                    MagiHandlers.scheduleTileCheck(e.player, snapshot.world, snapshot.x, snapshot.y, snapshot.z);
+                }
             }
         }
     }
