@@ -1,27 +1,18 @@
 package net.heyzeer0.mgh.mixins.forge;
 
 import net.heyzeer0.mgh.MagiHandlers;
-import net.heyzeer0.mgh.hacks.IEntity;
+import net.heyzeer0.mgh.hacks.EntityHelper;
 import net.heyzeer0.mgh.hacks.IMixinChunk;
-import net.heyzeer0.mgh.hacks.ITileEntityOwnable;
-import net.heyzeer0.mgh.mixins.MixinManager;
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.item.EntityFallingBlock;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraftforge.common.util.FakePlayer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
  * Created by Frani on 15/10/2017.
@@ -55,21 +46,9 @@ public abstract class MixinWorld {
         }
     }
 
-    @Inject(method = "onEntityAdded", at = @At(value = "HEAD"))
+    @Inject(method = "onEntityAdded", at = @At(value = "RETURN"))
     public void onEntitySpawn1(Entity e, CallbackInfo cir) {
-        if (MagiHandlers.getStack().getFirst(TileEntity.class).isPresent()) {
-            ((IEntity)e).setOwner(((ITileEntityOwnable)MagiHandlers.getStack().getFirst(TileEntity.class).get()).getFakePlayer());
-        } else if (MagiHandlers.getStack().getFirst(EntityPlayer.class).isPresent()) {
-            MagiHandlers.getStack().getFirst(EntityPlayer.class).ifPresent(((IEntity)e)::setOwner);
-        } else if (MagiHandlers.getStack().getFirst(Entity.class).isPresent()) {
-            MagiHandlers.getStack().getFirst(Entity.class).ifPresent(entity -> {
-                if (((IEntity) entity).hasOwner()) {
-                    ((IEntity) e).setOwner(((IEntity) entity).getOwner());
-                }
-            });
-        } else if (MagiHandlers.getStack().ignorePhase || e instanceof EntityItem || e instanceof EntityLiving || e instanceof EntityFallingBlock) {
-            // ignore, for now
-        }
+        EntityHelper.checkEntity(e);
     }
 
     @Inject(method = "tick", at = @At("HEAD"))
