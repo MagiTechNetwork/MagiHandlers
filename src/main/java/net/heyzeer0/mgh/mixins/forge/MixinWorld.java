@@ -46,9 +46,9 @@ public abstract class MixinWorld {
         }
     }
 
-    @Inject(method = "onEntityAdded", at = @At(value = "RETURN"))
+    @Inject(method = "onEntityAdded", at = @At(value = "HEAD"))
     public void onEntitySpawn1(Entity e, CallbackInfo cir) {
-        EntityHelper.checkEntity(e);
+        e = EntityHelper.checkEntity(e);
     }
 
     @Inject(method = "tick", at = @At("HEAD"))

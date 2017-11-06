@@ -14,19 +14,23 @@ import net.minecraft.tileentity.TileEntity;
  */
 public class EntityHelper {
 
-    public static void checkEntity(Entity e) {
+    public static Entity checkEntity(Entity e) {
         if (MagiHandlers.getStack().getFirst(TileEntity.class).isPresent()) {
             ((IEntity)e).setOwner(((ITileEntityOwnable)MagiHandlers.getStack().getFirst(TileEntity.class).get()).getFakePlayer());
+            return e;
         } else if (MagiHandlers.getStack().getFirst(Entity.class).isPresent()) {
-            IEntity entity = (IEntity)MagiHandlers.getStack().getFirst(Entity.class).get();
-            if (entity.hasOwner()) {
-                entity.setOwner(entity.getOwner());
+            IEntity mm = (IEntity)MagiHandlers.getStack().getFirst(Entity.class).get();
+            if (mm.hasOwner()) {
+                ((IEntity)e).setOwner(mm.getOwner());
             }
+            return e;
         } else if (MagiHandlers.getStack().getFirst(EntityPlayer.class).isPresent()) {
             ((IEntity)e).setOwner(MagiHandlers.getStack().getFirst(EntityPlayer.class).get());
+            return e;
         } else if (MagiHandlers.getStack().ignorePhase || e instanceof EntityItem || e instanceof EntityLiving || e instanceof EntityFallingBlock) {
             // ignore, for now
         }
+        return e;
     }
 
 }
