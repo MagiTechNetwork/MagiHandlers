@@ -21,7 +21,9 @@ public abstract class MixinTileSpreader implements ITileEntityOwnable {
 
     @Redirect(method = "tryShootBurst", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;spawnEntityInWorld(Lnet/minecraft/entity/Entity;)Z"))
     private boolean onSpawnEntity(World world, Entity entity) {
-        if (entity instanceof EntityThrowable) ((IEntityThrowable)entity).setThrower(getFakePlayer());
+        if (entity instanceof EntityThrowable) {
+            ((IEntityThrowable)entity).setThrower(getFakePlayer());
+        }
         return world.spawnEntityInWorld(entity);
     }
 
