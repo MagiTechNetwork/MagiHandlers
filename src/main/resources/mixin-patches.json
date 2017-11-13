@@ -143,5 +143,10 @@
     "name": "ComputerCraft",
     "file": "ComputerCraft1.75.jar",
     "mixin": "mixins/mixin-computercraft.json"
+  },
+  {
+    "name": "Funky Locomotion",
+    "file": "funky-locomotion-1.7.10-beta-7.jar",
+    "mixin": "mixins/mixin-funkylocomotion.json"
   }
 ]
