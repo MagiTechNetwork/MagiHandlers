@@ -8,7 +8,8 @@
     "MixinChunkManager",
     "MixinBlockMachine",
     "MixinTileEntityDigitalMiner",
-    "MixinEntityRobit"
+    "MixinEntityRobit",
+    "MixinChargeUtils"
   ],
   "server": [],
   "client": [],
