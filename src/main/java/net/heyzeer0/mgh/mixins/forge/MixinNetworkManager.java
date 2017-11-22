@@ -24,10 +24,10 @@ public abstract class MixinNetworkManager {
                 MagiHandlers.getStack().push(packetPlayer);
                 packet.processPacket(handler);
                 MagiHandlers.getStack().remove(packetPlayer);
-            } else {
-                packet.processPacket(handler);
+                return;
             }
         }
+        packet.processPacket(handler);
     }
 
 }
