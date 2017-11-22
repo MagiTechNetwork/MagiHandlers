@@ -14,12 +14,12 @@
   <component name="McpModuleSettings">
     <option name="mappingFiles">
       <set>
-        <option value="C:\Users\HeyZeer0\.gradle\caches\minecraft\net\minecraftforge\forge\1.7.10-10.13.4.1614-1.7.10\srgs\mcp-notch.srg" />
-        <option value="C:\Users\HeyZeer0\.gradle\caches\minecraft\net\minecraftforge\forge\1.7.10-10.13.4.1614-1.7.10\srgs\mcp-srg.srg" />
-        <option value="C:\Users\HeyZeer0\.gradle\caches\minecraft\net\minecraftforge\forge\1.7.10-10.13.4.1614-1.7.10\srgs\mcp.exc" />
-        <option value="C:\Users\HeyZeer0\.gradle\caches\minecraft\net\minecraftforge\forge\1.7.10-10.13.4.1614-1.7.10\srgs\notch-mcp.srg" />
-        <option value="C:\Users\HeyZeer0\.gradle\caches\minecraft\net\minecraftforge\forge\1.7.10-10.13.4.1614-1.7.10\srgs\notch-srg.srg" />
-        <option value="C:\Users\HeyZeer0\.gradle\caches\minecraft\net\minecraftforge\forge\1.7.10-10.13.4.1614-1.7.10\srgs\srg.exc" />
+        <option value="C:\Users\JEPlast\.gradle\caches\minecraft\net\minecraftforge\forge\1.7.10-10.13.4.1614-1.7.10\srgs\mcp-notch.srg" />
+        <option value="C:\Users\JEPlast\.gradle\caches\minecraft\net\minecraftforge\forge\1.7.10-10.13.4.1614-1.7.10\srgs\mcp-srg.srg" />
+        <option value="C:\Users\JEPlast\.gradle\caches\minecraft\net\minecraftforge\forge\1.7.10-10.13.4.1614-1.7.10\srgs\mcp.exc" />
+        <option value="C:\Users\JEPlast\.gradle\caches\minecraft\net\minecraftforge\forge\1.7.10-10.13.4.1614-1.7.10\srgs\notch-mcp.srg" />
+        <option value="C:\Users\JEPlast\.gradle\caches\minecraft\net\minecraftforge\forge\1.7.10-10.13.4.1614-1.7.10\srgs\notch-srg.srg" />
+        <option value="C:\Users\JEPlast\.gradle\caches\minecraft\net\minecraftforge\forge\1.7.10-10.13.4.1614-1.7.10\srgs\srg.exc" />
       </set>
     </option>
     <option name="mcpVersion" value="null_-1" />
@@ -42,66 +42,66 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.google.code.gson:gson:2.8.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: :forgeSrc:1.7.10-10.13.4.1614-1.7.10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: net.minecraft:launchwrapper:1.12" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.google.code.findbugs:jsr305:1.3.9" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.ow2.asm:asm-debug-all:5.0.3" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.typesafe.akka:akka-actor_2.11:2.3.3" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.typesafe:config:1.2.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.scala-lang:scala-actors-migration_2.11:1.1.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.scala-lang:scala-compiler:2.11.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.scala-lang.plugins:scala-continuations-library_2.11:1.0.2" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.scala-lang.plugins:scala-continuations-plugin_2.11.1:1.0.2" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.scala-lang:scala-library:2.11.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.scala-lang:scala-parser-combinators_2.11:1.0.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.scala-lang:scala-reflect:2.11.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.scala-lang:scala-swing_2.11:1.0.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.scala-lang:scala-xml_2.11:1.0.2" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: net.sf.jopt-simple:jopt-simple:4.5" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: lzma:lzma:0.0.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.mojang:realms:1.3.5" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.apache.commons:commons-compress:1.8.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.apache.httpcomponents:httpclient:4.3.3" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: commons-logging:commons-logging:1.1.3" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.apache.httpcomponents:httpcore:4.3.2" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: java3d:vecmath:1.3.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: net.sf.trove4j:trove4j:3.0.3" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.ibm.icu:icu4j-core-mojang:51.2" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.paulscode:codecjorbis:20101023" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.paulscode:codecwav:20101023" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.paulscode:libraryjavasound:20101123" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.paulscode:librarylwjglopenal:20100824" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.paulscode:soundsystem:20120107" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: io.netty:netty-all:4.0.10.Final" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.google.guava:guava:17.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.apache.commons:commons-lang3:3.3.2" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: commons-io:commons-io:2.4" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: commons-codec:commons-codec:1.9" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: net.java.jinput:jinput:2.0.5" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: net.java.jutils:jutils:1.0.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.mojang:authlib:1.5.16" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.apache.logging.log4j:log4j-api:2.0-beta9" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.apache.logging.log4j:log4j-core:2.0-beta9" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.lwjgl.lwjgl:lwjgl:2.9.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.lwjgl.lwjgl:lwjgl_util:2.9.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: tv.twitch:twitch:5.16" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.spongepowered:mixin:0.6.11-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.scala-lang:scala-actors:2.11.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.scala-lang.modules:scala-xml_2.11:1.0.2" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.scala-lang.modules:scala-parser-combinators_2.11:1.0.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: net.java.jinput:jinput-platform:2.0.5:natives-linux" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: net.java.jinput:jinput-platform:2.0.5:natives-windows" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: net.java.jinput:jinput-platform:2.0.5:natives-osx" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: tv.twitch:twitch-platform:5.16:natives-windows-32" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: tv.twitch:twitch-platform:5.16:natives-windows-64" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: tv.twitch:twitch-platform:5.16:natives-osx" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: tv.twitch:twitch-external-platform:4.5:natives-windows-32" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: tv.twitch:twitch-external-platform:4.5:natives-windows-64" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:2.9.1:natives-windows" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:2.9.1:natives-linux" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:2.9.1:natives-osx" level="project" />
-    <orderEntry type="module-library" scope="PROVIDED">
+    <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.8.0" level="project" />
+    <orderEntry type="library" name="Gradle: :forgeSrc:1.7.10-10.13.4.1614-1.7.10" level="project" />
+    <orderEntry type="library" name="Gradle: net.minecraft:launchwrapper:1.12" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.code.findbugs:jsr305:1.3.9" level="project" />
+    <orderEntry type="library" name="Gradle: org.ow2.asm:asm-debug-all:5.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: com.typesafe.akka:akka-actor_2.11:2.3.3" level="project" />
+    <orderEntry type="library" name="Gradle: com.typesafe:config:1.2.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.scala-lang:scala-actors-migration_2.11:1.1.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.scala-lang:scala-compiler:2.11.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.scala-lang.plugins:scala-continuations-library_2.11:1.0.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.scala-lang.plugins:scala-continuations-plugin_2.11.1:1.0.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.scala-lang:scala-library:2.11.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.scala-lang:scala-parser-combinators_2.11:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.scala-lang:scala-reflect:2.11.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.scala-lang:scala-swing_2.11:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.scala-lang:scala-xml_2.11:1.0.2" level="project" />
+    <orderEntry type="library" name="Gradle: net.sf.jopt-simple:jopt-simple:4.5" level="project" />
+    <orderEntry type="library" name="Gradle: lzma:lzma:0.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: com.mojang:realms:1.3.5" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.commons:commons-compress:1.8.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.httpcomponents:httpclient:4.3.3" level="project" />
+    <orderEntry type="library" name="Gradle: commons-logging:commons-logging:1.1.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.httpcomponents:httpcore:4.3.2" level="project" />
+    <orderEntry type="library" name="Gradle: java3d:vecmath:1.3.1" level="project" />
+    <orderEntry type="library" name="Gradle: net.sf.trove4j:trove4j:3.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: com.ibm.icu:icu4j-core-mojang:51.2" level="project" />
+    <orderEntry type="library" name="Gradle: com.paulscode:codecjorbis:20101023" level="project" />
+    <orderEntry type="library" name="Gradle: com.paulscode:codecwav:20101023" level="project" />
+    <orderEntry type="library" name="Gradle: com.paulscode:libraryjavasound:20101123" level="project" />
+    <orderEntry type="library" name="Gradle: com.paulscode:librarylwjglopenal:20100824" level="project" />
+    <orderEntry type="library" name="Gradle: com.paulscode:soundsystem:20120107" level="project" />
+    <orderEntry type="library" name="Gradle: io.netty:netty-all:4.0.10.Final" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.guava:guava:17.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.commons:commons-lang3:3.3.2" level="project" />
+    <orderEntry type="library" name="Gradle: commons-io:commons-io:2.4" level="project" />
+    <orderEntry type="library" name="Gradle: commons-codec:commons-codec:1.9" level="project" />
+    <orderEntry type="library" name="Gradle: net.java.jinput:jinput:2.0.5" level="project" />
+    <orderEntry type="library" name="Gradle: net.java.jutils:jutils:1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.mojang:authlib:1.5.16" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.logging.log4j:log4j-api:2.0-beta9" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.logging.log4j:log4j-core:2.0-beta9" level="project" />
+    <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl:2.9.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl_util:2.9.1" level="project" />
+    <orderEntry type="library" name="Gradle: tv.twitch:twitch:5.16" level="project" />
+    <orderEntry type="library" name="Gradle: org.spongepowered:mixin:0.6.11-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Gradle: org.scala-lang:scala-actors:2.11.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.scala-lang.modules:scala-xml_2.11:1.0.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.scala-lang.modules:scala-parser-combinators_2.11:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: net.java.jinput:jinput-platform:2.0.5:natives-linux" level="project" />
+    <orderEntry type="library" name="Gradle: net.java.jinput:jinput-platform:2.0.5:natives-windows" level="project" />
+    <orderEntry type="library" name="Gradle: net.java.jinput:jinput-platform:2.0.5:natives-osx" level="project" />
+    <orderEntry type="library" name="Gradle: tv.twitch:twitch-platform:5.16:natives-windows-32" level="project" />
+    <orderEntry type="library" name="Gradle: tv.twitch:twitch-platform:5.16:natives-windows-64" level="project" />
+    <orderEntry type="library" name="Gradle: tv.twitch:twitch-platform:5.16:natives-osx" level="project" />
+    <orderEntry type="library" name="Gradle: tv.twitch:twitch-external-platform:4.5:natives-windows-32" level="project" />
+    <orderEntry type="library" name="Gradle: tv.twitch:twitch-external-platform:4.5:natives-windows-64" level="project" />
+    <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:2.9.1:natives-windows" level="project" />
+    <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:2.9.1:natives-linux" level="project" />
+    <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:2.9.1:natives-osx" level="project" />
+    <orderEntry type="module-library">
       <library name="Gradle: avaritia">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/avaritia.jar!/" />
@@ -110,7 +110,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" scope="PROVIDED">
+    <orderEntry type="module-library">
       <library name="Gradle: betterquesting">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/betterquesting.jar!/" />
@@ -119,7 +119,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" scope="PROVIDED">
+    <orderEntry type="module-library">
       <library name="Gradle: bloodmagic">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/bloodmagic.jar!/" />
@@ -128,7 +128,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" scope="PROVIDED">
+    <orderEntry type="module-library">
       <library name="Gradle: botania">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/botania.jar!/" />
@@ -137,7 +137,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" scope="PROVIDED">
+    <orderEntry type="module-library">
       <library name="Gradle: buildcraft">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/buildcraft.jar!/" />
@@ -146,7 +146,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" scope="PROVIDED">
+    <orderEntry type="module-library">
       <library name="Gradle: cofhcore">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/cofhcore.jar!/" />
@@ -155,7 +155,16 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" scope="PROVIDED">
+    <orderEntry type="module-library">
+      <library name="Gradle: computercraft">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../libs/computercraft.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
       <library name="Gradle: draconicevolution">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/draconicevolution.jar!/" />
@@ -164,7 +173,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" scope="PROVIDED">
+    <orderEntry type="module-library">
       <library name="Gradle: exastris">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/exastris.jar!/" />
@@ -173,7 +182,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" scope="PROVIDED">
+    <orderEntry type="module-library">
       <library name="Gradle: extrautilities">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/extrautilities.jar!/" />
@@ -182,7 +191,16 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" scope="PROVIDED">
+    <orderEntry type="module-library">
+      <library name="Gradle: funkylocomotion">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../libs/funkylocomotion.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
       <library name="Gradle: industrialcraft">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/industrialcraft.jar!/" />
@@ -191,7 +209,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" scope="PROVIDED">
+    <orderEntry type="module-library">
       <library name="Gradle: magicalcrops">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/magicalcrops.jar!/" />
@@ -200,7 +218,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" scope="PROVIDED">
+    <orderEntry type="module-library">
       <library name="Gradle: mekanism">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/mekanism.jar!/" />
@@ -209,7 +227,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" scope="PROVIDED">
+    <orderEntry type="module-library">
       <library name="Gradle: mfr">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/mfr.jar!/" />
@@ -218,7 +236,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" scope="PROVIDED">
+    <orderEntry type="module-library">
       <library name="Gradle: openblocks">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/openblocks.jar!/" />
@@ -227,7 +245,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" scope="PROVIDED">
+    <orderEntry type="module-library">
       <library name="Gradle: openmods">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/openmods.jar!/" />
@@ -236,7 +254,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" scope="PROVIDED">
+    <orderEntry type="module-library">
       <library name="Gradle: spigot">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/spigot.jar!/" />
@@ -245,7 +263,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" scope="PROVIDED">
+    <orderEntry type="module-library">
       <library name="Gradle: storagedrawers">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/storagedrawers.jar!/" />
@@ -254,7 +272,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" scope="PROVIDED">
+    <orderEntry type="module-library">
       <library name="Gradle: thaumcraft">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/thaumcraft.jar!/" />
@@ -263,7 +281,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" scope="PROVIDED">
+    <orderEntry type="module-library">
       <library name="Gradle: thaumictinkerer">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/thaumictinkerer.jar!/" />
@@ -272,7 +290,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" scope="PROVIDED">
+    <orderEntry type="module-library">
       <library name="Gradle: thermalexpansion">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/thermalexpansion.jar!/" />
@@ -281,7 +299,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" scope="PROVIDED">
+    <orderEntry type="module-library">
       <library name="Gradle: tslots">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/tslots.jar!/" />
@@ -290,7 +308,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" scope="PROVIDED">
+    <orderEntry type="module-library">
       <library name="Gradle: wirelessredstone">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/wirelessredstone.jar!/" />
@@ -299,273 +317,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" scope="PROVIDED">
-      <library name="Gradle: witchery">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/witchery.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.google.code.gson:gson:2.8.0" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: :forgeSrc:1.7.10-10.13.4.1614-1.7.10" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: net.minecraft:launchwrapper:1.12" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.google.code.findbugs:jsr305:1.3.9" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.ow2.asm:asm-debug-all:5.0.3" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.typesafe.akka:akka-actor_2.11:2.3.3" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.typesafe:config:1.2.1" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.scala-lang:scala-actors-migration_2.11:1.1.0" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.scala-lang:scala-compiler:2.11.1" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.scala-lang.plugins:scala-continuations-library_2.11:1.0.2" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.scala-lang.plugins:scala-continuations-plugin_2.11.1:1.0.2" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.scala-lang:scala-library:2.11.1" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.scala-lang:scala-parser-combinators_2.11:1.0.1" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.scala-lang:scala-reflect:2.11.1" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.scala-lang:scala-swing_2.11:1.0.1" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.scala-lang:scala-xml_2.11:1.0.2" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: net.sf.jopt-simple:jopt-simple:4.5" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: lzma:lzma:0.0.1" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.mojang:realms:1.3.5" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.apache.commons:commons-compress:1.8.1" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.apache.httpcomponents:httpclient:4.3.3" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: commons-logging:commons-logging:1.1.3" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.apache.httpcomponents:httpcore:4.3.2" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: java3d:vecmath:1.3.1" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: net.sf.trove4j:trove4j:3.0.3" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.ibm.icu:icu4j-core-mojang:51.2" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.paulscode:codecjorbis:20101023" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.paulscode:codecwav:20101023" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.paulscode:libraryjavasound:20101123" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.paulscode:librarylwjglopenal:20100824" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.paulscode:soundsystem:20120107" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: io.netty:netty-all:4.0.10.Final" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.google.guava:guava:17.0" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.apache.commons:commons-lang3:3.3.2" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: commons-io:commons-io:2.4" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: commons-codec:commons-codec:1.9" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: net.java.jinput:jinput:2.0.5" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: net.java.jutils:jutils:1.0.0" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.mojang:authlib:1.5.16" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.apache.logging.log4j:log4j-api:2.0-beta9" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.apache.logging.log4j:log4j-core:2.0-beta9" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.lwjgl.lwjgl:lwjgl:2.9.1" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.lwjgl.lwjgl:lwjgl_util:2.9.1" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: tv.twitch:twitch:5.16" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.spongepowered:mixin:0.6.11-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.scala-lang:scala-actors:2.11.0" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.scala-lang.modules:scala-xml_2.11:1.0.2" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.scala-lang.modules:scala-parser-combinators_2.11:1.0.1" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: net.java.jinput:jinput-platform:2.0.5:natives-linux" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: net.java.jinput:jinput-platform:2.0.5:natives-windows" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: net.java.jinput:jinput-platform:2.0.5:natives-osx" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: tv.twitch:twitch-platform:5.16:natives-windows-32" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: tv.twitch:twitch-platform:5.16:natives-windows-64" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: tv.twitch:twitch-platform:5.16:natives-osx" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: tv.twitch:twitch-external-platform:4.5:natives-windows-32" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: tv.twitch:twitch-external-platform:4.5:natives-windows-64" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:2.9.1:natives-windows" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:2.9.1:natives-linux" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:2.9.1:natives-osx" level="project" />
-    <orderEntry type="module-library" scope="RUNTIME">
-      <library name="Gradle: avaritia">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/avaritia.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="RUNTIME">
-      <library name="Gradle: betterquesting">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/betterquesting.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="RUNTIME">
-      <library name="Gradle: bloodmagic">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/bloodmagic.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="RUNTIME">
-      <library name="Gradle: botania">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/botania.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="RUNTIME">
-      <library name="Gradle: buildcraft">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/buildcraft.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="RUNTIME">
-      <library name="Gradle: cofhcore">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/cofhcore.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="RUNTIME">
-      <library name="Gradle: draconicevolution">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/draconicevolution.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="RUNTIME">
-      <library name="Gradle: exastris">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/exastris.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="RUNTIME">
-      <library name="Gradle: extrautilities">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/extrautilities.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="RUNTIME">
-      <library name="Gradle: industrialcraft">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/industrialcraft.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="RUNTIME">
-      <library name="Gradle: magicalcrops">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/magicalcrops.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="RUNTIME">
-      <library name="Gradle: mekanism">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/mekanism.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="RUNTIME">
-      <library name="Gradle: mfr">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/mfr.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="RUNTIME">
-      <library name="Gradle: openblocks">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/openblocks.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="RUNTIME">
-      <library name="Gradle: openmods">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/openmods.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="RUNTIME">
-      <library name="Gradle: spigot">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/spigot.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="RUNTIME">
-      <library name="Gradle: storagedrawers">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/storagedrawers.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="RUNTIME">
-      <library name="Gradle: thaumcraft">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/thaumcraft.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="RUNTIME">
-      <library name="Gradle: thaumictinkerer">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/thaumictinkerer.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="RUNTIME">
-      <library name="Gradle: thermalexpansion">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/thermalexpansion.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="RUNTIME">
-      <library name="Gradle: tslots">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/tslots.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="RUNTIME">
-      <library name="Gradle: wirelessredstone">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/wirelessredstone.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="RUNTIME">
+    <orderEntry type="module-library">
       <library name="Gradle: witchery">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/witchery.jar!/" />
@@ -583,280 +335,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" scope="TEST" name="Gradle: com.google.code.gson:gson:2.8.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: :forgeSrc:1.7.10-10.13.4.1614-1.7.10" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: net.minecraft:launchwrapper:1.12" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: com.google.code.findbugs:jsr305:1.3.9" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.ow2.asm:asm-debug-all:5.0.3" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: com.typesafe.akka:akka-actor_2.11:2.3.3" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: com.typesafe:config:1.2.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.scala-lang:scala-actors-migration_2.11:1.1.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.scala-lang:scala-compiler:2.11.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.scala-lang.plugins:scala-continuations-library_2.11:1.0.2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.scala-lang.plugins:scala-continuations-plugin_2.11.1:1.0.2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.scala-lang:scala-library:2.11.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.scala-lang:scala-parser-combinators_2.11:1.0.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.scala-lang:scala-reflect:2.11.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.scala-lang:scala-swing_2.11:1.0.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.scala-lang:scala-xml_2.11:1.0.2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: net.sf.jopt-simple:jopt-simple:4.5" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: lzma:lzma:0.0.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: com.mojang:realms:1.3.5" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.apache.commons:commons-compress:1.8.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.apache.httpcomponents:httpclient:4.3.3" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: commons-logging:commons-logging:1.1.3" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.apache.httpcomponents:httpcore:4.3.2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: java3d:vecmath:1.3.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: net.sf.trove4j:trove4j:3.0.3" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: com.ibm.icu:icu4j-core-mojang:51.2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: com.paulscode:codecjorbis:20101023" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: com.paulscode:codecwav:20101023" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: com.paulscode:libraryjavasound:20101123" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: com.paulscode:librarylwjglopenal:20100824" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: com.paulscode:soundsystem:20120107" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: io.netty:netty-all:4.0.10.Final" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: com.google.guava:guava:17.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.apache.commons:commons-lang3:3.3.2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: commons-io:commons-io:2.4" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: commons-codec:commons-codec:1.9" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: net.java.jinput:jinput:2.0.5" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: net.java.jutils:jutils:1.0.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: com.mojang:authlib:1.5.16" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.apache.logging.log4j:log4j-api:2.0-beta9" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.apache.logging.log4j:log4j-core:2.0-beta9" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.lwjgl.lwjgl:lwjgl:2.9.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.lwjgl.lwjgl:lwjgl_util:2.9.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: tv.twitch:twitch:5.16" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.spongepowered:mixin:0.6.11-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.scala-lang:scala-actors:2.11.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.scala-lang.modules:scala-xml_2.11:1.0.2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.scala-lang.modules:scala-parser-combinators_2.11:1.0.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: net.java.jinput:jinput-platform:2.0.5:natives-linux" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: net.java.jinput:jinput-platform:2.0.5:natives-windows" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: net.java.jinput:jinput-platform:2.0.5:natives-osx" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: tv.twitch:twitch-platform:5.16:natives-windows-32" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: tv.twitch:twitch-platform:5.16:natives-windows-64" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: tv.twitch:twitch-platform:5.16:natives-osx" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: tv.twitch:twitch-external-platform:4.5:natives-windows-32" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: tv.twitch:twitch-external-platform:4.5:natives-windows-64" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:2.9.1:natives-windows" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:2.9.1:natives-linux" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:2.9.1:natives-osx" level="project" />
-    <orderEntry type="module-library" scope="TEST">
-      <library name="Gradle: avaritia">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/avaritia.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library name="Gradle: betterquesting">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/betterquesting.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library name="Gradle: bloodmagic">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/bloodmagic.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library name="Gradle: botania">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/botania.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library name="Gradle: buildcraft">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/buildcraft.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library name="Gradle: cofhcore">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/cofhcore.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library name="Gradle: draconicevolution">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/draconicevolution.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library name="Gradle: exastris">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/exastris.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library name="Gradle: extrautilities">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/extrautilities.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library name="Gradle: industrialcraft">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/industrialcraft.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library name="Gradle: magicalcrops">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/magicalcrops.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library name="Gradle: mekanism">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/mekanism.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library name="Gradle: mfr">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/mfr.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library name="Gradle: openblocks">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/openblocks.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library name="Gradle: openmods">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/openmods.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library name="Gradle: spigot">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/spigot.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library name="Gradle: storagedrawers">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/storagedrawers.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library name="Gradle: thaumcraft">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/thaumcraft.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library name="Gradle: thaumictinkerer">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/thaumictinkerer.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library name="Gradle: thermalexpansion">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/thermalexpansion.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library name="Gradle: tslots">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/tslots.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library name="Gradle: wirelessredstone">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/wirelessredstone.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library name="Gradle: witchery">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/witchery.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library>
-        <CLASSES>
-          <root url="file://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.4.1614-1.7.10/start" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.projectlombok:lombok:1.16.16" level="project" />
   </component>
 </module>

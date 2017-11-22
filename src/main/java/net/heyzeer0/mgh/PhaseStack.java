@@ -10,11 +10,6 @@ public class PhaseStack {
 
     private Deque<Object> phaseStack = new ArrayDeque<>(16);
 
-    @SuppressWarnings("unchecked")
-    public <T> List<T> getFrom(Class<T> c) {
-        return (List<T>) phaseStack.stream().filter(c::isInstance).collect(Collectors.toList());
-    }
-
     public void push(Object o) {
         phaseStack.addFirst(o);
     }
@@ -26,10 +21,6 @@ public class PhaseStack {
 
     public boolean remove(Object o) {
         return phaseStack.remove(o);
-    }
-
-    public Deque<Object> raw() {
-        return phaseStack;
     }
 
     public boolean ignorePhase = false;

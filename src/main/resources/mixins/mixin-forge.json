@@ -17,7 +17,8 @@
     "MixinExplosionEvent",
     "MixinEntity",
     "MixinForgeHooks",
-    "MixinExplosion"
+    "MixinExplosion",
+    "MixinNetworkManager"
   ],
   "server": [],
   "client": [],
