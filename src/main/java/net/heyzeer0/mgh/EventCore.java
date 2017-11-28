@@ -106,16 +106,6 @@ public class EventCore {
         }
     }
 
-    /*@SubscribeEvent(priority = EventPriority.HIGHEST)
-    public void onExplosionPre(ExplosionEvent.Start event) {
-        org.bukkit.entity.Entity exploder = Bukkit.getWorld(event.world.getSaveHandler().getWorldDirectoryName()).getEntities().stream().filter(e -> e.getUniqueId() == event.explosion.exploder.getUniqueID()).findFirst().orElse(null);
-        if (exploder != null) {
-            EntityExplodeEvent e = new EntityExplodeEvent(exploder, new Location(Bukkit.getWorld(event.world.getSaveHandler().getWorldDirectoryName()), event.explosion.explosionX, event.explosion.explosionY, event.explosion.explosionZ), new ArrayList<>(), event.explosion.explosionSize);
-            Bukkit.getPluginManager().callEvent(e);
-            if (e.isCancelled()) event.setCanceled(true);
-        }
-    }*/
-
     //Debugs
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
