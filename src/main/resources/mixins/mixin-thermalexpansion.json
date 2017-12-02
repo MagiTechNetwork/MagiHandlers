@@ -4,7 +4,8 @@
   "mixins":[
     "MixinEntityFlorb",
     "MixinTileAssembler",
-    "MixinItemIgniter"
+    "MixinItemIgniter",
+    "MixinTileInventory"
   ],
   "server": [],
   "client": [],
