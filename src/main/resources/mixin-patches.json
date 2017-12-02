@@ -143,5 +143,10 @@
     "name": "Funky Locomotion",
     "file": "funky-locomotion-1.7.10-beta-7.jar",
     "mixin": "mixins/mixin-funkylocomotion.json"
+  },
+  {
+    "name": "Ender Storage",
+    "file": "EnderStorage-1.7.10-1.4.7.37-universal.jar",
+    "mixin": "mixins/mixin-enderstorage.json"
   }
 ]
