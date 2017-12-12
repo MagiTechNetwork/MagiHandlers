@@ -79,7 +79,7 @@ dependencies {
         exclude module: 'launchwrapper'
         exclude module: 'guava'
     }
-    compileOnly fileTree(dir: 'libs', include: ['*.jar'])
+    compileOnly fileTree(dir: 'lib', include: ['*.jar'])
     compile 'com.google.code.gson:gson:2.8.0'
     compileOnly 'org.projectlombok:lombok:1.16.16'
 }
