@@ -9,7 +9,6 @@ import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.world.BlockEvent;
 
-
 /**
  * Created by HeyZeer0 on 01/05/2017.
  * Copyright © HeyZeer0 - 2016

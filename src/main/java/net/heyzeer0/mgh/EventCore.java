@@ -42,7 +42,6 @@ import java.util.UUID;
 public class EventCore {
 
     //trophyslots slots fix
-
     @SubscribeEvent
     public void join(EntityJoinWorldEvent e) {
         if(e.entity instanceof EntityPlayer) {
@@ -53,7 +52,6 @@ public class EventCore {
     }
 
     //witchery vampire death fix
-
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void hitVampire(LivingHurtEvent e) {
         if(Loader.isModLoaded("witchery")) {
