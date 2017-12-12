@@ -88,10 +88,15 @@ jar {
     from project.mixinRefMap
 
     manifest {
-        attributes 'FMLCorePlugin': 'net.heyzeer0.mgh.MagiCore',
-                   'FMLCorePluginContainsFMLMod': 'true',
-                   'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
-                   'TweakOrder': '0'
+        if (!gradle.startParameter.getTaskNames().contains("runServer")) {
+            attributes 'FMLCorePlugin': 'net.heyzeer0.mgh.MagiCore',
+                    'FMLCorePluginContainsFMLMod': 'true',
+                    'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
+                    'TweakOrder': '0'
+        } else {
+            attributes 'FMLCorePlugin': 'net.heyzeer0.mgh.MagiCore',
+            'FMLCorePluginContainsFMLMod': 'true'
+        }
     }
 
     configurations.shade.each { dep ->

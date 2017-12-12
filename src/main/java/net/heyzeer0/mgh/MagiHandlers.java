@@ -8,15 +8,14 @@ import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.heyzeer0.mgh.hacks.ITileEntityOwnable;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+
 
 /**
  * Created by HeyZeer0 on 08/03/2017.
@@ -27,6 +26,7 @@ public class MagiHandlers extends DummyModContainer {
     public static MagiHandlers instance;
     private PhaseStack stack;
     public List<Runnable> tasks;
+    public static boolean isCauldron = false;
     
     public MagiHandlers() {
         super(new ModMetadata());
@@ -36,6 +36,10 @@ public class MagiHandlers extends DummyModContainer {
         metadata.modId = "MagiHandlers";
         metadata.version = "1.0";
         this.tasks = new CopyOnWriteArrayList<>();
+        try {
+            Class.forName("thermos.Thermos");
+            isCauldron = true;
+        } catch (Exception e) {}
     }
 
     @Override
@@ -70,12 +74,9 @@ public class MagiHandlers extends DummyModContainer {
     }
 
     public static void scheduleTileCheck(EntityPlayer player, World world, int x, int y, int z) {
-        instance.tasks.add(new Runnable() {
-            @Override
-            public void run() {
-                ITileEntityOwnable tile = (ITileEntityOwnable) world.getTileEntity(x, y, z);
-                if (tile != null) tile.setPlayer(player);
-            }
+        instance.tasks.add(() -> {
+            ITileEntityOwnable tile = (ITileEntityOwnable) world.getTileEntity(x, y, z);
+            if (tile != null) tile.setPlayer(player);
         });
     }
 

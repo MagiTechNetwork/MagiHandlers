@@ -29,9 +29,6 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.event.block.BlockBreakEvent;
 
 import java.util.UUID;
 
@@ -76,12 +73,8 @@ public class EventCore {
     public void onDrawerBreak(BlockEvent.BreakEvent event) {
         // Fire bukkit events
         UUID playerUUID = event.getPlayer().getUniqueID();
-        Player p = Bukkit.getPlayer(playerUUID);
-        if (p == null) p = Bukkit.getOfflinePlayer(playerUUID).getPlayer();
-        if (p != null) {
-            BlockBreakEvent e = new BlockBreakEvent(p.getWorld().getBlockAt(event.x, event.y, event.z), p);
-            Bukkit.getPluginManager().callEvent(e);
-            if (e.isCancelled()) event.setCanceled(true);
+        if (MagiHandlers.isCauldron) {
+            BukkitEventHandlers.checkBukkitPermission(event);
         }
 
         // Storage drawers logic

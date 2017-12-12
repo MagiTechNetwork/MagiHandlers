@@ -101,249 +101,6 @@
     <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:2.9.1:natives-windows" level="project" />
     <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:2.9.1:natives-linux" level="project" />
     <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:2.9.1:natives-osx" level="project" />
-    <orderEntry type="module-library">
-      <library name="Gradle: avaritia">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/avaritia.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: betterquesting">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/betterquesting.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: bloodmagic">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/bloodmagic.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: botania">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/botania.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: buildcraft">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/buildcraft.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: cofhcore">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/cofhcore.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: computercraft">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/computercraft.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: draconicevolution">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/draconicevolution.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: enderstorage">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/enderstorage.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: exastris">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/exastris.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: extrautilities">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/extrautilities.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: funkylocomotion">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/funkylocomotion.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: ie">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/ie.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: industrialcraft">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/industrialcraft.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: magicalcrops">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/magicalcrops.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: mekanism">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/mekanism.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: mfr">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/mfr.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: openblocks">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/openblocks.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: openmods">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/openmods.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: spigot">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/spigot.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: storagedrawers">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/storagedrawers.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: thaumcraft">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/thaumcraft.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: thaumictinkerer">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/thaumictinkerer.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: thermalexpansion">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/thermalexpansion.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: tslots">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/tslots.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: wirelessredstone">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/wirelessredstone.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: witchery">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/witchery.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
     <orderEntry type="module-library" scope="RUNTIME">
       <library>
         <CLASSES>
@@ -354,5 +111,239 @@
       </library>
     </orderEntry>
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.projectlombok:lombok:1.16.16" level="project" />
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: avaritia">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/avaritia.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: betterquesting">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/betterquesting.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: bloodmagic">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/bloodmagic.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: botania">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/botania.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: buildcraft">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/buildcraft.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: cofhcore">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/cofhcore.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: computercraft">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/computercraft.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: draconicevolution">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/draconicevolution.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: enderstorage">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/enderstorage.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: exastris">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/exastris.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: extrautilities">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/extrautilities.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: funkylocomotion">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/funkylocomotion.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: industrialcraft">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/industrialcraft.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: magicalcrops">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/magicalcrops.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: mekanism">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/mekanism.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: mfr">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/mfr.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: openblocks">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/openblocks.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: openmods">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/openmods.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: spigot">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/spigot.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: storagedrawers">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/storagedrawers.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: thaumcraft">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/thaumcraft.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: thaumictinkerer">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/thaumictinkerer.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: thermalexpansion">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/thermalexpansion.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: tslots">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/tslots.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: wirelessredstone">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/wirelessredstone.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: witchery">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/witchery.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

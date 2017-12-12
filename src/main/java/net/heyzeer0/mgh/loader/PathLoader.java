@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import cpw.mods.fml.relauncher.CoreModManager;
 import net.minecraft.launchwrapper.LaunchClassLoader;
 import org.apache.logging.log4j.LogManager;
+import org.spongepowered.asm.mixin.MixinEnvironment;
 import org.spongepowered.asm.mixin.Mixins;
 
 import java.io.File;
@@ -42,16 +43,35 @@ public class PathLoader {
     private List<String> loadedPatches = new ArrayList<>();
 
     public void loadPatches() throws Exception{
-        Mixins.addConfiguration("mixins/mixin-forge.json");
+        boolean isThermos = false;
+        try {
+            Class.forName("thermos.Thermos");
+            isThermos = true;
+        } catch (Exception e) {}
 
-        Patch[] patches = gson.fromJson(Resources.toString(Resources.getResource("mixin-patches.json"), Charset.forName("UTF-8")), Patch[].class);
-        for (Patch patch : patches) {
-            File modfile = new File(modFolder, patch.getFile());
-            if (modfile.exists()){
-                loadModJar(modfile);
-                Mixins.addConfiguration(patch.getMixin());
-                LogManager.getLogger().info("[MagiHandlers] Applying " + patch.getMixin() + " to " + patch.getName());
-                loadedPatches.add(patch.getName());
+        if (!isThermos) {
+            MixinEnvironment.getDefaultEnvironment().addConfiguration("mixins/mixin-forge.json");
+            Patch[] patches = gson.fromJson(Resources.toString(Resources.getResource("mixin-patches.json"), Charset.forName("UTF-8")), Patch[].class);
+            for (Patch patch : patches) {
+                File modfile = new File(modFolder, patch.getFile());
+                if (modfile.exists()) {
+                    loadModJar(modfile);
+                    MixinEnvironment.getDefaultEnvironment().addConfiguration(patch.getMixin());
+                    LogManager.getLogger().info("[MagiHandlers] Applying " + patch.getMixin() + " to " + patch.getName());
+                    loadedPatches.add(patch.getName());
+                }
+            }
+        } else {
+            Mixins.addConfiguration("mixins/mixin-forge.json");
+            Patch[] patches = gson.fromJson(Resources.toString(Resources.getResource("mixin-patches.json"), Charset.forName("UTF-8")), Patch[].class);
+            for (Patch patch : patches) {
+                File modfile = new File(modFolder, patch.getFile());
+                if (modfile.exists()) {
+                    loadModJar(modfile);
+                    Mixins.addConfiguration(patch.getMixin());
+                    LogManager.getLogger().info("[MagiHandlers] Applying " + patch.getMixin() + " to " + patch.getName());
+                    loadedPatches.add(patch.getName());
+                }
             }
         }
     }
