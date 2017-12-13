@@ -30,8 +30,6 @@ import net.minecraftforge.event.entity.player.EntityInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 
-import java.util.UUID;
-
 /**
  * Created by HeyZeer0 on 29/05/2017.
  * Copyright © HeyZeer0 - 2016
@@ -72,7 +70,6 @@ public class EventCore {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onDrawerBreak(BlockEvent.BreakEvent event) {
         // Fire bukkit events
-        UUID playerUUID = event.getPlayer().getUniqueID();
         if (MagiHandlers.isCauldron) {
             BukkitEventHandlers.checkBukkitPermission(event);
         }

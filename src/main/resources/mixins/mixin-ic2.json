@@ -3,7 +3,8 @@
   "package":"net.heyzeer0.mgh.mixins.ic2",
   "mixins":[
     "MixinTileEntityTerra",
-    "MixinEntityMiningLaser"
+    "MixinEntityMiningLaser",
+    "MixinEntityIC2Explosive"
   ],
   "server": [],
   "client": [],

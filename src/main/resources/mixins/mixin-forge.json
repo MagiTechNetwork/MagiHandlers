@@ -14,11 +14,12 @@
     "MixinBlockEvent$MixinBreakEvent",
     "MixinBlockEvent$MixinPlaceEvent",
     "MixinWorldServer",
-    "MixinExplosionEvent",
+    "MixinExplosionEventStart",
     "MixinEntity",
     "MixinForgeHooks",
     "MixinExplosion",
-    "MixinNetworkManager"
+    "MixinNetworkManager",
+    "MixinExplosionEvent"
   ],
   "server": [],
   "client": [],
