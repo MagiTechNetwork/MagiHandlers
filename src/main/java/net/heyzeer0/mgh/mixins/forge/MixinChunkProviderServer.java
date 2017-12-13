@@ -1,6 +1,6 @@
 package net.heyzeer0.mgh.mixins.forge;
 
-import net.heyzeer0.mgh.hacks.IMixinChunkProvider;
+import net.heyzeer0.mgh.api.IMixinChunkProvider;
 import net.minecraft.util.LongHashMap;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.gen.ChunkProviderServer;

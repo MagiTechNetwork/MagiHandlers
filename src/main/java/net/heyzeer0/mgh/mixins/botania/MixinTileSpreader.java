@@ -1,7 +1,7 @@
 package net.heyzeer0.mgh.mixins.botania;
 
-import net.heyzeer0.mgh.hacks.IEntityThrowable;
-import net.heyzeer0.mgh.hacks.ITileEntityOwnable;
+import net.heyzeer0.mgh.api.IEntityThrowable;
+import net.heyzeer0.mgh.api.ITileEntityOwnable;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;

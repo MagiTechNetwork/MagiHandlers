@@ -1,6 +1,6 @@
 package net.heyzeer0.mgh.mixins.thaumcraft;
 
-import net.heyzeer0.mgh.hacks.ITileEntityOwnable;
+import net.heyzeer0.mgh.api.ITileEntityOwnable;
 import net.heyzeer0.mgh.mixins.MixinManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
@@ -9,8 +9,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import thaumcraft.api.TileThaumcraft;
-
-import java.util.UUID;
 
 /**
  * Created by Frani on 11/08/2017.

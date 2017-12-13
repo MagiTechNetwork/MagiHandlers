@@ -1,6 +1,6 @@
 package net.heyzeer0.mgh.mixins.forge;
 
-import net.heyzeer0.mgh.hacks.IMixinChunk;
+import net.heyzeer0.mgh.api.IMixinChunk;
 import net.minecraft.world.*;
 import net.minecraft.world.chunk.Chunk;
 import org.spongepowered.asm.mixin.Mixin;

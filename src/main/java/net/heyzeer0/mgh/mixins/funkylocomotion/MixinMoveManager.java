@@ -3,7 +3,7 @@ package net.heyzeer0.mgh.mixins.funkylocomotion;
 import com.rwtema.funkylocomotion.movers.MoveManager;
 import framesapi.BlockPos;
 import net.heyzeer0.mgh.MagiHandlers;
-import net.heyzeer0.mgh.hacks.ITileEntityOwnable;
+import net.heyzeer0.mgh.api.ITileEntityOwnable;
 import net.heyzeer0.mgh.mixins.MixinManager;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;

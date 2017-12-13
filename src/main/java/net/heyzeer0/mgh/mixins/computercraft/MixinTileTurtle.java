@@ -2,7 +2,7 @@ package net.heyzeer0.mgh.mixins.computercraft;
 
 import dan200.computercraft.shared.computer.blocks.TileComputerBase;
 import dan200.computercraft.shared.turtle.blocks.TileTurtle;
-import net.heyzeer0.mgh.hacks.ITileEntityOwnable;
+import net.heyzeer0.mgh.api.ITileEntityOwnable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;

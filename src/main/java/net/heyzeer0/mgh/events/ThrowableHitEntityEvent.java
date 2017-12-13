@@ -1,7 +1,7 @@
 package net.heyzeer0.mgh.events;
 
 import cpw.mods.fml.common.eventhandler.Cancelable;
-import net.heyzeer0.mgh.hacks.IEntity;
+import net.heyzeer0.mgh.api.IEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;

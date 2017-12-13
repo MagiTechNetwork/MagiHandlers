@@ -2,7 +2,7 @@ package net.heyzeer0.mgh.mixins.forge;
 
 import com.mojang.authlib.GameProfile;
 import net.heyzeer0.mgh.MagiHandlers;
-import net.heyzeer0.mgh.hacks.IEntity;
+import net.heyzeer0.mgh.api.IEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;

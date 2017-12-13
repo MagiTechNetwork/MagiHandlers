@@ -1,6 +1,6 @@
 package net.heyzeer0.mgh.mixins.forge;
 
-import net.heyzeer0.mgh.hacks.IMixinChunk;
+import net.heyzeer0.mgh.api.IMixinChunk;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.world.World;

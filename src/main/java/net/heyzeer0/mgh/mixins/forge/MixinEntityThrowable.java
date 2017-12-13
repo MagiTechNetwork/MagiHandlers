@@ -1,7 +1,7 @@
 package net.heyzeer0.mgh.mixins.forge;
 
+import net.heyzeer0.mgh.api.IEntityThrowable;
 import net.heyzeer0.mgh.events.ThrowableHitEntityEvent;
-import net.heyzeer0.mgh.hacks.IEntityThrowable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.MovingObjectPosition;

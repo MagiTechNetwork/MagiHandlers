@@ -1,8 +1,8 @@
 package net.heyzeer0.mgh.mixins.forge;
 
 import net.heyzeer0.mgh.MagiHandlers;
-import net.heyzeer0.mgh.hacks.IMixinChunk;
-import net.heyzeer0.mgh.hacks.IMixinChunkProvider;
+import net.heyzeer0.mgh.api.IMixinChunk;
+import net.heyzeer0.mgh.api.IMixinChunkProvider;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;

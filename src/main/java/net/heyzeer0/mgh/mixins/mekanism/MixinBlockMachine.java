@@ -1,6 +1,6 @@
 package net.heyzeer0.mgh.mixins.mekanism;
 
-import net.heyzeer0.mgh.hacks.ITileEntityOwnable;
+import net.heyzeer0.mgh.api.ITileEntityOwnable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

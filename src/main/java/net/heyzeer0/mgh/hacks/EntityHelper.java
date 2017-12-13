@@ -1,6 +1,8 @@
 package net.heyzeer0.mgh.hacks;
 
 import net.heyzeer0.mgh.MagiHandlers;
+import net.heyzeer0.mgh.api.IEntity;
+import net.heyzeer0.mgh.api.ITileEntityOwnable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 

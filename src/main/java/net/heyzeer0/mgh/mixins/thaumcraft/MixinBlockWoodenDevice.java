@@ -1,6 +1,6 @@
 package net.heyzeer0.mgh.mixins.thaumcraft;
 
-import net.heyzeer0.mgh.hacks.ITileEntityOwnable;
+import net.heyzeer0.mgh.api.ITileEntityOwnable;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;

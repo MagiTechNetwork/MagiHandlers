@@ -1,8 +1,8 @@
 package net.heyzeer0.mgh.mixins.forge;
 
 import net.heyzeer0.mgh.MagiHandlers;
+import net.heyzeer0.mgh.api.IMixinChunk;
 import net.heyzeer0.mgh.hacks.EntityHelper;
-import net.heyzeer0.mgh.hacks.IMixinChunk;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;

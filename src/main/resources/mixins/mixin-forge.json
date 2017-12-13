@@ -16,7 +16,6 @@
     "MixinWorldServer",
     "MixinExplosionEventStart",
     "MixinEntity",
-    "MixinForgeHooks",
     "MixinExplosion",
     "MixinNetworkManager",
     "MixinExplosionEvent"

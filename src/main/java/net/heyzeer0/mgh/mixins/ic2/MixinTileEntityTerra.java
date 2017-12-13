@@ -1,8 +1,7 @@
 package net.heyzeer0.mgh.mixins.ic2;
 
 import ic2.api.item.ITerraformingBP;
-import ic2.core.block.machine.tileentity.TileEntityElectricMachine;
-import net.heyzeer0.mgh.hacks.ITileEntityOwnable;
+import net.heyzeer0.mgh.api.ITileEntityOwnable;
 import net.heyzeer0.mgh.mixins.MixinManager;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;

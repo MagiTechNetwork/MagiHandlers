@@ -1,6 +1,6 @@
 package net.heyzeer0.mgh.mixins.progressiveauto;
 
-import net.heyzeer0.mgh.hacks.ITileEntityOwnable;
+import net.heyzeer0.mgh.api.ITileEntityOwnable;
 import net.heyzeer0.mgh.mixins.MixinManager;
 import net.minecraft.tileentity.TileEntity;
 import org.spongepowered.asm.mixin.Mixin;

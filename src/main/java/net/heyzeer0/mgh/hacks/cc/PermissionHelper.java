@@ -4,12 +4,11 @@ import dan200.computercraft.api.turtle.ITurtleAccess;
 import dan200.computercraft.shared.turtle.core.TurtlePlaceCommand;
 import dan200.computercraft.shared.turtle.core.TurtlePlayer;
 import dan200.computercraft.shared.util.WorldUtil;
-import net.heyzeer0.mgh.hacks.ITileEntityOwnable;
+import net.heyzeer0.mgh.api.ITileEntityOwnable;
 import net.heyzeer0.mgh.mixins.MixinManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Vec3;
-import net.minecraftforge.common.util.FakePlayer;
 
 /**
  * Created by Frani on 16/10/2017.

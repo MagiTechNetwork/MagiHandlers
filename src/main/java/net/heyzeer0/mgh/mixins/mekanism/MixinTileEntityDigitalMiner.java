@@ -1,15 +1,9 @@
 package net.heyzeer0.mgh.mixins.mekanism;
 
 import com.mojang.authlib.GameProfile;
-import cpw.mods.fml.common.registry.GameData;
 import mekanism.common.CommonProxy;
-import mekanism.common.Mekanism;
-import net.heyzeer0.mgh.hacks.ITileEntityOwnable;
+import net.heyzeer0.mgh.api.ITileEntityOwnable;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.WorldServer;
@@ -18,9 +12,7 @@ import net.minecraftforge.common.util.FakePlayerFactory;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.lang.ref.WeakReference;
 import java.util.UUID;

@@ -1,8 +1,8 @@
 package net.heyzeer0.mgh.mixins.forge;
 
 import net.heyzeer0.mgh.MagiHandlers;
-import net.heyzeer0.mgh.hacks.IEntity;
-import net.heyzeer0.mgh.hacks.ITileEntityOwnable;
+import net.heyzeer0.mgh.api.IEntity;
+import net.heyzeer0.mgh.api.ITileEntityOwnable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.Explosion;
