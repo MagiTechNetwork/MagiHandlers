@@ -3,7 +3,7 @@ package net.heyzeer0.mgh.mixins.funkylocomotion;
 import com.rwtema.funkylocomotion.movers.MoveManager;
 import framesapi.BlockPos;
 import net.heyzeer0.mgh.MagiHandlers;
-import net.heyzeer0.mgh.api.ITileEntityOwnable;
+import net.heyzeer0.mgh.api.forge.IForgeTileEntity;
 import net.heyzeer0.mgh.mixins.MixinManager;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -24,7 +24,7 @@ public abstract class MixinMoveManager {
 
     @Inject(method = "startMoving", at = @At("HEAD"), cancellable = true)
     private static void onStartMoving(World world, List<BlockPos> list, ForgeDirection dir, int maxTime, CallbackInfo ci) {
-        ITileEntityOwnable tile = MagiHandlers.getStack().getFirst(ITileEntityOwnable.class).get();
+        IForgeTileEntity tile = MagiHandlers.getStack().getFirst(IForgeTileEntity.class).get();
         for (BlockPos pos : list) {
             if (!MixinManager.canBuild(pos.x, pos.y, pos.z, world, tile.getFakePlayer())) {
                 ci.cancel();

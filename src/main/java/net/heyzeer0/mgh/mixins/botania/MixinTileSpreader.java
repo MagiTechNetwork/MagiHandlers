@@ -1,7 +1,7 @@
 package net.heyzeer0.mgh.mixins.botania;
 
 import net.heyzeer0.mgh.api.IEntityThrowable;
-import net.heyzeer0.mgh.api.ITileEntityOwnable;
+import net.heyzeer0.mgh.api.forge.IForgeTileEntity;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
@@ -16,7 +16,7 @@ import vazkii.botania.common.entity.EntityManaBurst;
 
 @Pseudo
 @Mixin(value = TileSpreader.class, remap = false)
-public abstract class MixinTileSpreader implements ITileEntityOwnable {
+public abstract class MixinTileSpreader implements IForgeTileEntity {
 
     @Redirect(method = "getBurst", at = @At(value = "INVOKE", target = "Lvazkii/botania/common/entity/EntityManaBurst;setSourceLens(Lnet/minecraft/item/ItemStack;)V"))
     private void onSpawnEntity(EntityManaBurst entity, ItemStack lens) {

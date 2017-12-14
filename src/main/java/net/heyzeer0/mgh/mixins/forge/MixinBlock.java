@@ -1,6 +1,6 @@
 package net.heyzeer0.mgh.mixins.forge;
 
-import net.heyzeer0.mgh.api.ITileEntityOwnable;
+import net.heyzeer0.mgh.api.forge.IForgeTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,9 +30,9 @@ public abstract class MixinBlock {
             if (entityliving instanceof EntityPlayer) {
                 EntityPlayer $owner = (EntityPlayer) entityliving;
                 TileEntity $te = world.getTileEntity(x, y, z);
-                if ($te instanceof ITileEntityOwnable && !((ITileEntityOwnable) $te).hasTrackedPlayer() && !($owner instanceof FakePlayer)) {
-                    ((ITileEntityOwnable) $te).setOwner($owner.getCommandSenderName());
-                    ((ITileEntityOwnable) $te).setUUID($owner.getUniqueID().toString());
+                if ($te instanceof IForgeTileEntity && !((IForgeTileEntity) $te).hasTrackedPlayer() && !($owner instanceof FakePlayer)) {
+                    ((IForgeTileEntity) $te).setOwner($owner.getCommandSenderName());
+                    ((IForgeTileEntity) $te).setUUID($owner.getUniqueID().toString());
                 }
             }
         }

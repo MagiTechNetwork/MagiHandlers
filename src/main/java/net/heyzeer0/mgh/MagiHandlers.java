@@ -6,7 +6,9 @@ import cpw.mods.fml.common.DummyModContainer;
 import cpw.mods.fml.common.LoadController;
 import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import net.heyzeer0.mgh.api.ITileEntityOwnable;
+import net.heyzeer0.mgh.api.bukkit.BukkitStack;
+import net.heyzeer0.mgh.api.forge.ForgeStack;
+import net.heyzeer0.mgh.api.forge.IForgeTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
@@ -48,6 +50,21 @@ public class MagiHandlers extends DummyModContainer {
         return true;
     }
 
+    public static void scheduleTileCheck(EntityPlayer player, World world, int x, int y, int z) {
+        instance.tasks.add(() -> {
+            IForgeTileEntity tile = (IForgeTileEntity) world.getTileEntity(x, y, z);
+            if (tile != null) tile.setPlayer(player);
+        });
+    }
+
+    public static EntityPlayer getPlayer(String name) {
+        return MinecraftServer.getServer().getConfigurationManager().func_152612_a(name);
+    }
+
+    public static PhaseStack getStack() {
+        return instance.stack;
+    }
+
     @Subscribe
     public void preInit(FMLPreInitializationEvent e) {
         LogManager.getLogger().warn(" ");
@@ -63,21 +80,8 @@ public class MagiHandlers extends DummyModContainer {
         MinecraftForge.EVENT_BUS.register(new EventCore());
         instance = this;
         this.stack = new PhaseStack();
-    }
-
-    public static EntityPlayer getPlayer(String name) {
-        return MinecraftServer.getServer().getConfigurationManager().func_152612_a(name);
-    }
-
-    public static PhaseStack getStack() {
-        return instance.stack;
-    }
-
-    public static void scheduleTileCheck(EntityPlayer player, World world, int x, int y, int z) {
-        instance.tasks.add(() -> {
-            ITileEntityOwnable tile = (ITileEntityOwnable) world.getTileEntity(x, y, z);
-            if (tile != null) tile.setPlayer(player);
-        });
+        ForgeStack.stack = this.stack;
+        BukkitStack.stack = this.stack;
     }
 
     public static void log(String content) {

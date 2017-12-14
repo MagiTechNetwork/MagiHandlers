@@ -1,6 +1,6 @@
 package net.heyzeer0.mgh.hacks.tt;
 
-import net.heyzeer0.mgh.api.ITileEntityOwnable;
+import net.heyzeer0.mgh.api.forge.IForgeTileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.IChatComponent;
@@ -16,7 +16,7 @@ public class FakeTabletFakePlayer extends FakeThaumcraftPlayer {
     TileAnimationTablet tablet;
 
     public FakeTabletFakePlayer(TileAnimationTablet tablet) {
-        super(tablet.getWorldObj(), ((ITileEntityOwnable)tablet).getFakePlayer().getGameProfile());
+        super(tablet.getWorldObj(), ((IForgeTileEntity) tablet).getFakePlayer().getGameProfile());
         this.tablet = tablet;
     }
 

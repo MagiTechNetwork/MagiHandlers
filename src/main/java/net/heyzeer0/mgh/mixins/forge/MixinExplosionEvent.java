@@ -1,8 +1,8 @@
 package net.heyzeer0.mgh.mixins.forge;
 
 import net.heyzeer0.mgh.MagiHandlers;
-import net.heyzeer0.mgh.api.IEntity;
-import net.heyzeer0.mgh.api.ITileEntityOwnable;
+import net.heyzeer0.mgh.api.forge.IForgeEntity;
+import net.heyzeer0.mgh.api.forge.IForgeTileEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.Explosion;
@@ -30,8 +30,8 @@ public abstract class MixinExplosionEvent {
         Entity exploder = exp.exploder;
         if (exploder != null && exploder instanceof EntityPlayer) return;
 
-        if (exploder != null && ((IEntity) exploder).hasOwner()) {
-            explosion.exploder = ((IEntity) exploder).getOwner();
+        if (exploder != null && ((IForgeEntity) exploder).hasOwner()) {
+            explosion.exploder = ((IForgeEntity) exploder).getOwner();
             return;
         }
 
@@ -41,13 +41,13 @@ public abstract class MixinExplosionEvent {
             return;
         }
 
-        Optional<ITileEntityOwnable> optionalTile = MagiHandlers.getStack().getFirst(ITileEntityOwnable.class);
+        Optional<IForgeTileEntity> optionalTile = MagiHandlers.getStack().getFirst(IForgeTileEntity.class);
         if (optionalTile.isPresent() && optionalTile.get().hasTrackedPlayer()) {
             explosion.exploder = optionalTile.get().getFakePlayer();
             return;
         }
 
-        Optional<IEntity> optionalEntity = MagiHandlers.getStack().getFirst(IEntity.class);
+        Optional<IForgeEntity> optionalEntity = MagiHandlers.getStack().getFirst(IForgeEntity.class);
         if (optionalEntity.isPresent() && optionalEntity.get().hasOwner()) {
             explosion.exploder = optionalEntity.get().getOwner();
             return;

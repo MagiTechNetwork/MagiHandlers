@@ -2,7 +2,7 @@ package net.heyzeer0.mgh.mixins.forge;
 
 import net.heyzeer0.mgh.MagiHandlers;
 import net.heyzeer0.mgh.api.IBlockEvent;
-import net.heyzeer0.mgh.api.ITileEntityOwnable;
+import net.heyzeer0.mgh.api.forge.IForgeTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -21,16 +21,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(BlockEvent.class)
 public abstract class MixinBlockEvent implements IBlockEvent {
 
-    private ITileEntityOwnable breaker;
+    private IForgeTileEntity breaker;
 
     @Override
-    public ITileEntityOwnable getTile() {
+    public IForgeTileEntity getTile() {
         return breaker;
     }
 
     @Override
     public void setTile(TileEntity tile) {
-        this.breaker = (ITileEntityOwnable) tile;
+        this.breaker = (IForgeTileEntity) tile;
     }
 
     @Inject(method = "<init>", at = @At("RETURN"))

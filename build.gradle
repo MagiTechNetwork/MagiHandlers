@@ -81,7 +81,10 @@ dependencies {
     }
     compileOnly fileTree(dir: 'lib', include: ['*.jar'])
     compile 'com.google.code.gson:gson:2.8.0'
-    compileOnly 'org.projectlombok:lombok:1.16.16'
+    compile project(':MagiHandlersAPI-Forge')
+    shade files('MagiHandlersAPI-Forge/build/libs/MagiHandlersAPI-Forge-1.0.jar')
+    compile project(':MagiHandlersAPI-Bukkit')
+    shade files('MagiHandlersAPI-Bukkit/build/libs/MagiHandlersAPI-Bukkit-1.0.jar')
 }
 
 jar {
@@ -101,7 +104,7 @@ jar {
 
     configurations.shade.each { dep ->
         from(project.zipTree(dep)){
-            include 'org/spongepowered', 'org/spongepowered/**'
+            include 'org/spongepowered', 'org/spongepowered/**', 'net/heyzeer0/mgh/api/forge/**', 'net/heyzeer0/mgh/api/bukkit/**'
         }
     }
 }

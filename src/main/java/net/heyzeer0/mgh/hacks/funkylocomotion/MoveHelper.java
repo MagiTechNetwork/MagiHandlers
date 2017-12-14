@@ -1,7 +1,7 @@
 package net.heyzeer0.mgh.hacks.funkylocomotion;
 
 import framesapi.BlockPos;
-import net.heyzeer0.mgh.api.ITileEntityOwnable;
+import net.heyzeer0.mgh.api.forge.IForgeTileEntity;
 import net.heyzeer0.mgh.mixins.MixinManager;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class MoveHelper {
 
-    public static List<BlockPos> checkBlocks(World world, List<BlockPos> list, ForgeDirection dir, ITileEntityOwnable tile) {
+    public static List<BlockPos> checkBlocks(World world, List<BlockPos> list, ForgeDirection dir, IForgeTileEntity tile) {
         if (dir == ForgeDirection.UNKNOWN) {
             throw new IllegalArgumentException("Direction cannot be unknown.");
         }

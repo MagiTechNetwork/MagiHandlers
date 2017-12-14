@@ -69,7 +69,7 @@ public abstract class MixinWorld {
             }
         } else if (MagiHandlers.getStack().getFirst(Entity.class).isPresent()) {
             if (MagiHandlers.getStack().ignorePhase) return;
-            IEntity entity = (IEntity) MagiHandlers.getStack().getFirst(Entity.class).get();
+            IForgeEntity entity = (IForgeEntity) MagiHandlers.getStack().getFirst(Entity.class).get();
             if (entity.hasOwner()) {
                 if (!MixinManager.canBuild(x, y, z, (World)(Object)this, entity.getOwner())) {
                     cir.setReturnValue(false);
@@ -77,7 +77,7 @@ public abstract class MixinWorld {
             }
         } else if (MagiHandlers.getStack().getFirst(TileEntity.class).isPresent()) {
             if (MagiHandlers.getStack().ignorePhase) return;
-            ITileEntityOwnable tile = (ITileEntityOwnable) MagiHandlers.getStack().getFirst(TileEntity.class).get();
+            IForgeTileEntity tile = (IForgeTileEntity) MagiHandlers.getStack().getFirst(TileEntity.class).get();
             if (tile.hasTrackedPlayer()) {
                 if (!MixinManager.canBuild(x, y, z, (World)(Object)this, tile.getFakePlayer())) {
                     cir.setReturnValue(false);

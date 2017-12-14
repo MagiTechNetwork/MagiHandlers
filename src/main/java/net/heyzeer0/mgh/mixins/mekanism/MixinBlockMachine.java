@@ -1,6 +1,6 @@
 package net.heyzeer0.mgh.mixins.mekanism;
 
-import net.heyzeer0.mgh.api.ITileEntityOwnable;
+import net.heyzeer0.mgh.api.forge.IForgeTileEntity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -25,9 +25,9 @@ public abstract class MixinBlockMachine {
         if (entityliving instanceof EntityPlayer) {
             EntityPlayer $owner = (EntityPlayer) entityliving;
             TileEntity $te = world.getTileEntity(x, y, z);
-            if ($te instanceof ITileEntityOwnable) {
-                ((ITileEntityOwnable) $te).setOwner($owner.getCommandSenderName());
-                ((ITileEntityOwnable) $te).setUUID($owner.getUniqueID().toString());
+            if ($te instanceof IForgeTileEntity) {
+                ((IForgeTileEntity) $te).setOwner($owner.getCommandSenderName());
+                ((IForgeTileEntity) $te).setUUID($owner.getUniqueID().toString());
             }
         }
     }

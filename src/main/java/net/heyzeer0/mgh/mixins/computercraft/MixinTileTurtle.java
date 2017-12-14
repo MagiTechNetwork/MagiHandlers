@@ -2,7 +2,7 @@ package net.heyzeer0.mgh.mixins.computercraft;
 
 import dan200.computercraft.shared.computer.blocks.TileComputerBase;
 import dan200.computercraft.shared.turtle.blocks.TileTurtle;
-import net.heyzeer0.mgh.api.ITileEntityOwnable;
+import net.heyzeer0.mgh.api.forge.IForgeTileEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,10 +18,10 @@ public abstract class MixinTileTurtle extends TileComputerBase {
 
     @Inject(method = "transferStateFrom", at = @At("HEAD"))
     private void injectOnTransferState(TileTurtle copy, CallbackInfo ci) {
-        ITileEntityOwnable otherTile = (ITileEntityOwnable) copy;
+        IForgeTileEntity otherTile = (IForgeTileEntity) copy;
         if (otherTile.hasTrackedPlayer()) {
-            ((ITileEntityOwnable)this).setOwner(otherTile.getOwner());
-            ((ITileEntityOwnable)this).setUUID(otherTile.getUUID());
+            ((IForgeTileEntity) this).setOwner(otherTile.getOwner());
+            ((IForgeTileEntity) this).setUUID(otherTile.getUUID());
         }
     }
 

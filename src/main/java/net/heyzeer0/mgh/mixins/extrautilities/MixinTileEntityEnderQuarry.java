@@ -1,6 +1,6 @@
 package net.heyzeer0.mgh.mixins.extrautilities;
 
-import net.heyzeer0.mgh.api.ITileEntityOwnable;
+import net.heyzeer0.mgh.api.forge.IForgeTileEntity;
 import net.heyzeer0.mgh.mixins.MixinManager;
 import net.minecraft.tileentity.TileEntity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Pseudo
 @Mixin(targets = "com/rwtema/extrautils/tileentity/enderquarry/TileEntityEnderQuarry", remap = false)
-public abstract class MixinTileEntityEnderQuarry extends TileEntity implements ITileEntityOwnable {
+public abstract class MixinTileEntityEnderQuarry extends TileEntity implements IForgeTileEntity {
 
     @Inject(method = "mineBlock", at = @At("HEAD"), cancellable = true)
     public void fireBreak(final int x, final int y, final int z, final boolean replaceWithDirt, CallbackInfoReturnable<Boolean> cir) {

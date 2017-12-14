@@ -13,6 +13,8 @@ buildscript {
 
 apply plugin: "forge"
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 version = modVersion
 group= modGroup
 archivesBaseName = modBaseName

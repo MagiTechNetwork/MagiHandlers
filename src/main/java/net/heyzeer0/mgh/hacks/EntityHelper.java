@@ -1,8 +1,8 @@
 package net.heyzeer0.mgh.hacks;
 
 import net.heyzeer0.mgh.MagiHandlers;
-import net.heyzeer0.mgh.api.IEntity;
-import net.heyzeer0.mgh.api.ITileEntityOwnable;
+import net.heyzeer0.mgh.api.forge.IForgeEntity;
+import net.heyzeer0.mgh.api.forge.IForgeTileEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 
@@ -15,21 +15,21 @@ import java.util.Optional;
 public class EntityHelper {
 
     public static Entity checkEntity(Entity e) {
-        Optional<ITileEntityOwnable> tile = MagiHandlers.getStack().getFirst(ITileEntityOwnable.class);
+        Optional<IForgeTileEntity> tile = MagiHandlers.getStack().getFirst(IForgeTileEntity.class);
         if (tile.isPresent()) {
-            ((IEntity) e).setOwner(tile.get().getFakePlayer());
+            ((IForgeEntity) e).setOwner(tile.get().getFakePlayer());
             return e;
         }
 
         Optional<EntityPlayer> player = MagiHandlers.getStack().getFirst(EntityPlayer.class);
         if (player.isPresent()) {
-            ((IEntity) e).setOwner(player.get());
+            ((IForgeEntity) e).setOwner(player.get());
             return e;
         }
 
-        Optional<IEntity> optEntity = MagiHandlers.getStack().getFirst(IEntity.class);
+        Optional<IForgeEntity> optEntity = MagiHandlers.getStack().getFirst(IForgeEntity.class);
         if (optEntity.isPresent() && optEntity.get().hasOwner()) {
-            ((IEntity) e).setOwner(optEntity.get().getOwner());
+            ((IForgeEntity) e).setOwner(optEntity.get().getOwner());
             return e;
         }
 

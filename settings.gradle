@@ -1,3 +1,4 @@
 rootProject.name = 'MagiHandlers'
-include 'api'
+include 'MagiHandlersAPI-Forge'
+include 'MagiHandlersAPI-Bukkit'
 

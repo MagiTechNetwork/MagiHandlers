@@ -3,7 +3,9 @@ package net.heyzeer0.mgh.mixins.forge;
 import com.mojang.authlib.GameProfile;
 import cpw.mods.fml.common.registry.GameData;
 import net.heyzeer0.mgh.MagiHandlers;
-import net.heyzeer0.mgh.api.ITileEntityOwnable;
+import net.heyzeer0.mgh.api.bukkit.IBukkitEntity;
+import net.heyzeer0.mgh.api.bukkit.IBukkitTileEntity;
+import net.heyzeer0.mgh.api.forge.IForgeTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -14,6 +16,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayerFactory;
+import org.bukkit.entity.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -26,7 +29,7 @@ import java.util.UUID;
  * Created by Frani on 15/10/2017.
  */
 @Mixin(TileEntity.class)
-public abstract class MixinTileEntity implements ITileEntityOwnable {
+public abstract class MixinTileEntity implements IForgeTileEntity, IBukkitTileEntity {
 
     @Shadow protected World worldObj;
     @Shadow public abstract Block getBlockType();
@@ -70,6 +73,22 @@ public abstract class MixinTileEntity implements ITileEntityOwnable {
     @Override
     public boolean hasTrackedPlayer() {
         return this.tileOwner != null && this.tileUuid != null;
+    }
+
+    @Override
+    public boolean hasOwner() {
+        return hasTrackedPlayer();
+    }
+
+    @Override
+    public void setOwner(Player player) {
+        this.tileOwner = player.getPlayerListName();
+        this.tileUuid = player.getUniqueId().toString();
+    }
+
+    @Override
+    public Player getBukkitOwner() {
+        return (Player) ((IBukkitEntity) getFakePlayer()).getCraftEntity();
     }
 
     @Override

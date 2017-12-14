@@ -2,7 +2,7 @@ package net.heyzeer0.mgh.mixins.mekanism;
 
 import com.mojang.authlib.GameProfile;
 import mekanism.common.CommonProxy;
-import net.heyzeer0.mgh.api.ITileEntityOwnable;
+import net.heyzeer0.mgh.api.forge.IForgeTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
@@ -23,7 +23,7 @@ import java.util.UUID;
 
 @Pseudo
 @Mixin(targets = "mekanism/common/tile/TileEntityDigitalMiner", remap = false)
-public abstract class MixinTileEntityDigitalMiner extends TileEntity implements ITileEntityOwnable {
+public abstract class MixinTileEntityDigitalMiner extends TileEntity implements IForgeTileEntity {
     private FakePlayer realFakePlayer;
 
     @Override

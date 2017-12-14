@@ -2,7 +2,8 @@ package net.heyzeer0.mgh.mixins.forge;
 
 import com.mojang.authlib.GameProfile;
 import net.heyzeer0.mgh.MagiHandlers;
-import net.heyzeer0.mgh.api.IEntity;
+import net.heyzeer0.mgh.api.bukkit.IBukkitEntity;
+import net.heyzeer0.mgh.api.forge.IForgeEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -10,6 +11,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayerFactory;
 import org.apache.logging.log4j.LogManager;
+import org.bukkit.craftbukkit.v1_7_R4.entity.CraftEntity;
+import org.bukkit.entity.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -22,12 +25,16 @@ import java.util.UUID;
  * Created by Frani on 02/11/2017.
  */
 @Mixin(Entity.class)
-public abstract class MixinEntity implements IEntity {
+public abstract class MixinEntity implements IForgeEntity, IBukkitEntity {
 
     @Shadow public World worldObj;
+
+    @Shadow
+    public abstract CraftEntity getBukkitEntity();
     private String uuid, username;
     private EntityPlayer owner;
 
+    // Forge
     @Override
     public void setOwner(EntityPlayer player) {
         if (player.getUniqueID().toString().isEmpty()) {
@@ -36,29 +43,6 @@ public abstract class MixinEntity implements IEntity {
         }
         this.uuid = player.getUniqueID().toString();
         this.username = player.getCommandSenderName();
-    }
-
-    @Override
-    public boolean hasOwner() {
-        return hasTrackedPlayer();
-    }
-
-    public boolean hasTrackedPlayer() {
-        return this.username != null && this.uuid != null && !this.username.isEmpty() && !this.uuid.isEmpty();
-    }
-
-    @Inject(method = "writeToNBT", at = @At("HEAD"))
-    private void onWriteToNBT(NBTTagCompound nbt, CallbackInfo ci) {
-        if (hasTrackedPlayer()) {
-            nbt.setString("MHData.Owner", username);
-            nbt.setString("MHData.UUID", uuid);
-        }
-    }
-
-    @Inject(method = "readFromNBT", at = @At("HEAD"))
-    private void onReadFromNBT(NBTTagCompound nbt, CallbackInfo ci) {
-        this.username = nbt.getString("MHData.Owner");
-        this.uuid = nbt.getString("MHData.UUID");
     }
 
     @Override
@@ -80,6 +64,47 @@ public abstract class MixinEntity implements IEntity {
             }
         }
         return owner;
+    }
+
+    // Bukkit
+    @Override
+    public void setOwner(Player player) {
+        this.uuid = player.getUniqueId().toString();
+        this.username = player.getPlayerListName();
+    }
+
+    @Override
+    public Object getCraftEntity() {
+        return this.getBukkitEntity();
+    }
+
+    @Override
+    public Player getBukkitOwner() {
+        return (Player) ((IBukkitEntity) getOwner()).getCraftEntity();
+    }
+
+    // Bukkit/Forge
+    @Override
+    public boolean hasOwner() {
+        return hasTrackedPlayer();
+    }
+
+    public boolean hasTrackedPlayer() {
+        return this.username != null && this.uuid != null && !this.username.isEmpty() && !this.uuid.isEmpty();
+    }
+
+    @Inject(method = "writeToNBT", at = @At("HEAD"))
+    private void onWriteToNBT(NBTTagCompound nbt, CallbackInfo ci) {
+        if (hasTrackedPlayer()) {
+            nbt.setString("MHData.Owner", username);
+            nbt.setString("MHData.UUID", uuid);
+        }
+    }
+
+    @Inject(method = "readFromNBT", at = @At("HEAD"))
+    private void onReadFromNBT(NBTTagCompound nbt, CallbackInfo ci) {
+        this.username = nbt.getString("MHData.Owner");
+        this.uuid = nbt.getString("MHData.UUID");
     }
 
 }

@@ -8,8 +8,9 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.heyzeer0.mgh.api.IBlockEvent;
-import net.heyzeer0.mgh.api.IEntity;
-import net.heyzeer0.mgh.api.ITileEntityOwnable;
+import net.heyzeer0.mgh.api.bukkit.IBukkitTileEntity;
+import net.heyzeer0.mgh.api.forge.IForgeEntity;
+import net.heyzeer0.mgh.api.forge.IForgeTileEntity;
 import net.heyzeer0.mgh.events.ThrowableHitEntityEvent;
 import net.heyzeer0.mgh.mixins.MixinManager;
 import net.lomeli.trophyslots.TrophySlots;
@@ -106,10 +107,11 @@ public class EventCore {
                 && e.entityPlayer.isSneaking()) {
 
             TileEntity te = e.world.getTileEntity(e.x, e.y, e.z);
-            if(te != null && te instanceof ITileEntityOwnable) {
+            if (te != null && te instanceof IForgeTileEntity) {
                 e.setCanceled(true);
-                e.entityPlayer.addChatComponentMessage(new ChatComponentText("Username: " + ((ITileEntityOwnable) te).getOwner()));
-                e.entityPlayer.addChatComponentMessage(new ChatComponentText("UUID: " + ((ITileEntityOwnable) te).getUUID()));
+                e.entityPlayer.addChatComponentMessage(new ChatComponentText("Username: " + ((IForgeTileEntity) te).getOwner()));
+                e.entityPlayer.addChatComponentMessage(new ChatComponentText("UUID: " + ((IForgeTileEntity) te).getUUID()));
+                e.entityPlayer.addChatComponentMessage(new ChatComponentText("IBukkitEntity: " + ((IBukkitTileEntity) te).getBukkitOwner()));
             }
         }
     }
@@ -139,12 +141,12 @@ public class EventCore {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onPlace(BlockEvent.PlaceEvent event) {
         if (event.isCanceled()) return;
-        ITileEntityOwnable tile = (ITileEntityOwnable) event.world.getTileEntity(event.x, event.y, event.z);
+        IForgeTileEntity tile = (IForgeTileEntity) event.world.getTileEntity(event.x, event.y, event.z);
         if (tile != null) {
             // Add tracking info
             if (!tile.hasTrackedPlayer()) {
                 if (event.player instanceof FakePlayer) {
-                    ITileEntityOwnable otherTile = ((IBlockEvent)event).getTile();
+                    IForgeTileEntity otherTile = ((IBlockEvent) event).getTile();
                     if (otherTile != null && otherTile.hasTrackedPlayer()) {
                         tile.setOwner(otherTile.getOwner());
                         tile.setUUID(otherTile.getUUID());
@@ -155,7 +157,7 @@ public class EventCore {
             }
         } else {
             if (event.player instanceof FakePlayer) {
-                ITileEntityOwnable otherTile = ((IBlockEvent)event).getTile();
+                IForgeTileEntity otherTile = ((IBlockEvent) event).getTile();
                 if (otherTile != null && otherTile.hasTrackedPlayer()) {
                     MagiHandlers.scheduleTileCheck(otherTile.getFakePlayer(), event.world, event.x, event.y, event.z);
                 }
@@ -170,11 +172,11 @@ public class EventCore {
         onPlace(e);
         if (e.isCanceled()) return;
         for (BlockSnapshot snapshot : e.getReplacedBlockSnapshots()) {
-            ITileEntityOwnable tile = (ITileEntityOwnable) e.world.getTileEntity(snapshot.x, snapshot.y, snapshot.z);
+            IForgeTileEntity tile = (IForgeTileEntity) e.world.getTileEntity(snapshot.x, snapshot.y, snapshot.z);
             if (tile != null && !tile.hasTrackedPlayer()) {
                 // Add tracking info
                 if (e.player instanceof FakePlayer) {
-                    ITileEntityOwnable otherTile = ((IBlockEvent) e).getTile();
+                    IForgeTileEntity otherTile = ((IBlockEvent) e).getTile();
                     if (otherTile != null && otherTile.hasTrackedPlayer()) {
                         tile.setOwner(otherTile.getOwner());
                         tile.setUUID(otherTile.getUUID());
@@ -184,7 +186,7 @@ public class EventCore {
                 }
             } else {
                 if (e.player instanceof FakePlayer) {
-                    ITileEntityOwnable otherTile = ((IBlockEvent)e).getTile();
+                    IForgeTileEntity otherTile = ((IBlockEvent) e).getTile();
                     if (otherTile != null && otherTile.hasTrackedPlayer()) {
                         MagiHandlers.scheduleTileCheck(otherTile.getFakePlayer(), snapshot.world, snapshot.x, snapshot.y, snapshot.z);
                     }
@@ -203,8 +205,8 @@ public class EventCore {
                 && e.entityPlayer.isSneaking()) {
 
             e.setCanceled(true);
-            e.entityPlayer.addChatComponentMessage(new ChatComponentText("Username: " + ((IEntity) e.target).getOwner().getCommandSenderName()));
-            e.entityPlayer.addChatComponentMessage(new ChatComponentText("UUID: " + ((IEntity) e.target).getOwner().getUniqueID().toString()));
+            e.entityPlayer.addChatComponentMessage(new ChatComponentText("Username: " + ((IForgeEntity) e.target).getOwner().getCommandSenderName()));
+            e.entityPlayer.addChatComponentMessage(new ChatComponentText("UUID: " + ((IForgeEntity) e.target).getOwner().getUniqueID().toString()));
         }
     }
 

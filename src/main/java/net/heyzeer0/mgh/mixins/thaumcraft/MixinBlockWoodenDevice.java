@@ -1,6 +1,6 @@
 package net.heyzeer0.mgh.mixins.thaumcraft;
 
-import net.heyzeer0.mgh.api.ITileEntityOwnable;
+import net.heyzeer0.mgh.api.forge.IForgeTileEntity;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
@@ -34,8 +34,8 @@ public abstract class MixinBlockWoodenDevice extends BlockContainer {
         if (entityliving instanceof EntityPlayer) {
             EntityPlayer $owner = (EntityPlayer) entityliving;
             TileEntity $te = world.getTileEntity(x, y, z);
-            if ($te != null && !((ITileEntityOwnable) $te).hasTrackedPlayer() && !($owner instanceof FakePlayer)) {
-                ((ITileEntityOwnable) $te).setPlayer($owner);
+            if ($te != null && !((IForgeTileEntity) $te).hasTrackedPlayer() && !($owner instanceof FakePlayer)) {
+                ((IForgeTileEntity) $te).setPlayer($owner);
             }
         }
     }

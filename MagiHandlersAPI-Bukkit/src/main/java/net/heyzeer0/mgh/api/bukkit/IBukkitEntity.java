@@ -11,6 +11,8 @@ public interface IBukkitEntity {
 
     boolean hasOwner();
 
-    Player getOwner();
+    Player getBukkitOwner();
+
+    Object getCraftEntity();
 
 }
