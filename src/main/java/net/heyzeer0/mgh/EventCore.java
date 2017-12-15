@@ -7,8 +7,8 @@ import com.jaquadro.minecraft.storagedrawers.block.tile.TileEntityDrawers;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import net.heyzeer0.mgh.api.IBlockEvent;
 import net.heyzeer0.mgh.api.bukkit.IBukkitTileEntity;
+import net.heyzeer0.mgh.api.forge.ForgeStack;
 import net.heyzeer0.mgh.api.forge.IForgeEntity;
 import net.heyzeer0.mgh.api.forge.IForgeTileEntity;
 import net.heyzeer0.mgh.events.ThrowableHitEntityEvent;
@@ -24,7 +24,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.common.util.BlockSnapshot;
-import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
@@ -59,7 +58,6 @@ public class EventCore {
                         }
                         if(ExtendedPlayer.get((EntityPlayer)e.entity).isVampire()) {
                             ((EntityPlayer) e.entity).setHealth(4);
-
                         }
                     }
                 }
@@ -145,25 +143,10 @@ public class EventCore {
         if (tile != null) {
             // Add tracking info
             if (!tile.hasTrackedPlayer()) {
-                if (event.player instanceof FakePlayer) {
-                    IForgeTileEntity otherTile = ((IBlockEvent) event).getTile();
-                    if (otherTile != null && otherTile.hasTrackedPlayer()) {
-                        tile.setOwner(otherTile.getOwner());
-                        tile.setUUID(otherTile.getUUID());
-                    }
-                } else {
-                    tile.setPlayer(event.player);
-                }
+                ForgeStack.getStack().getCurrentEntityPlayer().ifPresent(p -> tile.setPlayer(p));
             }
         } else {
-            if (event.player instanceof FakePlayer) {
-                IForgeTileEntity otherTile = ((IBlockEvent) event).getTile();
-                if (otherTile != null && otherTile.hasTrackedPlayer()) {
-                    MagiHandlers.scheduleTileCheck(otherTile.getFakePlayer(), event.world, event.x, event.y, event.z);
-                }
-            } else {
-                MagiHandlers.scheduleTileCheck(event.player, event.world, event.x, event.y, event.z);
-            }
+            ForgeStack.getStack().getCurrentEntityPlayer().ifPresent(p -> MagiHandlers.scheduleTileCheck(p, event.world, event.x, event.y, event.z));
         }
     }
 
@@ -173,26 +156,13 @@ public class EventCore {
         if (e.isCanceled()) return;
         for (BlockSnapshot snapshot : e.getReplacedBlockSnapshots()) {
             IForgeTileEntity tile = (IForgeTileEntity) e.world.getTileEntity(snapshot.x, snapshot.y, snapshot.z);
-            if (tile != null && !tile.hasTrackedPlayer()) {
+            if (tile != null) {
                 // Add tracking info
-                if (e.player instanceof FakePlayer) {
-                    IForgeTileEntity otherTile = ((IBlockEvent) e).getTile();
-                    if (otherTile != null && otherTile.hasTrackedPlayer()) {
-                        tile.setOwner(otherTile.getOwner());
-                        tile.setUUID(otherTile.getUUID());
-                    }
-                } else {
-                    tile.setPlayer(e.player);
+                if (!tile.hasTrackedPlayer()) {
+                    ForgeStack.getStack().getCurrentEntityPlayer().ifPresent(p -> tile.setPlayer(p));
                 }
             } else {
-                if (e.player instanceof FakePlayer) {
-                    IForgeTileEntity otherTile = ((IBlockEvent) e).getTile();
-                    if (otherTile != null && otherTile.hasTrackedPlayer()) {
-                        MagiHandlers.scheduleTileCheck(otherTile.getFakePlayer(), snapshot.world, snapshot.x, snapshot.y, snapshot.z);
-                    }
-                } else {
-                    MagiHandlers.scheduleTileCheck(e.player, snapshot.world, snapshot.x, snapshot.y, snapshot.z);
-                }
+                ForgeStack.getStack().getCurrentEntityPlayer().ifPresent(p -> MagiHandlers.scheduleTileCheck(p, snapshot.world, snapshot.x, snapshot.y, snapshot.z));
             }
         }
     }

@@ -27,7 +27,7 @@ public abstract class MixinExplosionEventStart extends ExplosionEvent {
     private void onConstruct(World world, Explosion explosion, CallbackInfo ci) {
         if (event.isCancelled()) {
             this.setCanceled(true);
-            return;
+            ci.cancel();
         }
     }
 

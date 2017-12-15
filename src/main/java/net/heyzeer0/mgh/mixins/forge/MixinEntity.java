@@ -74,7 +74,7 @@ public abstract class MixinEntity implements IForgeEntity, IBukkitEntity {
     }
 
     @Override
-    public Object getCraftEntity() {
+    public org.bukkit.entity.Entity getCraftEntity() {
         return this.getBukkitEntity();
     }
 

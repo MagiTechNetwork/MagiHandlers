@@ -1,5 +1,6 @@
 package net.heyzeer0.mgh.mixins;
 
+import net.heyzeer0.mgh.api.bukkit.IBukkitEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MovingObjectPosition;
@@ -8,6 +9,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import org.bukkit.Bukkit;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 
 /**
  * Created by HeyZeer0 on 01/05/2017.
@@ -26,7 +30,19 @@ public class MixinManager {
     }
 
     public static boolean canAttack(EntityPlayer attacker, Entity damaged) {
-        return !MinecraftForge.EVENT_BUS.post(new AttackEntityEvent(attacker, damaged));
+        AttackEntityEvent forgeEvent = new AttackEntityEvent(attacker, damaged);
+        MinecraftForge.EVENT_BUS.post(forgeEvent);
+        if (forgeEvent.isCanceled()) {
+            return false;
+        }
+        EntityDamageByEntityEvent bukkitEvent = new EntityDamageByEntityEvent(
+                ((IBukkitEntity) attacker).getCraftEntity(),
+                ((IBukkitEntity) damaged).getCraftEntity(),
+                EntityDamageEvent.DamageCause.ENTITY_ATTACK,
+                5
+        );
+        Bukkit.getPluginManager().callEvent(bukkitEvent);
+        return !bukkitEvent.isCancelled();
     }
 
     public static boolean canBuild(EntityPlayer player, Object location, World world) {

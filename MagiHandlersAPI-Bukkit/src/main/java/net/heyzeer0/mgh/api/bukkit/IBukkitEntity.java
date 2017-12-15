@@ -1,5 +1,6 @@
 package net.heyzeer0.mgh.api.bukkit;
 
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 /**
@@ -13,6 +14,6 @@ public interface IBukkitEntity {
 
     Player getBukkitOwner();
 
-    Object getCraftEntity();
+    Entity getCraftEntity();
 
 }

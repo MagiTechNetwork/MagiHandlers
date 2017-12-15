@@ -1,11 +1,11 @@
 package net.heyzeer0.mgh.mixins.forge;
 
+import net.heyzeer0.mgh.api.forge.ForgeStack;
 import net.heyzeer0.mgh.api.forge.IForgeTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
 import org.spongepowered.asm.mixin.Mixin;
@@ -29,10 +29,13 @@ public abstract class MixinBlock {
         if (this.hasTileEntity(itemstack.getItemDamage()) || this.hasTileEntity()) {
             if (entityliving instanceof EntityPlayer) {
                 EntityPlayer $owner = (EntityPlayer) entityliving;
-                TileEntity $te = world.getTileEntity(x, y, z);
-                if ($te instanceof IForgeTileEntity && !((IForgeTileEntity) $te).hasTrackedPlayer() && !($owner instanceof FakePlayer)) {
-                    ((IForgeTileEntity) $te).setOwner($owner.getCommandSenderName());
-                    ((IForgeTileEntity) $te).setUUID($owner.getUniqueID().toString());
+                IForgeTileEntity $te = (IForgeTileEntity) world.getTileEntity(x, y, z);
+                if (!$te.hasTrackedPlayer()) {
+                    if ($owner instanceof FakePlayer) {
+                        ForgeStack.getStack().getCurrentEntityPlayer().ifPresent(p -> $te.setPlayer(p));
+                    } else {
+                        $te.setPlayer($owner);
+                    }
                 }
             }
         }
