@@ -1,5 +1,7 @@
 package net.heyzeer0.mgh.mixins.thaumcraft;
 
+import net.heyzeer0.mgh.MagiHandlers;
+import net.heyzeer0.mgh.api.forge.ForgeStack;
 import net.heyzeer0.mgh.api.forge.IForgeTileEntity;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -8,7 +10,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.FakePlayer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
@@ -34,8 +35,12 @@ public abstract class MixinBlockWoodenDevice extends BlockContainer {
         if (entityliving instanceof EntityPlayer) {
             EntityPlayer $owner = (EntityPlayer) entityliving;
             TileEntity $te = world.getTileEntity(x, y, z);
-            if ($te != null && !((IForgeTileEntity) $te).hasTrackedPlayer() && !($owner instanceof FakePlayer)) {
-                ((IForgeTileEntity) $te).setPlayer($owner);
+            if ($te != null) {
+                if (!((IForgeTileEntity) $te).hasMHPlayer() && !MagiHandlers.isFakePlayer($owner.getCommandSenderName())) {
+                    ((IForgeTileEntity) $te).setMHPlayer($owner);
+                } else {
+                    ForgeStack.getStack().getCurrentEntityPlayer().ifPresent(((IForgeTileEntity) $te)::setMHPlayer);
+                }
             }
         }
     }

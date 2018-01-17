@@ -18,7 +18,7 @@ public class PermissionHelper {
     public static boolean canTurtleBreak(ITurtleAccess turtle, int dir) {
         ChunkCoordinates pos = WorldUtil.moveCoords(turtle.getPosition(), dir);
         IForgeTileEntity tile = (IForgeTileEntity) turtle.getWorld().getTileEntity(turtle.getPosition().posX, turtle.getPosition().posY, turtle.getPosition().posZ);
-        return MixinManager.canBuild(pos.posX, pos.posY, pos.posZ, turtle.getWorld(), tile.getFakePlayer());
+        return MixinManager.canBuild(pos.posX, pos.posY, pos.posZ, turtle.getWorld(), tile.getMHPlayer());
     }
 
     public static boolean canTurtleAttack(ITurtleAccess turtle, int dir) {
@@ -27,7 +27,7 @@ public class PermissionHelper {
         Vec3 rayDir = turtlePlayer.getLook(1.0F);
         Vec3 rayStart = turtlePos.addVector(rayDir.xCoord * 0.4D, rayDir.yCoord * 0.4D, rayDir.zCoord * 0.4D);
         Entity hitEntity = WorldUtil.rayTraceEntities(turtle.getWorld(), rayStart, rayDir, 1.1D);
-        return MixinManager.canAttack(((IForgeTileEntity) turtle.getWorld().getTileEntity(turtle.getPosition().posX, turtle.getPosition().posY, turtle.getPosition().posZ)).getFakePlayer(), hitEntity);
+        return MixinManager.canAttack(((IForgeTileEntity) turtle.getWorld().getTileEntity(turtle.getPosition().posX, turtle.getPosition().posY, turtle.getPosition().posZ)).getMHPlayer(), hitEntity);
     }
 
 }

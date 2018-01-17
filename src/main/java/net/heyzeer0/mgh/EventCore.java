@@ -5,8 +5,10 @@ import com.emoniph.witchery.common.ExtendedPlayer;
 import com.jaquadro.minecraft.storagedrawers.api.storage.IDrawer;
 import com.jaquadro.minecraft.storagedrawers.block.tile.TileEntityDrawers;
 import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import ic2.core.item.reactor.ItemReactorUranium;
 import net.heyzeer0.mgh.api.bukkit.IBukkitTileEntity;
 import net.heyzeer0.mgh.api.forge.ForgeStack;
 import net.heyzeer0.mgh.api.forge.IForgeEntity;
@@ -27,6 +29,7 @@ import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 
@@ -107,18 +110,16 @@ public class EventCore {
             TileEntity te = e.world.getTileEntity(e.x, e.y, e.z);
             if (te != null && te instanceof IForgeTileEntity) {
                 e.setCanceled(true);
-                e.entityPlayer.addChatComponentMessage(new ChatComponentText("Username: " + ((IForgeTileEntity) te).getOwner()));
-                e.entityPlayer.addChatComponentMessage(new ChatComponentText("UUID: " + ((IForgeTileEntity) te).getUUID()));
-                e.entityPlayer.addChatComponentMessage(new ChatComponentText("IBukkitEntity: " + ((IBukkitTileEntity) te).getBukkitOwner()));
+                e.entityPlayer.addChatComponentMessage(new ChatComponentText("Username: " + ((IForgeTileEntity) te).getMHOwner()));
+                e.entityPlayer.addChatComponentMessage(new ChatComponentText("UUID: " + ((IForgeTileEntity) te).getMHUuid()));
+                e.entityPlayer.addChatComponentMessage(new ChatComponentText("IBukkitEntity: " + ((IBukkitTileEntity) te).getMHBukkitOwner()));
             }
         }
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void onLastInteract(PlayerInteractEvent event) {
-        if(event.isCanceled()) {
-            event.entityPlayer.closeScreen();
-        }
+    public void onInteract(PlayerInteractEvent e) {
+        if (e.isCanceled()) MagiHandlers.closeScreen(e.entityPlayer);
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
@@ -142,11 +143,11 @@ public class EventCore {
         IForgeTileEntity tile = (IForgeTileEntity) event.world.getTileEntity(event.x, event.y, event.z);
         if (tile != null) {
             // Add tracking info
-            if (!tile.hasTrackedPlayer()) {
-                ForgeStack.getStack().getCurrentEntityPlayer().ifPresent(p -> tile.setPlayer(p));
+            if (!tile.hasMHPlayer()) {
+                ForgeStack.getStack().getCurrentEntityPlayer().ifPresent(tile::setMHPlayer);
             }
         } else {
-            ForgeStack.getStack().getCurrentEntityPlayer().ifPresent(p -> MagiHandlers.scheduleTileCheck(p, event.world, event.x, event.y, event.z));
+            ForgeStack.getStack().getCurrentEntityPlayer().ifPresent(p -> MagiHandlers.scheduleTileCheck(p.getCommandSenderName(), p.getUniqueID().toString(), event.world, event.x, event.y, event.z));
         }
     }
 
@@ -158,11 +159,11 @@ public class EventCore {
             IForgeTileEntity tile = (IForgeTileEntity) e.world.getTileEntity(snapshot.x, snapshot.y, snapshot.z);
             if (tile != null) {
                 // Add tracking info
-                if (!tile.hasTrackedPlayer()) {
-                    ForgeStack.getStack().getCurrentEntityPlayer().ifPresent(p -> tile.setPlayer(p));
+                if (!tile.hasMHPlayer()) {
+                    ForgeStack.getStack().getCurrentEntityPlayer().ifPresent(tile::setMHPlayer);
                 }
             } else {
-                ForgeStack.getStack().getCurrentEntityPlayer().ifPresent(p -> MagiHandlers.scheduleTileCheck(p, snapshot.world, snapshot.x, snapshot.y, snapshot.z));
+                ForgeStack.getStack().getCurrentEntityPlayer().ifPresent(p -> MagiHandlers.scheduleTileCheck(p.getCommandSenderName(), p.getUniqueID().toString(), snapshot.world, snapshot.x, snapshot.y, snapshot.z));
             }
         }
     }
@@ -177,6 +178,18 @@ public class EventCore {
             e.setCanceled(true);
             e.entityPlayer.addChatComponentMessage(new ChatComponentText("Username: " + ((IForgeEntity) e.target).getOwner().getCommandSenderName()));
             e.entityPlayer.addChatComponentMessage(new ChatComponentText("UUID: " + ((IForgeEntity) e.target).getOwner().getUniqueID().toString()));
+        }
+    }
+
+    @SubscribeEvent
+    public void onPickup(EntityItemPickupEvent e) {
+        if (Loader.isModLoaded("IC2")) {
+            if (e.item.getEntityItem().getItem() instanceof ItemReactorUranium || e.item.getEntityItem().getItem().getUnlocalizedName().contains("itemUran")) {
+                if (!MixinManager.canAttack(((IForgeEntity) e.item).getOwner(), e.entityLiving)) {
+                    e.setCanceled(true);
+                    e.setResult(Event.Result.DENY);
+                }
+            }
         }
     }
 

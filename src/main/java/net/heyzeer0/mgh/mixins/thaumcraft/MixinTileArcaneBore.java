@@ -24,7 +24,7 @@ public abstract class MixinTileArcaneBore extends TileThaumcraft implements IFor
 
     @Inject(method = "dig", at = @At("HEAD"), cancellable = true)
     public void fireBreak(CallbackInfo ci) {
-        if (!MixinManager.canBuild(digX, digY, digZ, worldObj, getFakePlayer())) {
+        if (!MixinManager.canBuild(digX, digY, digZ, worldObj, this.getMHPlayer())) {
             ci.cancel();
         }
     }

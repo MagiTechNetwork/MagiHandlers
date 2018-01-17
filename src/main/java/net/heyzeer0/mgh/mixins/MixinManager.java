@@ -35,6 +35,7 @@ public class MixinManager {
         if (forgeEvent.isCanceled()) {
             return false;
         }
+        if (damaged == null) return true;
         EntityDamageByEntityEvent bukkitEvent = new EntityDamageByEntityEvent(
                 ((IBukkitEntity) attacker).getCraftEntity(),
                 ((IBukkitEntity) damaged).getCraftEntity(),

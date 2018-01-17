@@ -1,5 +1,7 @@
 package net.heyzeer0.mgh.mixins.mekanism;
 
+import net.heyzeer0.mgh.MagiHandlers;
+import net.heyzeer0.mgh.api.forge.ForgeStack;
 import net.heyzeer0.mgh.api.forge.IForgeTileEntity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,10 +26,12 @@ public abstract class MixinBlockMachine {
     public void onBlockPlacedByOwner(World world, int x, int y, int z, EntityLivingBase entityliving, ItemStack itemstack, CallbackInfo ci) {
         if (entityliving instanceof EntityPlayer) {
             EntityPlayer $owner = (EntityPlayer) entityliving;
+            if (MagiHandlers.isFakePlayer($owner.getCommandSenderName())) {
+                $owner = ForgeStack.getStack().getCurrentEntityPlayer().orElse($owner);
+            }
             TileEntity $te = world.getTileEntity(x, y, z);
             if ($te instanceof IForgeTileEntity) {
-                ((IForgeTileEntity) $te).setOwner($owner.getCommandSenderName());
-                ((IForgeTileEntity) $te).setUUID($owner.getUniqueID().toString());
+                ((IForgeTileEntity) $te).setMHPlayer($owner);
             }
         }
     }

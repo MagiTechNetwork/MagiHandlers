@@ -21,7 +21,7 @@ import java.util.List;
  */
 
 @Pseudo
-@Mixin(targets = "vazkii/botania/common/entity/EntityEnderAirBottle")
+@Mixin(targets = "vazkii/botania/common/entity/EntityEnderAirBottle", remap = false)
 public abstract class MixinEntityEnderAirBottle extends EntityThrowable {
 
     @Shadow
@@ -32,7 +32,7 @@ public abstract class MixinEntityEnderAirBottle extends EntityThrowable {
     }
 
     @Overwrite
-    protected void onImpact(MovingObjectPosition pos) {
+    protected void func_70184_a(MovingObjectPosition pos) {
         if (pos.entityHit == null && !worldObj.isRemote) {
             List<ChunkCoordinates> coordsList = getCoordsToPut(pos.blockX, pos.blockY, pos.blockZ);
             worldObj.playAuxSFX(2002, (int) Math.round(posX), (int) Math.round(posY), (int) Math.round(posZ), 8);

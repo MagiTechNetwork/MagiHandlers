@@ -19,7 +19,7 @@ public abstract class MixinTileEntityTerra implements IForgeTileEntity {
 
     @Redirect(method = "updateEntityServer", at = @At(value = "INVOKE", target = "Lic2/api/item/ITerraformingBP;terraform(Lnet/minecraft/world/World;III)Z"))
     public boolean redirectTerraform(ITerraformingBP instance, World world, int x, int z, int y) {
-        if (MixinManager.canBuild(x, y, z, world, getFakePlayer())) {
+        if (MixinManager.canBuild(x, y, z, world, this.getMHPlayer())) {
             return instance.terraform(world, x, z, y);
         }
         return false;

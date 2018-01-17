@@ -20,7 +20,7 @@ public abstract class MixinTileFloodGate extends TileEntity implements IForgeTil
 
     @Inject(method = "canPlaceFluidAt", at = @At("HEAD"), cancellable = true)
     public void fireBreak(Block block, int x, int y, int z, CallbackInfoReturnable<Boolean> cir) {
-        if (!MixinManager.canBuild(x, y, z, worldObj, getFakePlayer())) {
+        if (!MixinManager.canBuild(x, y, z, worldObj, this.getMHPlayer())) {
             cir.setReturnValue(false);
         }
     }

@@ -19,9 +19,8 @@ public abstract class MixinTileTurtle extends TileComputerBase {
     @Inject(method = "transferStateFrom", at = @At("HEAD"))
     private void injectOnTransferState(TileTurtle copy, CallbackInfo ci) {
         IForgeTileEntity otherTile = (IForgeTileEntity) copy;
-        if (otherTile.hasTrackedPlayer()) {
-            ((IForgeTileEntity) this).setOwner(otherTile.getOwner());
-            ((IForgeTileEntity) this).setUUID(otherTile.getUUID());
+        if (otherTile.hasMHPlayer()) {
+            ((IForgeTileEntity) this).setMHOwner(otherTile.getMHOwner(), otherTile.getMHUuid());
         }
     }
 

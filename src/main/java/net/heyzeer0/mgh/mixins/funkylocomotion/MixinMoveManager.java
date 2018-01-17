@@ -26,12 +26,12 @@ public abstract class MixinMoveManager {
     private static void onStartMoving(World world, List<BlockPos> list, ForgeDirection dir, int maxTime, CallbackInfo ci) {
         IForgeTileEntity tile = MagiHandlers.getStack().getFirst(IForgeTileEntity.class).get();
         for (BlockPos pos : list) {
-            if (!MixinManager.canBuild(pos.x, pos.y, pos.z, world, tile.getFakePlayer())) {
+            if (!MixinManager.canBuild(pos.x, pos.y, pos.z, world, tile.getMHPlayer())) {
                 ci.cancel();
                 return;
             }
             BlockPos pos2 = pos.advance(dir);
-            if (!MixinManager.canBuild(pos2.x, pos2.y, pos2.z, world, tile.getFakePlayer())) {
+            if (!MixinManager.canBuild(pos2.x, pos2.y, pos2.z, world, tile.getMHPlayer())) {
                 ci.cancel();
                 return;
             }

@@ -7,20 +7,28 @@ import net.minecraft.entity.player.EntityPlayer;
  */
 public interface IForgeTileEntity {
 
-    String getOwner();
+    String getMHOwner();
 
-    void setOwner(String owner);
+    void setMHOwner(String owner);
 
-    String getUUID();
+    String getMHUuid();
 
-    void setUUID(String uuid);
+    void setMHUuid(String uuid);
 
-    EntityPlayer getFakePlayer();
+    EntityPlayer getMHPlayer();
 
-    EntityPlayer getFakePlayerReplacingBlock();
+    default void setMHPlayer(EntityPlayer player) {
+        setMHOwner(player.getCommandSenderName());
+        setMHUuid(player.getUniqueID().toString());
+    }
 
-    void setPlayer(EntityPlayer player);
+    EntityPlayer getMHPlayerReplacing();
 
-    boolean hasTrackedPlayer();
+    boolean hasMHPlayer();
+
+    default void setMHOwner(String name, String uuid) {
+        setMHOwner(name);
+        setMHUuid(uuid);
+    }
 
 }

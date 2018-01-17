@@ -21,7 +21,7 @@ public abstract class MixinTileSpreader implements IForgeTileEntity {
     @Redirect(method = "getBurst", at = @At(value = "INVOKE", target = "Lvazkii/botania/common/entity/EntityManaBurst;setSourceLens(Lnet/minecraft/item/ItemStack;)V"))
     private void onSpawnEntity(EntityManaBurst entity, ItemStack lens) {
         if (entity != null) {
-            ((IEntityThrowable)entity).setThrower(getFakePlayer());
+            ((IEntityThrowable) entity).setThrower(this.getMHPlayer());
         }
 
         entity.setSourceLens(lens);

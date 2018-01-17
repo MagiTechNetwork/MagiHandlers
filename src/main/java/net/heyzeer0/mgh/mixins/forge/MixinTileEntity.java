@@ -45,65 +45,59 @@ public abstract class MixinTileEntity implements IForgeTileEntity, IBukkitTileEn
     private EntityPlayer realFakePlayer;
 
     @Override
-    public String getOwner() {
+    public String getMHOwner() {
         return this.tileOwner;
     }
 
     @Override
-    public String getUUID() {
-        return this.tileUuid;
-    }
-
-    @Override
-    public void setOwner(String owner) {
-        this.tileOwner = owner;
-    }
-
-    @Override
-    public void setUUID(String uuid) {
-        this.tileUuid = uuid;
-    }
-
-    @Override
-    public void setPlayer(EntityPlayer player) {
-        this.setOwner(player.getCommandSenderName());
-        this.setUUID(player.getUniqueID().toString());
-    }
-
-    @Override
-    public boolean hasTrackedPlayer() {
-        return this.tileOwner != null && this.tileUuid != null;
-    }
-
-    @Override
-    public boolean hasOwner() {
-        return hasTrackedPlayer();
-    }
-
-    @Override
-    public void setOwner(Player player) {
+    public void setMHOwner(Player player) {
         this.tileOwner = player.getPlayerListName();
         this.tileUuid = player.getUniqueId().toString();
     }
 
     @Override
-    public Player getBukkitOwner() {
-        return (Player) ((IBukkitEntity) getFakePlayer()).getCraftEntity();
+    public String getMHUuid() {
+        return this.tileUuid;
     }
 
     @Override
-    public EntityPlayer getFakePlayer() {
-        if (this.hasTrackedPlayer() && MagiHandlers.getPlayer(this.tileOwner) != null) {
+    public void setMHUuid(String uuid) {
+        this.tileUuid = uuid;
+    }
+
+    @Override
+    public void setMHOwner(String owner) {
+        this.tileOwner = owner;
+    }
+
+    @Override
+    public boolean hasMHPlayer() {
+        return this.tileOwner != null && this.tileUuid != null;
+    }
+
+    @Override
+    public boolean hasMHOwner() {
+        return hasMHPlayer();
+    }
+
+    @Override
+    public Player getMHBukkitOwner() {
+        return (Player) ((IBukkitEntity) getMHPlayer()).getCraftEntity();
+    }
+
+    @Override
+    public EntityPlayer getMHPlayer() {
+        if (this.hasMHPlayer() && MagiHandlers.getPlayer(this.tileOwner) != null) {
             realFakePlayer = MagiHandlers.getPlayer(this.tileOwner);
             return realFakePlayer;
         }
         if (realFakePlayer == null) {
-            if (this.hasTrackedPlayer()) {
+            if (this.hasMHPlayer()) {
                 if (MagiHandlers.getPlayer(this.tileOwner) != null) {
                     realFakePlayer = MagiHandlers.getPlayer(this.tileOwner);
                 } else {
                     try {
-                        realFakePlayer = FakePlayerFactory.get((WorldServer) this.worldObj, new GameProfile(UUID.fromString(getUUID()), getOwner()));
+                        realFakePlayer = FakePlayerFactory.get((WorldServer) this.worldObj, new GameProfile(UUID.fromString(getMHUuid()), getMHOwner()));
                     } catch (IllegalArgumentException e) {
                         realFakePlayer = FakePlayerFactory.getMinecraft((WorldServer) this.worldObj);
                     }
@@ -116,8 +110,8 @@ public abstract class MixinTileEntity implements IForgeTileEntity, IBukkitTileEn
     }
 
     @Override
-    public EntityPlayer getFakePlayerReplacingBlock() {
-        if (!this.hasTrackedPlayer()) {
+    public EntityPlayer getMHPlayerReplacing() {
+        if (!this.hasMHPlayer()) {
             ItemStack item = new ItemStack(this.getBlockType(), 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
             this.writeToNBT(nbt);
@@ -127,7 +121,7 @@ public abstract class MixinTileEntity implements IForgeTileEntity, IBukkitTileEn
             this.getWorldObj().setBlock(this.xCoord, this.yCoord, this.zCoord, GameData.getBlockRegistry().getObject("ExtraUtilities:chestMini"));
             ((IInventory)this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord)).setInventorySlotContents(0, item);
         }
-        return getFakePlayer();
+        return getMHPlayer();
     }
 
     @Inject(method = "readFromNBT", at = @At("HEAD"))

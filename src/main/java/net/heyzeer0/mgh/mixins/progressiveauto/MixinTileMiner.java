@@ -19,7 +19,7 @@ public abstract class MixinTileMiner extends TileEntity implements IForgeTileEnt
 
     @Inject(method = "canMineBlock", at = @At("HEAD"), cancellable = true)
     private void injectCanMineBlock(int x, int y, int z, CallbackInfoReturnable<Integer> cir) {
-        if (!MixinManager.canBuild(x, y, z, worldObj, getFakePlayer())) {
+        if (!MixinManager.canBuild(x, y, z, worldObj, this.getMHPlayer())) {
             cir.setReturnValue(0);
         }
     }

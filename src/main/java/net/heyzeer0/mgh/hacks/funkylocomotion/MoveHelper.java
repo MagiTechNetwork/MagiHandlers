@@ -22,8 +22,10 @@ public class MoveHelper {
         List<BlockPos> newBlocks = list.isEmpty() ? new ArrayList<>() : new ArrayList<>(list);
         for (BlockPos blockPos : list) {
             BlockPos advance = blockPos.advance(dir);
-            if (!MixinManager.canBuild(blockPos.x, blockPos.y, blockPos.z, world, tile.getFakePlayer())) newBlocks.remove(blockPos);
-            if (list.contains(advance) && !MixinManager.canBuild(advance.x, advance.y, advance.z, world, tile.getFakePlayer())) newBlocks.remove(blockPos);
+            if (!MixinManager.canBuild(blockPos.x, blockPos.y, blockPos.z, world, tile.getMHPlayer()))
+                newBlocks.remove(blockPos);
+            if (list.contains(advance) && !MixinManager.canBuild(advance.x, advance.y, advance.z, world, tile.getMHPlayer()))
+                newBlocks.remove(blockPos);
         }
         return newBlocks;
     }

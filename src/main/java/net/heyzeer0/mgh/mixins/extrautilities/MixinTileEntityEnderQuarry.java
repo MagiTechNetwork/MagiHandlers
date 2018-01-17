@@ -19,7 +19,7 @@ public abstract class MixinTileEntityEnderQuarry extends TileEntity implements I
 
     @Inject(method = "mineBlock", at = @At("HEAD"), cancellable = true)
     public void fireBreak(final int x, final int y, final int z, final boolean replaceWithDirt, CallbackInfoReturnable<Boolean> cir) {
-        if (!MixinManager.canBuild(x, y, z, worldObj, getFakePlayerReplacingBlock())) {
+        if (!MixinManager.canBuild(x, y, z, worldObj, this.getMHPlayerReplacing())) {
             cir.setReturnValue(false);
         }
     }

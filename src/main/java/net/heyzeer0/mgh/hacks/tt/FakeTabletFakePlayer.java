@@ -16,7 +16,7 @@ public class FakeTabletFakePlayer extends FakeThaumcraftPlayer {
     TileAnimationTablet tablet;
 
     public FakeTabletFakePlayer(TileAnimationTablet tablet) {
-        super(tablet.getWorldObj(), ((IForgeTileEntity) tablet).getFakePlayer().getGameProfile());
+        super(tablet.getWorldObj(), ((IForgeTileEntity) tablet).getMHPlayer().getGameProfile());
         this.tablet = tablet;
     }
 

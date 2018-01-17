@@ -7,10 +7,10 @@ import org.bukkit.entity.Player;
  */
 public interface IBukkitTileEntity {
 
-    Player getBukkitOwner();
+    Player getMHBukkitOwner();
 
-    void setOwner(Player player);
+    void setMHOwner(Player player);
 
-    boolean hasOwner();
+    boolean hasMHOwner();
 
 }

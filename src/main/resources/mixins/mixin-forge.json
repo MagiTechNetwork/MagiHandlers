@@ -10,7 +10,6 @@
     "MixinSpawnerAnimals",
     "MixinChunk",
     "MixinChunkProviderServer",
-    "MixinBlockEvent",
     "MixinBlockEvent$MixinBreakEvent",
     "MixinBlockEvent$MixinPlaceEvent",
     "MixinWorldServer",
@@ -18,7 +17,11 @@
     "MixinEntity",
     "MixinExplosion",
     "MixinNetworkManager",
-    "MixinExplosionEvent"
+    "MixinExplosionEvent",
+    "MixinPlayerEvent",
+    "MixinLivingEvent",
+    "MixinCraftEventFactory",
+    "MixinYggdrasilMinecraftSessionService"
   ],
   "server": [],
   "client": [],

@@ -17,14 +17,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  */
 
 @Pseudo
-@Mixin(targets = "vazkii/botania/common/entity/EntityThornChakram")
+@Mixin(targets = "vazkii/botania/common/entity/EntityThornChakram", remap = false)
 public abstract class MixinEntityThornChakram extends EntityThrowable {
 
     public MixinEntityThornChakram(World world) {
         super(world);
     }
 
-    @Inject(method = "onImpact", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "func_70184_a", at = @At("HEAD"), cancellable = true)
     private void injectImpact(MovingObjectPosition pos, CallbackInfo ci) {
         if (pos.entityHit != null && pos.entityHit instanceof EntityLivingBase && pos.entityHit != getThrower() && getThrower() instanceof EntityPlayer) {
             if (!MixinManager.canAttack((EntityPlayer)getThrower(), pos.entityHit)) {

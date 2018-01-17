@@ -1,20 +1,30 @@
 package net.heyzeer0.mgh;
 
+import com.google.common.collect.Lists;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import cpw.mods.fml.common.DummyModContainer;
 import cpw.mods.fml.common.LoadController;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.ModMetadata;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import net.heyzeer0.mgh.api.bukkit.BukkitAPI;
 import net.heyzeer0.mgh.api.bukkit.BukkitStack;
 import net.heyzeer0.mgh.api.forge.ForgeStack;
 import net.heyzeer0.mgh.api.forge.IForgeTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.network.play.server.S2EPacketCloseWindow;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
+import org.bukkit.Location;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -23,12 +33,34 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * Created by HeyZeer0 on 08/03/2017.
  * Copyright © HeyZeer0 - 2016
  */
-public class MagiHandlers extends DummyModContainer {
+public class MagiHandlers extends DummyModContainer implements BukkitAPI.MagiHandlers {
 
     public static MagiHandlers instance;
     private PhaseStack stack;
     public List<Runnable> tasks;
     public static boolean isCauldron = false;
+    private static List<String> fakePlayers = Lists.newArrayList(
+            "[computercraft]",
+            "[cofh]",
+            "[buildcraft]",
+            "[mekanism]",
+            "[minefactoryreloaded]",
+            "[computercraft]",
+            "[forestry]",
+            "[openmods]",
+            "[extrautilities]",
+            "[minecraft]",
+            "[draconic-evolution]",
+            "[eiokillera]",
+            "[eiofarmer]",
+            "[fakethaumcraftgolem]",
+            "fakethaumcraftgolem",
+            "[pr_fake]",
+            "[tt]",
+            "fakethaumcraft",
+            "fakethaumcraftbore",
+            "[thaumcrafttablet]"
+    );
     
     public MagiHandlers() {
         super(new ModMetadata());
@@ -50,11 +82,21 @@ public class MagiHandlers extends DummyModContainer {
         return true;
     }
 
-    public static void scheduleTileCheck(EntityPlayer player, World world, int x, int y, int z) {
+    public static void scheduleTileCheck(String username, String uuid, World world, int x, int y, int z) {
         instance.tasks.add(() -> {
             IForgeTileEntity tile = (IForgeTileEntity) world.getTileEntity(x, y, z);
-            if (tile != null) tile.setPlayer(player);
+            if (tile != null) {
+                tile.setMHOwner(username, uuid);
+            }
         });
+    }
+
+    public static void closeScreen(EntityPlayer p) {
+        ((EntityPlayerMP) p).playerNetServerHandler.sendPacket(new S2EPacketCloseWindow());
+    }
+
+    public static boolean isFakePlayer(String name) {
+        return name.toLowerCase().contains("openmodsfakeplayer") || fakePlayers.contains(name.toLowerCase());
     }
 
     public static EntityPlayer getPlayer(String name) {
@@ -63,6 +105,28 @@ public class MagiHandlers extends DummyModContainer {
 
     public static PhaseStack getStack() {
         return instance.stack;
+    }
+
+    public static List<Block> getNearbyBlocks(Location location, int radius) {
+        List<Block> blocks = new ArrayList<>();
+        for (int x = location.getBlockX() - radius; x <= location.getBlockX() + radius; x++) {
+            for (int y = location.getBlockY() - radius; y <= location.getBlockY() + radius; y++) {
+                for (int z = location.getBlockZ() - radius; z <= location.getBlockZ() + radius; z++) {
+                    blocks.add(location.getWorld().getBlockAt(x, y, z));
+                }
+            }
+        }
+        return blocks;
+    }
+
+    @Override
+    public void closeInventory(Player p) {
+        closeScreen(getPlayer(p.getName()));
+    }
+
+    public static void log(String content) {
+        LogManager.getLogger().warn(" ");
+        LogManager.getLogger().warn("[MagiHandlers] " + content);
     }
 
     @Subscribe
@@ -82,11 +146,12 @@ public class MagiHandlers extends DummyModContainer {
         this.stack = new PhaseStack();
         ForgeStack.stack = this.stack;
         BukkitStack.stack = this.stack;
+        BukkitAPI.handlers = this;
     }
 
-    public static void log(String content) {
-        LogManager.getLogger().warn(" ");
-        LogManager.getLogger().warn("[MagiHandlers] " + content);
+    @Subscribe
+    public void onInit(FMLPostInitializationEvent e) {
+        if (Loader.isModLoaded("OpenComputers")) MinecraftForge.EVENT_BUS.register(new OpenComputersEventHandler());
     }
 
 }

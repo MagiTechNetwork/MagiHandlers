@@ -1,16 +1,16 @@
 package net.heyzeer0.mgh.mixins.forge;
 
 import net.heyzeer0.mgh.MagiHandlers;
-import net.heyzeer0.mgh.api.IBlockEvent;
-import net.heyzeer0.mgh.api.forge.IForgeTileEntity;
+import net.heyzeer0.mgh.api.forge.ForgeStack;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.BlockSnapshot;
-import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.world.BlockEvent;
-import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Mutable;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -18,49 +18,33 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 /**
  * Created by Frani on 18/10/2017.
  */
-@Mixin(BlockEvent.class)
-public abstract class MixinBlockEvent implements IBlockEvent {
-
-    private IForgeTileEntity breaker;
-
-    @Override
-    public IForgeTileEntity getTile() {
-        return breaker;
-    }
-
-    @Override
-    public void setTile(TileEntity tile) {
-        this.breaker = (IForgeTileEntity) tile;
-    }
-
-    @Inject(method = "<init>", at = @At("RETURN"))
-    private void onConstruct(int a, int b, int c, World d, Block e, int f, CallbackInfo ci) {
-        MagiHandlers.getStack().getFirst(TileEntity.class).ifPresent(this::setTile);
-    }
+public abstract class MixinBlockEvent {
 
     @Mixin(value = BlockEvent.BreakEvent.class, remap = false)
-    public static abstract class MixinBreakEvent implements IBlockEvent {
+    public static abstract class MixinBreakEvent {
 
-        @Shadow @Final private EntityPlayer player;
+        @Shadow
+        @Final
+        @Mutable
+        private EntityPlayer player;
 
-        @Overwrite
-        public EntityPlayer getPlayer() {
-            if (player instanceof FakePlayer && getTile() != null) {
-                return getTile().getFakePlayer();
+        @Inject(method = "<init>", at = @At("RETURN"))
+        private void onConstruct(int x, int y, int z, World world, Block block, int meta, EntityPlayer p, CallbackInfo ci) {
+            if (MagiHandlers.isFakePlayer(p.getCommandSenderName())) {
+                this.player = ForgeStack.getStack().getCurrentEntityPlayer().orElse(p);
             }
-            return player;
         }
     }
 
     @Mixin(BlockEvent.PlaceEvent.class)
-    public static abstract class MixinPlaceEvent implements IBlockEvent {
+    public static abstract class MixinPlaceEvent {
 
         @Shadow @Final @Mutable public EntityPlayer player;
 
         @Inject(method = "<init>", at = @At("RETURN"))
         private void onConstruct(BlockSnapshot blockSnapshot, Block placedAgainst, EntityPlayer p, CallbackInfo ci) {
-            if (p instanceof FakePlayer && getTile() != null) {
-                player = getTile().getFakePlayer();
+            if (MagiHandlers.isFakePlayer(p.getCommandSenderName())) {
+                this.player = ForgeStack.getStack().getCurrentEntityPlayer().orElse(p);
             }
         }
     }
