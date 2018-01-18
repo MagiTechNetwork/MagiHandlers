@@ -2,16 +2,12 @@ package net.heyzeer0.mgh.mixins.forge;
 
 import net.heyzeer0.mgh.MagiHandlers;
 import net.heyzeer0.mgh.api.forge.ForgeStack;
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.world.World;
-import org.bukkit.block.BlockState;
 import org.bukkit.craftbukkit.v1_7_R4.event.CraftEventFactory;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 /**
  * Created by Frani on 20/12/2017.
@@ -19,18 +15,24 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(value = CraftEventFactory.class, remap = false)
 public class MixinCraftEventFactory {
 
-    @Inject(method = "callBlockBreakEvent", at = @At("HEAD"))
-    private static void onCallBreakEvent(World world, int x, int y, int z, Block block, int meta, EntityPlayerMP player, CallbackInfoReturnable cir) {
-        if (MagiHandlers.isFakePlayer(player.getCommandSenderName())) {
-            player = (EntityPlayerMP) ForgeStack.getStack().getCurrentEntityPlayer().orElse(player);
-        }
+    @ModifyVariable(method = "callBlockBreakEvent", at = @At("HEAD"), index = 6, argsOnly = true)
+    private static EntityPlayerMP replaceBreakingPlayer(EntityPlayerMP old) {
+        return MagiHandlers.isFakePlayer(old.getCommandSenderName()) ? (EntityPlayerMP) ForgeStack.getStack().getCurrentEntityPlayer().orElse(old) : old;
     }
 
-    @Inject(method = "callBlockPlaceEvent", at = @At("HEAD"))
-    private static void onCallBlockPlace(World world, EntityPlayer who, BlockState replacedBlockState, int clickedX, int clickedY, int clickedZ, CallbackInfoReturnable cir) {
-        if (MagiHandlers.isFakePlayer(who.getCommandSenderName())) {
-            who = ForgeStack.getStack().getCurrentEntityPlayer().orElse(who);
-        }
+    @ModifyVariable(method = "callBlockPlaceEvent", at = @At("HEAD"), index = 1, argsOnly = true)
+    private static EntityPlayer replacePlacingPlayer(EntityPlayer who) {
+        return MagiHandlers.isFakePlayer(who.getCommandSenderName()) ? ForgeStack.getStack().getCurrentEntityPlayer().orElse(who) : who;
+    }
+
+    @ModifyVariable(method = "callPlayerInteractEvent(Lnet/minecraft/entity/player/EntityPlayer;Lorg/bukkit/event/block/Action;IIIILnet/minecraft/item/ItemStack;)Lorg/bukkit/event/player/PlayerInteractEvent;", at = @At("HEAD"), index = 0, argsOnly = true)
+    private static EntityPlayer replaceInteractingPlyer(EntityPlayer p) {
+        return MagiHandlers.isFakePlayer(p.getCommandSenderName()) ? ForgeStack.getStack().getCurrentEntityPlayer().orElse(p) : p;
+    }
+
+    @ModifyVariable(method = "callBlockMultiPlaceEvent", at = @At("HEAD"), index = 1, argsOnly = true)
+    private static EntityPlayer replaceMultiPlace(EntityPlayer p) {
+        return MagiHandlers.isFakePlayer(p.getCommandSenderName()) ? ForgeStack.getStack().getCurrentEntityPlayer().orElse(p) : p;
     }
 
 }

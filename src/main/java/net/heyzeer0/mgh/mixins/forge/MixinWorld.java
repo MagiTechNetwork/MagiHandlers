@@ -2,7 +2,8 @@ package net.heyzeer0.mgh.mixins.forge;
 
 import net.heyzeer0.mgh.MagiHandlers;
 import net.heyzeer0.mgh.api.IMixinChunk;
-import net.heyzeer0.mgh.hacks.EntityHelper;
+import net.heyzeer0.mgh.api.forge.ForgeStack;
+import net.heyzeer0.mgh.api.forge.IForgeEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -11,6 +12,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
@@ -46,9 +48,10 @@ public abstract class MixinWorld {
         }
     }
 
-    @Inject(method = "onEntityAdded", at = @At(value = "HEAD"))
-    public void onEntitySpawn1(Entity e, CallbackInfo cir) {
-        e = EntityHelper.checkEntity(e);
+    @ModifyVariable(method = "onEntityAdded", at = @At("HEAD"), argsOnly = true)
+    public Entity replaceEntity(Entity e) {
+        ForgeStack.getStack().getCurrentEntityPlayer().ifPresent(((IForgeEntity) e)::setOwner);
+        return e;
     }
 
     @Inject(method = "tick", at = @At("HEAD"))
