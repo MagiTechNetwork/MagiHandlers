@@ -15,7 +15,10 @@
     "MixinTileNode",
     "MixinTileEldritchTrap",
     "MixinTileArcaneBore",
-    "MixinBlockWoodenDevice"
+    "MixinBlockWoodenDevice",
+    "MixinPacketFocusChangeToServer",
+    "MixinPacketScannedToServer",
+    "MixinPacketAspectCombinationToServer"
   ],
   "server": [],
   "client": [],
