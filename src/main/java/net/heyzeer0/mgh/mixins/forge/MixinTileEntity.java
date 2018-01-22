@@ -15,6 +15,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.FakePlayerFactory;
 import org.bukkit.entity.Player;
 import org.spongepowered.asm.mixin.Mixin;
@@ -43,6 +44,7 @@ public abstract class MixinTileEntity implements IForgeTileEntity, IBukkitTileEn
     private String tileOwner;
     private String tileUuid;
     private EntityPlayer realFakePlayer;
+    private UUID MHUUID;
 
     @Override
     public String getMHOwner() {
@@ -53,6 +55,7 @@ public abstract class MixinTileEntity implements IForgeTileEntity, IBukkitTileEn
     public void setMHOwner(Player player) {
         this.tileOwner = player.getPlayerListName();
         this.tileUuid = player.getUniqueId().toString();
+        this.MHUUID = player.getUniqueId();
     }
 
     @Override
@@ -62,6 +65,12 @@ public abstract class MixinTileEntity implements IForgeTileEntity, IBukkitTileEn
 
     @Override
     public void setMHUuid(String uuid) {
+        try {
+            UUID u = UUID.fromString(uuid);
+            this.MHUUID = u;
+        } catch (Exception e) {
+            return;
+        }
         this.tileUuid = uuid;
     }
 
@@ -72,7 +81,7 @@ public abstract class MixinTileEntity implements IForgeTileEntity, IBukkitTileEn
 
     @Override
     public boolean hasMHPlayer() {
-        return this.tileOwner != null && this.tileUuid != null;
+        return this.tileOwner != null && this.tileUuid != null && this.MHUUID != null;
     }
 
     @Override
@@ -86,25 +95,36 @@ public abstract class MixinTileEntity implements IForgeTileEntity, IBukkitTileEn
     }
 
     @Override
-    public EntityPlayer getMHPlayer() {
-        if (this.hasMHPlayer() && MagiHandlers.getPlayer(this.tileOwner) != null) {
-            realFakePlayer = MagiHandlers.getPlayer(this.tileOwner);
-            return realFakePlayer;
-        }
-        if (realFakePlayer == null) {
-            if (this.hasMHPlayer()) {
-                if (MagiHandlers.getPlayer(this.tileOwner) != null) {
-                    realFakePlayer = MagiHandlers.getPlayer(this.tileOwner);
+    public EntityPlayer getMHPlayer(boolean fake) {
+        if (this.hasMHPlayer()) {
+            if (realFakePlayer == null) {
+                EntityPlayer f = FakePlayerFactory.get((WorldServer) this.worldObj, new GameProfile(this.MHUUID, getMHOwner()));
+                if (fake) {
+                    realFakePlayer = f;
                 } else {
-                    try {
-                        realFakePlayer = FakePlayerFactory.get((WorldServer) this.worldObj, new GameProfile(UUID.fromString(getMHUuid()), getMHOwner()));
-                    } catch (IllegalArgumentException e) {
-                        realFakePlayer = FakePlayerFactory.getMinecraft((WorldServer) this.worldObj);
+                    EntityPlayer p = MagiHandlers.getPlayer(this.tileOwner);
+                    realFakePlayer = p != null ? p : f;
+                }
+                return realFakePlayer;
+            } else {
+                if (fake) {
+                    if (realFakePlayer instanceof FakePlayer) {
+                        return realFakePlayer;
+                    } else {
+                        realFakePlayer = null;
+                        return this.getMHPlayer(true);
+                    }
+                } else {
+                    if (realFakePlayer instanceof FakePlayer) {
+                        if (!realFakePlayer.getCommandSenderName().equals("[Minecraft]")) {
+                            realFakePlayer = null;
+                            realFakePlayer = this.getMHPlayer(false);
+                        }
                     }
                 }
-            } else {
-                realFakePlayer = FakePlayerFactory.getMinecraft((WorldServer) this.worldObj);
             }
+        } else {
+            realFakePlayer = FakePlayerFactory.getMinecraft((WorldServer) this.worldObj);
         }
         return realFakePlayer;
     }
@@ -128,6 +148,11 @@ public abstract class MixinTileEntity implements IForgeTileEntity, IBukkitTileEn
     private void injectReadFromNBT(NBTTagCompound nbttagcompound, CallbackInfo ci) {
         this.tileOwner = nbttagcompound.getString("MHData.Owner");
         this.tileUuid = nbttagcompound.getString("MHData.UUID");
+        try {
+            this.MHUUID = this.MHUUID == null ? UUID.fromString(this.tileUuid) : this.MHUUID;
+        } catch (Exception e) {
+            // we don't really want to do anything at this point
+        }
     }
 
     @Inject(method = "writeToNBT", at = @At("HEAD"))

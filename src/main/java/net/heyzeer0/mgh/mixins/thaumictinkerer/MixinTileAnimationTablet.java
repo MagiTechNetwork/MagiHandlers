@@ -1,5 +1,6 @@
 package net.heyzeer0.mgh.mixins.thaumictinkerer;
 
+import net.heyzeer0.mgh.api.forge.IForgeTileEntity;
 import net.heyzeer0.mgh.hacks.tt.FakeTabletFakePlayer;
 import net.minecraft.tileentity.TileEntity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,10 +18,15 @@ import thaumic.tinkerer.common.block.tile.tablet.TileAnimationTablet;
  */
 @Pseudo
 @Mixin(value = TileAnimationTablet.class, remap = false)
-public abstract class MixinTileAnimationTablet extends TileEntity {
+public abstract class MixinTileAnimationTablet extends TileEntity implements IForgeTileEntity {
 
     @Shadow private boolean isBreaking;
     @Shadow protected abstract void stopBreaking();
+
+    @Override
+    public boolean useOriginalMHPlayer() {
+        return false;
+    }
 
     @Inject(method = "func_145845_h", at = @At("HEAD"), cancellable = true)
     private void onEntityUpdate(CallbackInfo ci) {

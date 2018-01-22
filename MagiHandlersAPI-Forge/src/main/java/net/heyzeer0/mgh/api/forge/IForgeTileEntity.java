@@ -15,7 +15,9 @@ public interface IForgeTileEntity {
 
     void setMHUuid(String uuid);
 
-    EntityPlayer getMHPlayer();
+    default EntityPlayer getMHPlayer() {
+        return getMHPlayer(!useOriginalMHPlayer());
+    }
 
     default void setMHPlayer(EntityPlayer player) {
         setMHOwner(player.getCommandSenderName());
@@ -29,6 +31,12 @@ public interface IForgeTileEntity {
     default void setMHOwner(String name, String uuid) {
         setMHOwner(name);
         setMHUuid(uuid);
+    }
+
+    EntityPlayer getMHPlayer(boolean fake);
+
+    default boolean useOriginalMHPlayer() {
+        return true;
     }
 
 }

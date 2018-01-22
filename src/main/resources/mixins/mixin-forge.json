@@ -21,7 +21,8 @@
     "MixinPlayerEvent",
     "MixinLivingEvent",
     "MixinCraftEventFactory",
-    "MixinYggdrasilMinecraftSessionService"
+    "MixinYggdrasilMinecraftSessionService",
+    "MixinCraftPlayer"
   ],
   "server": [],
   "client": [],

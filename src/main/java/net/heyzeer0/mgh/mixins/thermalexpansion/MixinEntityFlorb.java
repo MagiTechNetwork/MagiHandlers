@@ -16,14 +16,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * Created by Frani on 10/06/2017.
  */
 @Pseudo
-@Mixin(targets = "cofh/thermalexpansion/entity/projectile/EntityFlorb", remap = false)
+@Mixin(targets = "cofh/thermalexpansion/entity/projectile/EntityFlorb")
 public abstract class MixinEntityFlorb extends EntityThrowable {
 
     public MixinEntityFlorb(World world) {
         super(world);
     }
 
-    @Inject(method = "func_70184_a", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;setBlock(IIILnet/minecraft/block/Block;II)Z", shift = At.Shift.BEFORE), cancellable = true)
+    @Inject(method = "onImpact", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;setBlock(IIILnet/minecraft/block/Block;II)Z", shift = At.Shift.BEFORE), cancellable = true)
     private void injectImpact(MovingObjectPosition mop, CallbackInfo ci) {
         if(getThrower() instanceof EntityPlayer){
             BlockEvent.BreakEvent event = new BlockEvent.BreakEvent(mop.blockX, mop.blockY, mop.blockZ, ((EntityPlayer) getThrower()).getEntityWorld(), worldObj.getBlock(mop.blockX, mop.blockY, mop.blockZ), worldObj.getBlockMetadata(mop.blockX, mop.blockY, mop.blockZ), (EntityPlayer)getThrower());

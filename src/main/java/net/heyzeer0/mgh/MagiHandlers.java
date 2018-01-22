@@ -15,6 +15,7 @@ import net.heyzeer0.mgh.api.forge.ForgeStack;
 import net.heyzeer0.mgh.api.forge.IForgeTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.S2EPacketCloseWindow;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
@@ -61,6 +62,11 @@ public class MagiHandlers extends DummyModContainer implements BukkitAPI.MagiHan
             "fakethaumcraftbore",
             "[thaumcrafttablet]"
     );
+
+    private static List<String> longRangeProtected = Lists.newArrayList(
+            "ItemIgniter",
+            "ItemChiller"
+    );
     
     public MagiHandlers() {
         super(new ModMetadata());
@@ -97,6 +103,10 @@ public class MagiHandlers extends DummyModContainer implements BukkitAPI.MagiHan
 
     public static boolean isFakePlayer(String name) {
         return name.toLowerCase().contains("openmodsfakeplayer") || fakePlayers.contains(name.toLowerCase());
+    }
+
+    public static boolean isLongRangeBlocked(ItemStack o) {
+        return longRangeProtected.contains(o.getItem().getClass().getSimpleName());
     }
 
     public static EntityPlayer getPlayer(String name) {

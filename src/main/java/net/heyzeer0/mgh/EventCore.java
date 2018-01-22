@@ -25,6 +25,8 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
 import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -113,6 +115,7 @@ public class EventCore {
                 e.entityPlayer.addChatComponentMessage(new ChatComponentText("Username: " + ((IForgeTileEntity) te).getMHOwner()));
                 e.entityPlayer.addChatComponentMessage(new ChatComponentText("UUID: " + ((IForgeTileEntity) te).getMHUuid()));
                 e.entityPlayer.addChatComponentMessage(new ChatComponentText("IBukkitEntity: " + ((IBukkitTileEntity) te).getMHBukkitOwner()));
+                e.entityPlayer.addChatComponentMessage(new ChatComponentText("EntityPlayer: " + ((IForgeTileEntity) te).getMHPlayer()));
             }
         }
     }
@@ -120,6 +123,18 @@ public class EventCore {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onInteract(PlayerInteractEvent e) {
         if (e.isCanceled()) MagiHandlers.closeScreen(e.entityPlayer);
+    }
+
+    @SubscribeEvent
+    public void onRangedClick(PlayerInteractEvent e) {
+        MagiHandlers.log("Fired ");
+        if (e.entityPlayer.getHeldItem() != null && MagiHandlers.isLongRangeBlocked(e.entityPlayer.getHeldItem())) {
+            MovingObjectPosition pos = this.getCurrentMovingObjectPosition(e.entityPlayer, 32, true);
+            if (!MixinManager.canBuild(e.entityPlayer, pos, e.entityPlayer.worldObj)) {
+                e.setCanceled(true);
+                MagiHandlers.log("Canceled ");
+            }
+        }
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
@@ -192,5 +207,14 @@ public class EventCore {
             }
         }
     }
+
+    private MovingObjectPosition getCurrentMovingObjectPosition(EntityPlayer player, double range, boolean liquids) {
+        Vec3 var4 = Vec3.createVectorHelper(player.posX, player.posY, player.posZ);
+        Vec3 var5 = player.getLook(1.0F);
+        var4.yCoord += (double) player.getEyeHeight();
+        var5 = var4.addVector(var5.xCoord * range, var5.yCoord * range, var5.zCoord * range);
+        return player.worldObj.rayTraceBlocks(var4, var5, liquids);
+    }
+
 
 }
