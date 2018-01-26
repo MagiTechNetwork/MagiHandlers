@@ -62,34 +62,4 @@ public abstract class MixinWorld {
         }
     }
 
-    /*@Inject(method = "setBlock(IIILnet/minecraft/block/Block;II)Z", at = @At("HEAD"), cancellable = true)
-    public void onSetBlock(int x, int y, int z, Block block, int meta, int flag, CallbackInfoReturnable cir) {
-        if (MagiHandlers.getStack().getFirst(EntityPlayer.class).isPresent()) {
-            if (MagiHandlers.getStack().ignorePhase) return;
-            EntityPlayer player = MagiHandlers.getStack().getFirst(EntityPlayer.class).get();
-            if (!(player instanceof FakePlayer) && !MixinManager.canBuild(x, y, z, (World)(Object)this, player)) {
-                cir.setReturnValue(false);
-            }
-        } else if (MagiHandlers.getStack().getFirst(Entity.class).isPresent()) {
-            if (MagiHandlers.getStack().ignorePhase) return;
-            IForgeEntity entity = (IForgeEntity) MagiHandlers.getStack().getFirst(Entity.class).get();
-            if (entity.hasOwner()) {
-                if (!MixinManager.canBuild(x, y, z, (World)(Object)this, entity.getOwner())) {
-                    cir.setReturnValue(false);
-                }
-            }
-        } else if (MagiHandlers.getStack().getFirst(TileEntity.class).isPresent()) {
-            if (MagiHandlers.getStack().ignorePhase) return;
-            IForgeTileEntity tile = (IForgeTileEntity) MagiHandlers.getStack().getFirst(TileEntity.class).get();
-            if (tile.hasTrackedPlayer()) {
-                if (!MixinManager.canBuild(x, y, z, (World)(Object)this, tile.getFakePlayer())) {
-                    cir.setReturnValue(false);
-                }
-            }
-        } else {
-            //MagiHandlers.log("Could not capture the cause of a setBlock, ignoring. Stacktrace: ");
-            //Thread.dumpStack();
-        }
-    }*/
-
 }

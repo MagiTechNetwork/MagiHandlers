@@ -127,12 +127,10 @@ public class EventCore {
 
     @SubscribeEvent
     public void onRangedClick(PlayerInteractEvent e) {
-        MagiHandlers.log("Fired ");
         if (e.entityPlayer.getHeldItem() != null && MagiHandlers.isLongRangeBlocked(e.entityPlayer.getHeldItem())) {
             MovingObjectPosition pos = this.getCurrentMovingObjectPosition(e.entityPlayer, 32, true);
             if (!MixinManager.canBuild(e.entityPlayer, pos, e.entityPlayer.worldObj)) {
                 e.setCanceled(true);
-                MagiHandlers.log("Canceled ");
             }
         }
     }
