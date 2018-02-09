@@ -59,6 +59,13 @@ public abstract class MixinWorldServer extends World {
         }
     }
 
+    @Redirect(method = "func_147456_g", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/Block;updateTick(Lnet/minecraft/world/World;IIILjava/util/Random;)V"))
+    private void updateTick$2(Block block, World w, int x, int y, int z, Random rand) {
+        MagiHandlers.getStack().ignorePhase = true;
+        block.updateTick(w, x, y, z, rand);
+        MagiHandlers.getStack().ignorePhase = false;
+    }
+
     @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/SpawnerAnimals;findChunksForSpawning(Lnet/minecraft/world/WorldServer;ZZZ)I"))
     private int redirectFindChunksForSpawningCall(SpawnerAnimals instance, WorldServer w, boolean a, boolean b, boolean c) {
         MagiHandlers.getStack().ignorePhase = true;
