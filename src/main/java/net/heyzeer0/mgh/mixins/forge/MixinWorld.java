@@ -4,7 +4,11 @@ import net.heyzeer0.mgh.MagiHandlers;
 import net.heyzeer0.mgh.api.IMixinChunk;
 import net.heyzeer0.mgh.api.forge.ForgeStack;
 import net.heyzeer0.mgh.api.forge.IForgeEntity;
+import net.heyzeer0.mgh.api.forge.IForgeTileEntity;
+import net.heyzeer0.mgh.mixins.MixinManager;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
@@ -15,6 +19,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
  * Created by Frani on 15/10/2017.
@@ -24,6 +29,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class MixinWorld {
 
     @Shadow public abstract Chunk getChunkFromBlockCoords(int p_72938_1_, int p_72938_2_);
+
+    @Shadow
+    public abstract TileEntity getTileEntity(int p_147438_1_, int p_147438_2_, int p_147438_3_);
 
     @Redirect(method = "updateEntities", at = @At(value = "INVOKE", target = "Lnet/minecraft/tileentity/TileEntity;updateEntity()V"))
     public void redirectTileEntityUpdate(TileEntity te) {
@@ -59,6 +67,25 @@ public abstract class MixinWorld {
         for (Runnable r : MagiHandlers.instance.tasks) {
             r.run();
             MagiHandlers.instance.tasks.remove(r);
+        }
+    }
+
+    @Inject(method = "setBlock(IIILnet/minecraft/block/Block;II)Z", at = @At("RETURN"), cancellable = true)
+    private void onSetBlock(int x, int y, int z, Block newBlock, int meta, int flags, CallbackInfoReturnable<Boolean> cir) {
+        if (!MagiHandlers.getStack().isIgnoringPhase()) {
+            EntityPlayer owner = MagiHandlers.getStack().getCurrentEntityPlayer().orElse(null);
+            if (owner == null) {
+                MagiHandlers.log("Something is trying to set a block without an owner, stack: ");
+                Thread.dumpStack();
+                return;
+            }
+            IForgeTileEntity te = (IForgeTileEntity) this.getTileEntity(x, y, z);
+            if (te != null && !te.hasMHPlayer()) {
+                te.setMHPlayer(owner);
+            }
+            if (!MixinManager.canBuild(x, y, z, (World) (Object) this, owner)) {
+                cir.setReturnValue(false);
+            }
         }
     }
 

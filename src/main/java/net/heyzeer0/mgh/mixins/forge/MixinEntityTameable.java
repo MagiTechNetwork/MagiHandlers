@@ -41,7 +41,7 @@ public abstract class MixinEntityTameable extends EntityAnimal {
         return this.worldObj.func_152378_a(tamedOwner);
     }
 
-    @Inject(method = "func_152113_b", at = @At("RETURN"))
+    @Inject(method = "func_152115_b", at = @At("RETURN"))
     private void onSetOwner(String uuid, CallbackInfo ci) {
         this.tamedOwner = UUID.fromString(uuid);
     }

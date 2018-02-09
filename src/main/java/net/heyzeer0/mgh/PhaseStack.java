@@ -56,11 +56,14 @@ public class PhaseStack implements IBukkitStack, IForgeStack {
         return phaseStack.removeIf(obj -> obj.equals(o));
     }
 
+    public boolean isIgnoringPhase() {
+        return this.ignorePhase;
+    }
     public boolean ignorePhase = false;
 
     public void printThread() {
         StringBuilder sb = new StringBuilder();
-        for (StackTraceElement e : Arrays.copyOfRange(Thread.currentThread().getStackTrace(), 2, 6)) {
+        for (StackTraceElement e : Arrays.copyOfRange(Thread.currentThread().getStackTrace(), 2, 10)) {
             if(sb.length() != 0) sb.append('\n');
             sb.append(e);
         }
