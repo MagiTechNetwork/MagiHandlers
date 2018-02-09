@@ -24,7 +24,7 @@ public abstract class MixinPlayerEvent {
     public EntityPlayer entityPlayer;
 
     @Inject(method = "<init>", at = @At("RETURN"))
-    private void onConctruct(EntityPlayer player, CallbackInfo ci) {
+    private void onConstruct(EntityPlayer player, CallbackInfo ci) {
         if (MagiHandlers.isFakePlayer(player.getCommandSenderName())) {
             this.entityPlayer = ForgeStack.getStack().getCurrentEntityPlayer().orElse(player);
         }

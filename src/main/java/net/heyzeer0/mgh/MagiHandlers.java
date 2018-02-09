@@ -97,6 +97,15 @@ public class MagiHandlers extends DummyModContainer implements BukkitAPI.MagiHan
         });
     }
 
+    public static void track(String name, String uuid, World world, int x, int y, int z) {
+        IForgeTileEntity te = (IForgeTileEntity) world.getTileEntity(x, y, z);
+        if (te != null) {
+            te.setMHOwner(name, uuid);
+        } else {
+            scheduleTileCheck(name, uuid, world, x, y, z);
+        }
+    }
+
     public static void closeScreen(EntityPlayer p) {
         ((EntityPlayerMP) p).playerNetServerHandler.sendPacket(new S2EPacketCloseWindow());
     }

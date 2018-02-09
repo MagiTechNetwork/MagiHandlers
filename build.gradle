@@ -91,7 +91,7 @@ jar {
     from project.mixinRefMap
 
     manifest {
-        if (!gradle.startParameter.getTaskNames().contains("runServer")) {
+        if (gradle.startParameter.getTaskNames().contains("build")) {
             attributes 'FMLCorePlugin': 'net.heyzeer0.mgh.MagiCore',
                     'FMLCorePluginContainsFMLMod': 'true',
                     'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',

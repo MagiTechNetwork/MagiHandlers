@@ -148,5 +148,10 @@
     "name": "Ender Storage",
     "file": "EnderStorage-1.7.10-1.4.7.37-universal.jar",
     "mixin": "mixins/mixin-enderstorage.json"
+  },
+  {
+    "name": "Immersive Engineering",
+    "file": "ImmersiveEngineering-0.7.7.jar",
+    "mixin": "mixins/mixin-ie.json"
   }
 ]

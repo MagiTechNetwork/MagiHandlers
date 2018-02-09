@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
  */
 
 @Pseudo
-@Mixin(value = TileEntityBuilderGuide.class)
+@Mixin(value = TileEntityBuilderGuide.class, remap = false)
 public abstract class MixinTileEntityBuilderGuide {
 
     @Redirect(method = "survivalPlaceBlocks", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/management/ItemInWorldManager;activateBlockOrUseItem(Lnet/minecraft/entity/player/EntityPlayer;Lnet/minecraft/world/World;Lnet/minecraft/item/ItemStack;IIIIFFF)Z"))

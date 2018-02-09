@@ -33,6 +33,7 @@ public class MagiCore implements IFMLLoadingPlugin {
             LogManager.getLogger().warn(" ");
             LogManager.getLogger().warn("[MagiHandlers] An error ocurred while trying to load class transformers.");
             LogManager.getLogger().warn(" ");
+            e.printStackTrace();
         }
 
     }
