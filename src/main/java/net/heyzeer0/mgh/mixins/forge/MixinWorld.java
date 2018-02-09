@@ -74,14 +74,23 @@ public abstract class MixinWorld {
     private void onSetBlock(int x, int y, int z, Block newBlock, int meta, int flags, CallbackInfoReturnable<Boolean> cir) {
         if (!MagiHandlers.getStack().isIgnoringPhase()) {
             EntityPlayer owner = MagiHandlers.getStack().getCurrentEntityPlayer().orElse(null);
+            if (owner != null) {
+                IForgeTileEntity te = (IForgeTileEntity) this.getTileEntity(x, y, z);
+                if (te != null && !te.hasMHPlayer()) {
+                    te.setMHPlayer(owner);
+                }
+            }
+        }
+    }
+
+    @Inject(method = "setBlock(IIILnet/minecraft/block/Block;II)Z", at = @At("HEAD"), cancellable = true)
+    private void onSetBlockHead(int x, int y, int z, Block newBlock, int meta, int flags, CallbackInfoReturnable<Boolean> cir) {
+        if (!MagiHandlers.getStack().isIgnoringPhase()) {
+            EntityPlayer owner = MagiHandlers.getStack().getCurrentEntityPlayer().orElse(null);
             if (owner == null) {
                 MagiHandlers.log("Something is trying to set a block without an owner, stack: ");
                 Thread.dumpStack();
                 return;
-            }
-            IForgeTileEntity te = (IForgeTileEntity) this.getTileEntity(x, y, z);
-            if (te != null && !te.hasMHPlayer()) {
-                te.setMHPlayer(owner);
             }
             if (!MixinManager.canBuild(x, y, z, (World) (Object) this, owner)) {
                 cir.setReturnValue(false);

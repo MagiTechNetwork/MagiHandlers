@@ -153,5 +153,10 @@
     "name": "Immersive Engineering",
     "file": "ImmersiveEngineering-0.7.7.jar",
     "mixin": "mixins/mixin-ie.json"
+  },
+  {
+    "name": "Applied Energistics 2",
+    "file": "ae2.jar",
+    "mixin": "mixins/mixin-ae2.json"
   }
 ]

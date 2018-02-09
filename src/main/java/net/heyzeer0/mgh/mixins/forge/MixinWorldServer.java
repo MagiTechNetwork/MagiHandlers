@@ -59,10 +59,13 @@ public abstract class MixinWorldServer extends World {
         }
     }
 
-    @Redirect(method = "func_147456_g", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/Block;updateTick(Lnet/minecraft/world/World;IIILjava/util/Random;)V"))
-    private void updateTick$2(Block block, World w, int x, int y, int z, Random rand) {
+    @Inject(method = "func_147456_g", at = @At("HEAD"))
+    private void onUpdateBlocksHead(CallbackInfo ci) {
         MagiHandlers.getStack().ignorePhase = true;
-        block.updateTick(w, x, y, z, rand);
+    }
+
+    @Inject(method = "func_147485_a", at = @At("HEAD"))
+    private void onUpdateBlocksReturn(CallbackInfo ci) {
         MagiHandlers.getStack().ignorePhase = false;
     }
 
