@@ -23,7 +23,8 @@
     "MixinCraftEventFactory",
     "MixinYggdrasilMinecraftSessionService",
     "MixinCraftPlayer",
-    "MixinEntityTameable"
+    "MixinEntityTameable",
+    "MixinSimplePluginManager"
   ],
   "server": [],
   "client": [],
