@@ -1,10 +1,8 @@
 {
   "required": true,
-  "package": "net.heyzeer0.mgh.mixins.ae2",
+  "package": "net.heyzeer0.mgh.mixins.forestry",
   "mixins": [
-    "MixinPartFormationPlane",
-    "MixinPartAnnihilationPlane",
-    "MixinTickHandler"
+    "MixinTileFarmGearbox"
   ],
   "server": [],
   "client": [],

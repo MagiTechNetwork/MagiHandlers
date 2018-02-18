@@ -88,8 +88,8 @@ public abstract class MixinWorld {
         if (!MagiHandlers.getStack().isIgnoringPhase()) {
             EntityPlayer owner = MagiHandlers.getStack().getCurrentEntityPlayer().orElse(null);
             if (owner == null) {
-                //MagiHandlers.log("Something is trying to set a block without an owner, stack: ");
-                //Thread.dumpStack();
+                MagiHandlers.log("Something is trying to set a block without an owner, stack: ");
+                Thread.dumpStack();
                 return;
             }
             if (!MixinManager.canBuild(x, y, z, (World) (Object) this, owner)) {

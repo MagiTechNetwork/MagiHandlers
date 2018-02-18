@@ -4,7 +4,8 @@
   "mixins":[
     "MixinTileEntityTerra",
     "MixinEntityMiningLaser",
-    "MixinEntityIC2Explosive"
+    "MixinEntityIC2Explosive",
+    "MixinTileEntityElectricMachine"
   ],
   "server": [],
   "client": [],

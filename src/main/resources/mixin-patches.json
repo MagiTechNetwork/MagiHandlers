@@ -153,5 +153,10 @@
     "name": "Applied Energistics 2",
     "file": "ae2.jar",
     "mixin": "mixins/mixin-ae2.json"
+  },
+  {
+    "name": "Forestry",
+    "file": "forestry_1.7.10-4.2.16.64.jar",
+    "mixin": "mixins/mixin-forestry.json"
   }
 ]
