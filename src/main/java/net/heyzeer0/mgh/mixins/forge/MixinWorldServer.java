@@ -37,6 +37,20 @@ public abstract class MixinWorldServer extends World {
         }
     }
 
+    @Redirect(method = "func_147485_a", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/Block;onBlockEventReceived(Lnet/minecraft/world/World;IIIII)Z"))
+    private boolean redirectOnBlockEvent(Block block, World world, int x, int y, int z, int id, int data) {
+        boolean r;
+        if (this.currentTile == null) {
+            final boolean isIgnoring = MagiHandlers.getStack().ignorePhase;
+            MagiHandlers.getStack().ignorePhase = true;
+            r = block.onBlockEventReceived(world, x, y, z, id, data);
+            MagiHandlers.getStack().ignorePhase = isIgnoring;
+        } else {
+            r = block.onBlockEventReceived(world, x, y, z, id, data);
+        }
+        return r;
+    }
+
     @Inject(method = "func_147488_Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/management/ServerConfigurationManager;sendToAllNear(DDDDILnet/minecraft/network/Packet;)V", shift = At.Shift.AFTER))
     private void onSendToAllNear(CallbackInfo ci) {
         if (currentTile != null) {
