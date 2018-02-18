@@ -9,8 +9,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.FakePlayerFactory;
-import org.apache.logging.log4j.LogManager;
 import org.bukkit.craftbukkit.v1_7_R4.entity.CraftEntity;
 import org.bukkit.entity.Player;
 import org.spongepowered.asm.mixin.Mixin;
@@ -32,11 +32,11 @@ public abstract class MixinEntity implements IForgeEntity, IBukkitEntity {
     @Shadow
     public abstract CraftEntity getBukkitEntity();
     private String uuid, username;
-    private EntityPlayer owner;
+    private EntityPlayer realFakePlayer;
 
     // Forge
     @Override
-    public void setOwner(EntityPlayer player) {
+    public void setMHOwner(EntityPlayer player) {
         if (player.getUniqueID().toString().isEmpty()) {
             MagiHandlers.log("Tried to add a invalid player as entity owner, player: " + player.getCommandSenderName());
             return;
@@ -46,7 +46,40 @@ public abstract class MixinEntity implements IForgeEntity, IBukkitEntity {
     }
 
     @Override
-    public EntityPlayer getOwner() {
+    public EntityPlayer getMHOwner(boolean fake) {
+        if (this.hasTrackedPlayer()) {
+            if (realFakePlayer == null) {
+                EntityPlayer f = FakePlayerFactory.get((WorldServer) this.worldObj, new GameProfile(UUID.fromString(this.uuid), this.username));
+                if (fake) {
+                    realFakePlayer = f;
+                } else {
+                    EntityPlayer p = MagiHandlers.getPlayer(this.username);
+                    realFakePlayer = p != null ? p : f;
+                }
+                return realFakePlayer;
+            } else {
+                if (fake) {
+                    if (realFakePlayer instanceof FakePlayer) {
+                        return realFakePlayer;
+                    } else {
+                        realFakePlayer = null;
+                        return this.getMHOwner(true);
+                    }
+                } else {
+                    if (realFakePlayer instanceof FakePlayer) {
+                        if (!realFakePlayer.getCommandSenderName().equals("[Minecraft]")) {
+                            realFakePlayer = null;
+                            realFakePlayer = this.getMHOwner(false);
+                        }
+                    }
+                }
+            }
+        } else {
+            realFakePlayer = FakePlayerFactory.getMinecraft((WorldServer) this.worldObj);
+        }
+        return realFakePlayer;
+
+        /*
         if (this.hasTrackedPlayer() && MagiHandlers.getPlayer(this.username) != null) {
             owner = MagiHandlers.getPlayer(this.username);
             return owner;
@@ -63,7 +96,7 @@ public abstract class MixinEntity implements IForgeEntity, IBukkitEntity {
                 owner = FakePlayerFactory.getMinecraft((WorldServer) this.worldObj);
             }
         }
-        return owner;
+        return owner;*/
     }
 
     // Bukkit
@@ -80,7 +113,7 @@ public abstract class MixinEntity implements IForgeEntity, IBukkitEntity {
 
     @Override
     public Player getBukkitOwner() {
-        return (Player) ((IBukkitEntity) getOwner()).getCraftEntity();
+        return (Player) ((IBukkitEntity) getMHOwner()).getCraftEntity();
     }
 
     // Bukkit/Forge

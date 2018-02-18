@@ -28,7 +28,7 @@ public class ThrowableHitEntityEvent extends EntityEvent {
         if (thrower == null && entity instanceof EntityThrowable) {
             this.thrower = ((EntityThrowable)entity).getThrower();
             if (this.thrower == null) {
-                this.thrower = ((IForgeEntity) entity).getOwner();
+                this.thrower = ((IForgeEntity) entity).getMHOwner();
             }
         }
     }

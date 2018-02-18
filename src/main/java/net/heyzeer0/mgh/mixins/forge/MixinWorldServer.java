@@ -64,7 +64,7 @@ public abstract class MixinWorldServer extends World {
         MagiHandlers.getStack().ignorePhase = true;
     }
 
-    @Inject(method = "func_147485_a", at = @At("HEAD"))
+    @Inject(method = "func_147456_g", at = @At("RETURN"))
     private void onUpdateBlocksReturn(CallbackInfo ci) {
         MagiHandlers.getStack().ignorePhase = false;
     }

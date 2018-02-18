@@ -35,7 +35,6 @@ public abstract class MixinEntityTameable extends EntityAnimal {
                 tamedOwner = UUID.fromString(func_152113_b());
             }
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
         return this.worldObj.func_152378_a(tamedOwner);

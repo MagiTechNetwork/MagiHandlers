@@ -9,8 +9,16 @@ public interface IForgeEntity {
 
     boolean hasOwner();
 
-    EntityPlayer getOwner();
+    default EntityPlayer getMHOwner() {
+        return getMHOwner(!this.useRealPlayer());
+    }
 
-    void setOwner(EntityPlayer player);
+    void setMHOwner(EntityPlayer player);
+
+    EntityPlayer getMHOwner(boolean fake);
+
+    default boolean useRealPlayer() {
+        return true;
+    }
 
 }

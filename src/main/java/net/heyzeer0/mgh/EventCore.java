@@ -189,8 +189,8 @@ public class EventCore {
                 && e.entityPlayer.isSneaking()) {
 
             e.setCanceled(true);
-            e.entityPlayer.addChatComponentMessage(new ChatComponentText("Username: " + ((IForgeEntity) e.target).getOwner().getCommandSenderName()));
-            e.entityPlayer.addChatComponentMessage(new ChatComponentText("UUID: " + ((IForgeEntity) e.target).getOwner().getUniqueID().toString()));
+            e.entityPlayer.addChatComponentMessage(new ChatComponentText("Username: " + ((IForgeEntity) e.target).getMHOwner().getCommandSenderName()));
+            e.entityPlayer.addChatComponentMessage(new ChatComponentText("UUID: " + ((IForgeEntity) e.target).getMHOwner().getUniqueID().toString()));
         }
     }
 
@@ -198,7 +198,7 @@ public class EventCore {
     public void onPickup(EntityItemPickupEvent e) {
         if (Loader.isModLoaded("IC2")) {
             if (e.item.getEntityItem().getItem() instanceof ItemReactorUranium || e.item.getEntityItem().getItem().getUnlocalizedName().contains("itemUran")) {
-                if (!MixinManager.canAttack(((IForgeEntity) e.item).getOwner(), e.entityLiving)) {
+                if (!MixinManager.canAttack(((IForgeEntity) e.item).getMHOwner(), e.entityLiving)) {
                     e.setCanceled(true);
                     e.setResult(Event.Result.DENY);
                 }

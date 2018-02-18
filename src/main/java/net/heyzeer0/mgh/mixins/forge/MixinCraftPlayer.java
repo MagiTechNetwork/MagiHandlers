@@ -41,7 +41,7 @@ public abstract class MixinCraftPlayer {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 

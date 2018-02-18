@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(value = ItemEnderStorage.class, remap = false)
 public abstract class MixinItemEnderStorage {
 
-    @Redirect(method = "placeBlockAt", at = @At(value = "INVOKE", target = "Lcodechicken/enderstorage/common/TileFrequencyOwner;setOwner(Ljava/lang/String;)V"))
+    @Redirect(method = "placeBlockAt", at = @At(value = "INVOKE", target = "Lcodechicken/enderstorage/common/TileFrequencyOwner;setMHOwner(Ljava/lang/String;)V"))
     public void onSetOwner(TileFrequencyOwner tile, String owner) {
         ((ITileFrequencyOwner) tile).setFrequencyOwner(owner);
     }

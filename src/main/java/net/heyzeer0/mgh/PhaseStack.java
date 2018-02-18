@@ -38,7 +38,7 @@ public class PhaseStack implements IBukkitStack, IForgeStack {
         } else if (getFirst(IForgeTileEntity.class).isPresent()) {
             p = getFirst(IForgeTileEntity.class).get().getMHPlayer();
         } else if (getFirst(IForgeEntity.class).isPresent()) {
-            p = getFirst(IForgeEntity.class).get().getOwner();
+            p = getFirst(IForgeEntity.class).get().getMHOwner();
         }
         return Optional.ofNullable(p);
     }
