@@ -6,6 +6,7 @@ import net.heyzeer0.mgh.api.IMixinChunkProvider;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.chunk.IChunkProvider;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -40,6 +41,19 @@ public abstract class MixinChunk implements IMixinChunk {
     @Inject(method = "onChunkLoad", at = @At("TAIL"))
     private void tail(CallbackInfo ci) {
         MagiHandlers.getStack().ignorePhase = false;
+    }
+
+    private boolean ignoringState = false;
+
+    @Inject(method = "populateChunk", at = @At("HEAD"))
+    private void onPopulateHead(IChunkProvider a, IChunkProvider b, int c, int d, CallbackInfo ci) {
+        ignoringState = MagiHandlers.getStack().ignorePhase;
+        MagiHandlers.getStack().ignorePhase = true;
+    }
+
+    @Inject(method = "populateChunk", at = @At("RETURN"))
+    private void onPopulateReturn(IChunkProvider a, IChunkProvider b, int c, int d, CallbackInfo ci) {
+        MagiHandlers.getStack().ignorePhase = this.ignoringState;
     }
 
 }

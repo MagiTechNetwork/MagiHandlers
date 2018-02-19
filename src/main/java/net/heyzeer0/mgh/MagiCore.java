@@ -19,7 +19,7 @@ public class MagiCore implements IFMLLoadingPlugin {
     public static PathLoader loader = new PathLoader();
 
     public MagiCore() {
-        //System.setProperty("mixin.debug.export", "true");
+        System.setProperty("mixin.debug.export", "true");
         MixinBootstrap.init();
 
         LogManager.getLogger().warn(" ");
