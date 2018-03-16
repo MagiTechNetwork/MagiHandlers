@@ -67,9 +67,10 @@ public abstract class MixinWorldServer extends World {
             block.updateTick(w, x, y, z, rand);
             MagiHandlers.getStack().remove(te);
         } else {
+            final boolean isIgnoring = MagiHandlers.getStack().ignorePhase;
             MagiHandlers.getStack().ignorePhase = true;
             block.updateTick(w, x, y, z, rand);
-            MagiHandlers.getStack().ignorePhase = false;
+            MagiHandlers.getStack().ignorePhase = isIgnoring;
         }
     }
 
