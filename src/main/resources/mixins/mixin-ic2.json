@@ -5,7 +5,8 @@
     "MixinTileEntityTerra",
     "MixinEntityMiningLaser",
     "MixinEntityIC2Explosive",
-    "MixinTileEntityElectricMachine"
+    "MixinTileEntityElectricMachine",
+    "MixinExplosionIC2"
   ],
   "server": [],
   "client": [],

@@ -25,7 +25,8 @@
     "MixinCraftPlayer",
     "MixinEntityTameable",
     "MixinSimplePluginManager",
-    "MixinCraftTask"
+    "MixinCraftTask",
+    "MixinYggdrasilAuthenticationService"
   ],
   "server": [],
   "client": [],
