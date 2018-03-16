@@ -138,7 +138,7 @@ public class EventCore {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onHit(ThrowableHitEntityEvent event) {
         if (event.thrower != null && event.thrower instanceof EntityPlayer) {
-            if (event.projectile.entityHit != null) {
+            if (event.projectile.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY) {
                 if (!MixinManager.canAttack((EntityPlayer) event.thrower, event.projectile.entityHit)) {
                     event.setCanceled(true);
                 }

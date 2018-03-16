@@ -1,6 +1,7 @@
 package net.heyzeer0.mgh.events;
 
 import cpw.mods.fml.common.eventhandler.Cancelable;
+import net.heyzeer0.mgh.api.forge.ForgeStack;
 import net.heyzeer0.mgh.api.forge.IForgeEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -28,7 +29,11 @@ public class ThrowableHitEntityEvent extends EntityEvent {
         if (thrower == null && entity instanceof EntityThrowable) {
             this.thrower = ((EntityThrowable)entity).getThrower();
             if (this.thrower == null) {
-                this.thrower = ((IForgeEntity) entity).getMHOwner();
+                if (((IForgeEntity) entity).hasOwner()) {
+                    this.thrower = ((IForgeEntity) entity).getMHOwner();
+                } else {
+                    ForgeStack.getStack().getCurrentEntityPlayer().ifPresent(p -> this.thrower = p);
+                }
             }
         }
     }
