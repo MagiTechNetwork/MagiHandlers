@@ -21,12 +21,11 @@
     "MixinPlayerEvent",
     "MixinLivingEvent",
     "MixinCraftEventFactory",
-    "MixinYggdrasilMinecraftSessionService",
     "MixinCraftPlayer",
     "MixinEntityTameable",
     "MixinSimplePluginManager",
     "MixinCraftTask",
-    "MixinYggdrasilAuthenticationService"
+    "MixinMinecraftServer"
   ],
   "server": [],
   "client": [],
