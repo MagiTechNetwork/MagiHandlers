@@ -18,9 +18,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(targets = "WayofTime/alchemicalWizardry/common/rituals/RitualEffectDemonPortal", remap = false)
 public abstract class MixinRitualEffectDemonPortal {
 
+    // TODO: rework this logic, use the default world instead hardcoded names
     @Inject(method = "startRitual", at = @At("HEAD"), cancellable = true)
     private void injectRitual(IMasterRitualStone ritualStone, EntityPlayer player, CallbackInfo ci) {
-        if(ritualStone.getWorld().getProviderName().equalsIgnoreCase("world")) {
+        String w = ritualStone.getWorld().getProviderName();
+        if (w.equalsIgnoreCase("world") || w.equalsIgnoreCase("BlackCraft")) {
             player.addChatMessage(new ChatComponentText("§cEste ritual não pode ser realizado no overworld."));
             ci.cancel();
         }
