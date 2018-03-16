@@ -158,5 +158,10 @@
     "name": "Forestry",
     "file": "forestry_1.7.10-4.2.16.64.jar",
     "mixin": "mixins/mixin-forestry.json"
+  },
+  {
+    "name": "Wireless Redstone",
+    "file": "WR-CBE-1.7.10-1.4.1.9-universal.jar",
+    "mixin": "mixins/mixin-wrcbe.json"
   }
 ]
