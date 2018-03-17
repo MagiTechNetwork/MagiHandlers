@@ -5,7 +5,8 @@
     "MixinEntityFlorb",
     "MixinTileAssembler",
     "MixinTileInventory",
-    "MixinTileActivator"
+    "MixinTileActivator",
+    "MixinTileStrongbox"
   ],
   "server": [],
   "client": [],

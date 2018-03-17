@@ -15,9 +15,9 @@ public abstract class MixinTileFarmGearbox {
 
     @Redirect(method = "updateServer", at = @At(value = "INVOKE", target = "Lforestry/api/multiblock/IFarmController;doWork()Z"))
     private boolean redirectDoWork(IFarmController instance) {
-        MagiHandlers.getStack().push(instance);
+        MagiHandlers.getStack().push(this);
         boolean value = instance.doWork();
-        MagiHandlers.getStack().remove(instance);
+        MagiHandlers.getStack().remove(this);
         return value;
     }
 

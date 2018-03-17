@@ -33,6 +33,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerOpenContainerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 
 /**
@@ -203,6 +204,13 @@ public class EventCore {
                     e.setResult(Event.Result.DENY);
                 }
             }
+        }
+    }
+
+    @SubscribeEvent
+    public void onOpenContainer(PlayerOpenContainerEvent event) {
+        if (!event.entityPlayer.openContainer.canInteractWith(event.entityPlayer)) {
+            event.entityPlayer.closeScreen();
         }
     }
 
