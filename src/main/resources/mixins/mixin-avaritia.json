@@ -4,7 +4,8 @@
   "mixins":[
     "MixinEntityEndestPearl",
     "MixinEntityGapingVoid",
-    "MixinToolHelper"
+    "MixinToolHelper",
+    "MixinTileInfinitato"
   ],
   "server": [],
   "client": [],
