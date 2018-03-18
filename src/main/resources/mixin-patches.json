@@ -163,5 +163,10 @@
     "name": "Wireless Redstone",
     "file": "WR-CBE-1.7.10-1.4.1.9-universal.jar",
     "mixin": "mixins/mixin-wrcbe.json"
+  },
+  {
+    "name": "WorldEdit",
+    "file": "worldedit-forge-mc1.7.10-6.1.1-dist.jar",
+    "mixin": "mixins/mixin-worldedit.json"
   }
 ]
