@@ -3,7 +3,7 @@
   "package":"net.heyzeer0.mgh.mixins.ie",
   "mixins":[
     "MixinImmersiveEngineering",
-    "MixinItemChemthrower"
+    "MixinEntityIEProjectile"
   ],
   "server": [],
   "client": [],

@@ -28,12 +28,12 @@ public class ThrowableHitEntityEvent extends EntityEvent {
         this.thrower = thrower;
         if (thrower == null && entity instanceof EntityThrowable) {
             this.thrower = ((EntityThrowable)entity).getThrower();
-            if (this.thrower == null) {
-                if (((IForgeEntity) entity).hasOwner()) {
-                    this.thrower = ((IForgeEntity) entity).getMHOwner();
-                } else {
-                    ForgeStack.getStack().getCurrentEntityPlayer().ifPresent(p -> this.thrower = p);
-                }
+        }
+        if (this.thrower == null) {
+            if (((IForgeEntity) entity).hasOwner()) {
+                this.thrower = ((IForgeEntity) entity).getMHOwner();
+            } else {
+                ForgeStack.getStack().getCurrentEntityPlayer().ifPresent(p -> this.thrower = p);
             }
         }
     }

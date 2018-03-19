@@ -1,8 +1,10 @@
 package net.heyzeer0.mgh.mixins;
 
 import net.heyzeer0.mgh.api.bukkit.IBukkitEntity;
+import net.heyzeer0.mgh.util.BlockPos;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -12,6 +14,8 @@ import net.minecraftforge.event.world.BlockEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+
+import java.util.List;
 
 /**
  * Created by HeyZeer0 on 01/05/2017.
@@ -54,8 +58,17 @@ public class MixinManager {
         return false;
     }
 
+    public static boolean canBuild(EntityPlayer player, BlockPos pos) {
+        return canBuild(pos.x, pos.y, pos.x, pos.world, player);
+    }
+
     public static boolean canBuild(int x, int y, int z, World world, EntityPlayer player) {
         return !MinecraftForge.EVENT_BUS.post(generateBlockEvent(x, y, z, world, player));
+    }
+
+    public static <T> List<T> getEntitiesNear(Class<T> entityClass, BlockPos pos, int radius) {
+        AxisAlignedBB aabb = pos.getBox(radius);
+        return pos.world.getEntitiesWithinAABB(entityClass, aabb);
     }
 
 

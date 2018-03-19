@@ -97,6 +97,10 @@ public class MagiHandlers extends DummyModContainer implements BukkitAPI.MagiHan
         });
     }
 
+    public static void schedule(Runnable r) {
+        instance.tasks.add(r);
+    }
+
     public static void track(String name, String uuid, World world, int x, int y, int z) {
         IForgeTileEntity te = (IForgeTileEntity) world.getTileEntity(x, y, z);
         if (te != null) {
