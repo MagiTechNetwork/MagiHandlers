@@ -14,7 +14,8 @@
     "MixinItemGravityRod",
     "MixinTileCorporeaIndex",
     "MixinEntityBabylonWeapon",
-    "MixinTileSpreader"
+    "MixinTileSpreader",
+    "MixinItemWorldSeed"
   ],
   "server": [],
   "client": [],

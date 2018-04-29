@@ -10,7 +10,8 @@
     "MixinItemTaglockKit",
     "MixinEntitySpellEffect",
     "MixinEntityGrenade",
-    "MixinItemPoppet"
+    "MixinItemPoppet",
+    "MixinEntityAIDigBlocks"
   ],
   "server": [],
   "client": [],
