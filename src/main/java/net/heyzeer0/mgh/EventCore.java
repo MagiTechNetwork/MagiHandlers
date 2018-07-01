@@ -9,11 +9,13 @@ import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import ic2.core.item.reactor.ItemReactorUranium;
+import mcp.mobius.betterbarrels.BetterBarrels;
 import net.heyzeer0.mgh.api.bukkit.IBukkitTileEntity;
 import net.heyzeer0.mgh.api.forge.ForgeStack;
 import net.heyzeer0.mgh.api.forge.IForgeEntity;
 import net.heyzeer0.mgh.api.forge.IForgeTileEntity;
 import net.heyzeer0.mgh.events.ThrowableHitEntityEvent;
+import net.heyzeer0.mgh.hacks.thaumcraft.ThaumcraftHelper;
 import net.heyzeer0.mgh.mixins.MixinManager;
 import net.lomeli.trophyslots.TrophySlots;
 import net.lomeli.trophyslots.core.SlotUtil;
@@ -35,6 +37,9 @@ import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerOpenContainerEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import org.bukkit.craftbukkit.v1_7_R4.inventory.CraftItemStack;
+import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.ItemStack;
 
 /**
  * Created by HeyZeer0 on 29/05/2017.
@@ -106,17 +111,41 @@ public class EventCore {
         // Run debug
         if(e.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK
                 && e.entityPlayer.getHeldItem() != null
-                && e.entityPlayer.getHeldItem().getItem() == Items.arrow
                 && MinecraftServer.getServer().getConfigurationManager().func_152596_g(e.entityPlayer.getGameProfile())
                 && e.entityPlayer.isSneaking()) {
+            e.setCanceled(true);
 
-            TileEntity te = e.world.getTileEntity(e.x, e.y, e.z);
-            if (te != null && te instanceof IForgeTileEntity) {
-                e.setCanceled(true);
-                e.entityPlayer.addChatComponentMessage(new ChatComponentText("Username: " + ((IForgeTileEntity) te).getMHOwner()));
-                e.entityPlayer.addChatComponentMessage(new ChatComponentText("UUID: " + ((IForgeTileEntity) te).getMHUuid()));
-                e.entityPlayer.addChatComponentMessage(new ChatComponentText("IBukkitEntity: " + ((IBukkitTileEntity) te).getMHBukkitOwner()));
-                e.entityPlayer.addChatComponentMessage(new ChatComponentText("EntityPlayer: " + ((IForgeTileEntity) te).getMHPlayer()));
+            if (e.entityPlayer.getHeldItem().getItem() == Items.arrow) {
+                TileEntity te = e.world.getTileEntity(e.x, e.y, e.z);
+                if (te != null && te instanceof IForgeTileEntity) {
+                    e.setCanceled(true);
+                    e.entityPlayer.addChatComponentMessage(new ChatComponentText("Username: " + ((IForgeTileEntity) te).getMHOwner()));
+                    e.entityPlayer.addChatComponentMessage(new ChatComponentText("UUID: " + ((IForgeTileEntity) te).getMHUuid()));
+                    e.entityPlayer.addChatComponentMessage(new ChatComponentText("IBukkitEntity: " + ((IBukkitTileEntity) te).getMHBukkitOwner()));
+                    e.entityPlayer.addChatComponentMessage(new ChatComponentText("EntityPlayer: " + ((IForgeTileEntity) te).getMHPlayer()));
+                }
+            } else if (e.entityPlayer.getHeldItem().getItem() == Items.diamond_hoe) {
+                if (Loader.isModLoaded("Thaumcraft")) {
+                    ThaumcraftHelper.generatePortal(e.world, e.x, e.y, e.z);
+                    e.entityPlayer.addChatComponentMessage(new ChatComponentText("Generating obelisk!"));
+                }
+            }
+        }
+
+        if (Loader.isModLoaded("JABBA") && e.entityPlayer.getHeldItem() != null &&
+                (e.entityPlayer.getHeldItem().getItem() == BetterBarrels.itemMover || e.entityPlayer.getHeldItem().getItem() == BetterBarrels.itemMoverDiamond) &&
+                e.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) {
+            org.bukkit.block.Block b = MagiHandlers.getBukkitWorld(e.world).getBlockAt(e.x, e.y, e.z);
+            if (b instanceof InventoryHolder) {
+                for (ItemStack bukkitStack : ((InventoryHolder) b).getInventory()) {
+                    if (!MagiHandlers.isItemValidForBag((net.minecraft.item.ItemStack) (Object) CraftItemStack.asNMSCopy(bukkitStack))) {
+                        e.setCanceled(true);
+                        e.entityPlayer.addChatMessage(new ChatComponentText(
+                                "§cEsse bloco contém itens proibidos para dollies! (golden bags, cells, etc)"
+                        ));
+                        return;
+                    }
+                }
             }
         }
     }

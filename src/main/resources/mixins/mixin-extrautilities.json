@@ -6,7 +6,8 @@
     "MixinContainerFilter",
     "MixinTileEntityEnderThermicLavaPump",
     "MixinXUHelper",
-    "MixinTileEntityEnderQuarry"
+    "MixinTileEntityEnderQuarry",
+    "MixinSlotItemContainer"
   ],
   "server": [],
   "client": [],

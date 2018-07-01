@@ -1,5 +1,6 @@
 package net.heyzeer0.mgh;
 
+import appeng.api.AEApi;
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
@@ -9,6 +10,7 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import mcp.mobius.betterbarrels.BetterBarrels;
 import net.heyzeer0.mgh.api.bukkit.BukkitAPI;
 import net.heyzeer0.mgh.api.bukkit.BukkitStack;
 import net.heyzeer0.mgh.api.forge.ForgeStack;
@@ -152,6 +154,20 @@ public class MagiHandlers extends DummyModContainer implements BukkitAPI.MagiHan
         LogManager.getLogger().warn("[MagiHandlers] " + content);
     }
 
+    public static boolean isItemValidForBag(ItemStack i) {
+        if (Loader.isModLoaded("appliedenergistics2") && (
+                i.getItem() == AEApi.instance().definitions().items().cell1k() ||
+                        i.getItem() == AEApi.instance().definitions().items().cell4k() ||
+                        i.getItem() == AEApi.instance().definitions().items().cell16k() ||
+                        i.getItem() == AEApi.instance().definitions().items().cell64k())) {
+            return false;
+        }
+
+        return !Loader.isModLoaded("JABBA") ||
+                (i.getItem() != BetterBarrels.itemMover && i.getItem() != BetterBarrels.itemMoverDiamond) ||
+                (!i.hasTagCompound() || !i.getTagCompound().hasKey("Container"));
+    }
+
     @Subscribe
     public void preInit(FMLPreInitializationEvent e) {
         LogManager.getLogger().warn(" ");
@@ -175,6 +191,15 @@ public class MagiHandlers extends DummyModContainer implements BukkitAPI.MagiHan
     @Subscribe
     public void onInit(FMLPostInitializationEvent e) {
         if (Loader.isModLoaded("OpenComputers")) MinecraftForge.EVENT_BUS.register(new OpenComputersEventHandler());
+    }
+
+    public static org.bukkit.World getBukkitWorld(World w) {
+        try {
+            return (org.bukkit.World) w.getClass().getMethod("getWorld").invoke(w);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }
