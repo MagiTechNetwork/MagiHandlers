@@ -35,12 +35,13 @@ public abstract class MixinChunk implements IMixinChunk {
 
     @Inject(method = "onChunkLoad", at = @At("HEAD"))
     private void head(CallbackInfo ci) {
+        ignoringState = MagiHandlers.getStack().ignorePhase;
         MagiHandlers.getStack().ignorePhase = true;
     }
 
-    @Inject(method = "onChunkLoad", at = @At("TAIL"))
+    @Inject(method = "onChunkLoad", at = @At("RETURN"))
     private void tail(CallbackInfo ci) {
-        MagiHandlers.getStack().ignorePhase = false;
+        MagiHandlers.getStack().ignorePhase = this.ignoringState;
     }
 
     private boolean ignoringState = false;

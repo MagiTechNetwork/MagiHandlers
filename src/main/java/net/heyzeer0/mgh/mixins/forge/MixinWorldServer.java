@@ -74,21 +74,24 @@ public abstract class MixinWorldServer extends World {
         }
     }
 
+    private boolean isIgnoringPhase = false;
+
     @Inject(method = "func_147456_g", at = @At("HEAD"))
     private void onUpdateBlocksHead(CallbackInfo ci) {
+        this.isIgnoringPhase = MagiHandlers.getStack().ignorePhase;
         MagiHandlers.getStack().ignorePhase = true;
     }
 
     @Inject(method = "func_147456_g", at = @At("RETURN"))
     private void onUpdateBlocksReturn(CallbackInfo ci) {
-        MagiHandlers.getStack().ignorePhase = false;
+        MagiHandlers.getStack().ignorePhase = this.isIgnoringPhase;
     }
 
     @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/SpawnerAnimals;findChunksForSpawning(Lnet/minecraft/world/WorldServer;ZZZ)I"))
     private int redirectFindChunksForSpawningCall(SpawnerAnimals instance, WorldServer w, boolean a, boolean b, boolean c) {
-        MagiHandlers.getStack().ignorePhase = true;
+        boolean isIgnoring = MagiHandlers.getStack().ignorePhase;
         instance.findChunksForSpawning(w, a, b, c);
-        MagiHandlers.getStack().ignorePhase = false;
+        MagiHandlers.getStack().ignorePhase = isIgnoring;
         return 0;
     }
 
