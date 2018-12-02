@@ -23,7 +23,7 @@ public abstract class MixinExplosionEventStart extends ExplosionEvent {
 
     @Shadow private ExplosionPrimeEvent event;
 
-    @Inject(method = "<init>", at = @At("RETURN"))
+    @Inject(method = "<init>", at = @At("RETURN"), cancellable = true)
     private void onConstruct(World world, Explosion explosion, CallbackInfo ci) {
         if (event.isCancelled()) {
             this.setCanceled(true);
